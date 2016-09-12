@@ -1,0 +1,67 @@
+10
+
+dir
+1048
+svn://fauams3.am.uni-erlangen.de/usr/local/svn/stinglSolver/PenLab/interfaces
+svn://fauams3.am.uni-erlangen.de/usr/local/svn/stinglSolver
+
+
+
+2013-12-05T22:41:11.128858Z
+1037
+kocvara
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+afad4b8d-6c3f-0410-a09f-f7ab5eb9e5df
+
+LMI
+dir
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+svn://fauams3.am.uni-erlangen.de/usr/local/svn/stinglSolver/PenLab/interfaces/SDP_SDPA
+1034
+
+NLP_AMPL
+dir
+
+PMI
+dir
+
+BMI
+dir
+
+SDP_SDPA
+dir
+
+
+
+delete
+
