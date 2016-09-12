@@ -1,0 +1,15 @@
+function  solve_tto( iname )
+%
+% Solve the truss topology optimization problem by PENLAB
+%
+% Example: >> solve_tto('GEO/t3x3.geo')
+%
+
+par = kobum(iname);
+problem = tto_define(par);
+penm = penlab(problem);
+solve(penm);
+pic(par,penm.x);
+
+end
+

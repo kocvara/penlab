@@ -1,0 +1,43 @@
+What needs to be done:
+--------------------------------------------------------------------------------
+* printing & error reporting is seriosly wrong
+  It should be through output levels user sets in the option settings but static
+  methods/normal routines don't have access to these + printing errors before 
+  option settings get even initialized?
+  perhaps pass printing routine to the static ones? They print only errors anyway
+* overload disp of the object
+* BMI input from Pennon mex structures
+* scalar bounded all others (as matrix elements)
+  --> DONE via boundschecker
+* anonymous functions with 'userdata' ? or any way so that user doesn't need to deal with 'userdata' if he doesn't want to?
+Anonymouns functions could be done using deal() (distribute input args to output) but deal is picky and it needs the exact number of arguments:
+    testf=@(x,Y,userdata) deal(x.^2,userdata)
+    >> [y,userdata]=testf(4,[],['abc'])
+    y =
+        16
+    userdata =
+        abc
+The 2nd problem could be handled (in theory) in the following way. If user sets in penm structure that he doesn't want to use 'userdata', I will remember his anonumous bits not as function handles directly but as anonumous functions using deal:
+   obj.objfun=@(x,Y,userdata)deal(penm.objfun(x,Y,userdata),userdata)
+* change SDPA reader so that it is consistent with NAG Pennon, e.g. A_i*x_i + A_0 >=0 or something like that...
+* add used bounds on all elements etc (into readonly section)
+* problem if something (e.g. bounds) is a vector but the other one is a vector of the other shape (nx1, 1xn)
+  --> sorted for bounds (transposition to a row vector), look if needed elsewhere
+* option settings 'set catcher' worked quite strange...
+* check what are column and what row vectors and fix it properly
+* point changed flag
+* cache & reuse f,g,fd,gd
+* some of the parameters needs to re-set to zero if I decide to resolve after it has been solved once (e.g., lmlast, ls_small_cnt)
+* check all 'stats' elements
+
+
+BUGS or small known problems:
+--------------------------------------------------------------------------------
+* check how SeDuMi's installer works (to add path to Matlab), if I call install.m from different directory, it adds wrong ones to the path --> needs to be call from PenLab root. Perhaps not a problem.
+
+================================================================================
+FEATURES DONE
+================================================================================
+* bounds on elements of matrix variables
+* possible to set bounds of all mat. variable elements by a scalar
+
