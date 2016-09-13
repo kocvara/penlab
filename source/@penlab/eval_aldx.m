@@ -42,7 +42,7 @@ function [status] = eval_aldx(obj)
     % box constraints
     if (obj.Nxbox>0)
       xboxx = obj.xboxshift + obj.xboxmlt .* obj.xall(obj.xboxmap);
-      xboxdx = sparse(obj.xboxmap,[1:obj.Nxbox],obj.xboxmlt,obj.Nx+obj.NYnnz,obj.Nxbox);
+      xboxdx = sparse(obj.xboxmap,[1:obj.Nxbox],obj.xboxmlt,obj.Nx,obj.Nxbox);
     end
 
     ALdx=fdx;
