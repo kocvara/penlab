@@ -525,16 +525,20 @@
 % *Nearest correlation matrix problem*
 %
 % Go to directory |applications/CorrMat|.
-% We solve the nearest correlation matrix problem with the constrained 
-% condition number as described in Example 7.1 from the PENLAB paper
-% (directory |tex/penlab_paper|). On input is a given symmetric matrix |H|, 
-% not necessarily a correlation matrix, and |kappa|, the required condition
+% We solve the nearest correlation matrix problem. The problem may include
+% constraints on matrix elements and on the condition number of the
+% resulting matrix; see Example 7.1 from the PENLAB paper (directory
+% |tex/penlab_paper|). On input is a given matrix |H|, not necessarily a
+% correlation matrix and, if applicable, |kappa|, the required condition
 % number of the computed correlation matrix.
 %
-%  penm = corr_define(kappa, H);
-%  problem = penlab(penm);
-%  problem.solve();
-%  X = problem.Y{1}*problem.x;
+% The user can choose (by commenting/uncommenting) the required problem in 
+% |corr_solve.m|:
+%
+%  penm = corr_define; %nearest correlation matrix
+%  penm = corr_define_bound; %nearest correlation matrix with element-wise constraints
+%  penm = corr_define_cond(kappa); %nearest correlation matrix with constrained condition number
+%  penm = corr_define_cond_bound(kappa); %nearest correlation matrix with constrained condition number and elements
 % 
 % *Static output feedback with COMPLib input*
 %
