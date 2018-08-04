@@ -1,10 +1,5 @@
-<<<<<<< .mine
-Problem name: Pennon NLP-SDP problem 27-Jun-2013 16:31:45
-Start time:   27-Jun-2013 16:31:45
-=======
-Problem name: Pennon NLP-SDP problem 29-Sep-2013 22:19:46
-Start time:   29-Sep-2013 22:19:46
->>>>>>> .r975
+Problem name: Pennon NLP-SDP problem 04-Jul-2018 18:24:16
+Start time:   04-Jul-2018 18:24:16
 All option settings (* = set by user):
   outlev                : 2 
   outlev_file           : 5 
@@ -13,21 +8,19 @@ All option settings (* = set by user):
   maxotiter             : 100 
   maxiniter             : 100 
   penalty_update        : 0.5 
-  penalty_min           : 1e-006 
   penalty_update_bar    : 0.3 
   mpenalty_update       : 0.5 
-  mpenalty_border       : 1e-006 
-  mpenalty_min          : 1e-006 
-  mpenalty_update_bar   : 0.5 
+  mpenalty_min          : 1e-06 
+  mpenalty_border       : 1e-06 
   max_outer_iter        : 100 
-  outer_stop_limit      : 1e-006 
+  outer_stop_limit      : 1e-06 
   kkt_stop_limit        : 0.0001 
   mlt_update            : 0.3 
   mmlt_update           : 0.1 
   uinit                 : 1 
   uinit_box             : 1 
   uinit_eq              : 0 
-  umin                  : 1e-010 
+  umin                  : 1e-10 
   pinit                 : 1 
   pinit_bar             : 1 
   usebarrier            : 0 
@@ -48,22 +41,22 @@ All option settings (* = set by user):
   max_ls_iter           : 20 
   max_lseq_iter         : 20 
   armijo_eps            : 0.01 
-  ldl_pivot             : 1e-005 
+  ldl_pivot             : 1e-05 
   pert_update           : 2 
-  pert_min              : 1e-006 
+  pert_min              : 1e-06 
   pert_try_max          : 50 
   pert_faster           : 1 
   chol_ordering         : 1 
   luk3_diag             : 1 
  
 *******************************************************************************
-PenLab 1.0
+PenLab 1.04 (20140125)
 *******************************************************************************
-Number of variables                          150
+Number of variables                           18
 Number of matrix variables                     0
    - degrees of freedom (var. elements)        0
 (Function) constraints
-   - box inequalities                        150
+   - box inequalities                         18
    - linear inequalities                       0
    - nonlinear inequalities                    0
    - linear equalities                         0
@@ -75,2612 +68,511 @@ Matrix constraints
  
 Min./Max. box-mult.:    1.000000 /  1.000000
 ******************** Start *********************
-Objective                0.0000000000000000E+000
-<<<<<<< .mine
-Augmented Lagrangian     1.7116279069767415E+001
-|f(x) - Lagr(x)|         1.7116279069767415E+001
-Grad augm. lagr.         1.2516655600700889E+002
-=======
-Augmented Lagrangian     1.7116279069767529E+001
-|f(x) - Lagr(x)|         1.7116279069767529E+001
-Grad augm. lagr.         1.2630431016632404E+001
->>>>>>> .r975
-Feasibility (max)        9.5124922343529743E+000
+Objective                 0.0000000000000000E+00
+Augmented Lagrangian      1.8421052631578920E+00
+|f(x) - Lagr(x)|          1.8421052631578920E+00
+Grad augm. lagr.          2.9804037144929787E+01
+Feasibility (max)         6.1803402006626118E-01
 Feasibility eqx      
 Feasibility ineq     
-Feasibility box          0.0000000000000000E+000
-Feasibility m.ineq       9.5124922343529743E+000
-Complementarity          0.0000000000000000E+000
-Minimal penalty          1.0000000000000000E+000
+Feasibility box           0.0000000000000000E+00
+Feasibility m.ineq        6.1803402006626118E-01
+Complementarity           0.0000000000000000E+00
+Minimal penalty           8.3333333333333337E-01
 ************************************************
  
 ************* Start of outer step   1 **********
-<<<<<<< .mine
-object(x_  0) =  1.7116279069767415E+001
-||grad(x)||_2 =  1.2516655600700889E+002
-=======
-object(x_  0) =  1.7116279069767529E+001
-||grad(x)||_2 =  1.2630431016632404E+001
->>>>>>> .r975
+object(x_  0) =   1.8421052631578920E+00
+||grad(x)||_2 =   2.9804037144929787E+01
         --- start of inner iter ---
  
 Computing ordering
-Chol fact OK in 0.000000s, total 0.000000s, no pert=0, pert=0.0000e+000, nnz=2223 (dim 150x150)
-LS (pen): -4.9855e+002, 1 steps, Step width: 1.000000
+Chol fact OK in 0.000000s, total 0.000000s, no pert=0, pert=0.0000e+00, nnz=79 (dim 18x18)
+LS (pen): -4.4415e+00, 1 steps, Step width: 1.000000
  
-<<<<<<< .mine
-object(x_  1) = -3.1432592872818850E+002
-||grad(x)||_2 =  5.5365751665706938E+001
-=======
-object(x_  1) = -3.0819564573410048E+001
-||grad(x)||_2 =  3.8480567513834214E+000
->>>>>>> .r975
+object(x_  1) =  -1.1351937395524363E+00
+||grad(x)||_2 =   1.3616611035534842E+01
         --- end of   1 in. iter ---
 
 Reusing ordering
-Chol fact OK in 0.078001s, total 0.078001s, no pert=0, pert=0.0000e+000, nnz=11325 (dim 150x150)
-LS (pen): -3.0379e+002, 1 steps, Step width: 1.000000
+Chol fact OK in 0.000000s, total 0.000000s, no pert=0, pert=0.0000e+00, nnz=171 (dim 18x18)
+LS (pen): -3.0434e+00, 1 steps, Step width: 1.000000
  
-<<<<<<< .mine
-object(x_  2) = -5.1096871428280508E+002
-||grad(x)||_2 =  2.2307094118481999E+001
-=======
-object(x_  2) = -4.3782505580394400E+001
-||grad(x)||_2 =  1.1956843492547884E+000
->>>>>>> .r975
+object(x_  2) =  -3.1323996832672067E+00
+||grad(x)||_2 =   6.0225782427462482E+00
         --- end of   2 in. iter ---
 
 Reusing ordering
-Chol fact OK in 0.000000s, total 0.000000s, no pert=0, pert=0.0000e+000, nnz=11325 (dim 150x150)
-LS (pen): -1.4436e+002, 1 steps, Step width: 1.000000
+Chol fact OK in 0.000000s, total 0.000000s, no pert=0, pert=0.0000e+00, nnz=171 (dim 18x18)
+LS (pen): -1.5952e+00, 1 steps, Step width: 1.000000
  
-<<<<<<< .mine
-object(x_  3) = -6.0221660197955248E+002
-||grad(x)||_2 =  8.1122697226412495E+000
-=======
-object(x_  3) = -4.6123895413833679E+001
-||grad(x)||_2 =  2.2398647943303870E-001
->>>>>>> .r975
+object(x_  3) =  -4.1360810720799854E+00
+||grad(x)||_2 =   2.4908809938550611E+00
         --- end of   3 in. iter ---
 
 Reusing ordering
-Chol fact OK in 0.000000s, total 0.000000s, no pert=0, pert=0.0000e+000, nnz=11325 (dim 150x150)
-LS (pen): -4.7190e+001, 1 steps, Step width: 1.000000
+Chol fact OK in 0.000000s, total 0.000000s, no pert=0, pert=0.0000e+00, nnz=171 (dim 18x18)
+LS (pen): -5.4734e-01, 1 steps, Step width: 1.000000
  
-<<<<<<< .mine
-object(x_  4) = -6.3030298856428067E+002
-||grad(x)||_2 =  2.1927770378285731E+000
-=======
-object(x_  4) = -4.6240126064746278E+001
-||grad(x)||_2 =  1.7906180578931518E-002
->>>>>>> .r975
+object(x_  4) =  -4.4720249418166187E+00
+||grad(x)||_2 =   9.1756609778857345E-01
         --- end of   4 in. iter ---
 
 Reusing ordering
-Chol fact OK in 0.000000s, total 0.000000s, no pert=0, pert=0.0000e+000, nnz=11325 (dim 150x150)
-LS (pen): -6.6293e+000, 1 steps, Step width: 1.000000
+Chol fact OK in 0.000000s, total 0.000000s, no pert=0, pert=0.0000e+00, nnz=171 (dim 18x18)
+LS (pen): -1.5186e-01, 1 steps, Step width: 1.000000
  
-<<<<<<< .mine
-object(x_  5) = -6.3394502394616177E+002
-||grad(x)||_2 =  3.2468711301715864E-001
-=======
-object(x_  5) = -4.6240974475157145E+001
-||grad(x)||_2 =  1.6757077515174479E-004
->>>>>>> .r975
+object(x_  5) =  -4.5621479463696186E+00
+||grad(x)||_2 =   2.4265916127434903E-01
         --- end of   5 in. iter ---
 
 Reusing ordering
-Chol fact OK in 0.015600s, total 0.015600s, no pert=0, pert=0.0000e+000, nnz=11325 (dim 150x150)
-LS (pen): -2.2018e-001, 1 steps, Step width: 1.000000
+Chol fact OK in 0.000000s, total 0.000000s, no pert=0, pert=0.0000e+00, nnz=171 (dim 18x18)
+LS (pen): -1.9208e-02, 1 steps, Step width: 1.000000
  
-object(x_  6) = -6.3405945745370650E+002
-||grad(x)||_2 =  2.2134282890779008E-002
+object(x_  6) =  -4.5724271865698274E+00
+||grad(x)||_2 =   2.4681148249842664E-02
         --- end of   6 in. iter ---
 
 Reusing ordering
-Chol fact OK in 0.000000s, total 0.000000s, no pert=0, pert=0.0000e+000, nnz=11325 (dim 150x150)
-LS (pen): -1.4081e-003, 1 steps, Step width: 1.000000
+Chol fact OK in 0.000000s, total 0.000000s, no pert=0, pert=0.0000e+00, nnz=171 (dim 18x18)
+LS (pen): -2.4697e-04, 1 steps, Step width: 1.000000
  
-object(x_  7) = -6.3406016835643095E+002
-||grad(x)||_2 =  3.2862632935801427E-004
+object(x_  7) =  -4.5725516333899003E+00
+||grad(x)||_2 =   2.8697693158193696E-04
         --- end of   7 in. iter ---
 
 Unconstr min OK
 ************ Result of outer step   1 **********
-<<<<<<< .mine
-Objective                3.0226310189068931E+002
-Augmented Lagrangian    -6.3406016835643095E+002
-|f(x) - f(x_old)|        3.0226310189068931E+002
-|f(x) - Lagr(x)|         9.3632327024712026E+002
-Grad augm. lagr.         3.2862632935801427E-004
-Feasibility (max)        4.6889032062608740E+000
-=======
-Objective                9.4705343460539240E+001
-Augmented Lagrangian    -4.6240974475157145E+001
-|f(x) - f(x_old)|        9.4705343460539240E+001
-|f(x) - Lagr(x)|         1.4094631793569638E+002
-Grad augm. lagr.         1.6757077515174479E-004
-Feasibility (max)        7.3536541603971255E+000
->>>>>>> .r975
+Objective                 6.2594683096132400E+00
+Augmented Lagrangian     -4.5725516333899003E+00
+|f(x) - f(x_old)|         6.2594683096132400E+00
+|f(x) - Lagr(x)|          1.0832019943003139E+01
+Grad augm. lagr.          2.8697693158193696E-04
+Feasibility (max)         7.1172058582305894E-02
 Feasibility eqx      
 Feasibility ineq     
-Feasibility box          0.0000000000000000E+000
-Feasibility m.ineq       4.6889032062608740E+000
-Complementarity          2.5000000000000000E-001
-Minimal penalty          1.0000000000000000E+000
+Feasibility box           0.0000000000000000E+00
+Feasibility m.ineq        7.1172058582305894E-02
+Complementarity           2.4997470243570216E-01
+Minimal penalty           8.3333333333333337E-01
 Newton steps                                   7
 Inner steps                                    7
 Linesearch steps                               7
-Time of the minimization step         0.842405 s
-  - factorizations in the step       0.0936006 s
+Time of the minimization step             0.05 s
+  - factorizations in the step               0 s
 ************************************************
  
 ************* Start of outer step   2 **********
-object(x_  0) =  1.9514418638206965E+002
-||grad(x)||_2 =  1.0531870813956999E+001
+object(x_  0) =   2.8857997605097787E+00
+||grad(x)||_2 =   2.6976729540063693E+00
         --- start of inner iter ---
  
 Reusing ordering
-Chol fact OK in 0.000000s, total 0.000000s, no pert=0, pert=0.0000e+000, nnz=11325 (dim 150x150)
-LS (pen): -1.5631e+003, 4 steps, Step width: 0.125000
+Chol fact OK in 0.000000s, total 0.000000s, no pert=0, pert=0.0000e+00, nnz=171 (dim 18x18)
+LS (pen): -7.7918e+00, 3 steps, Step width: 0.250000
  
-object(x_  1) =  3.4301312260143590E+001
-||grad(x)||_2 =  5.1865052889629295E+000
+object(x_  1) =   1.3242272121669054E+00
+||grad(x)||_2 =   1.5175098538463909E+00
         --- end of   1 in. iter ---
 
 Reusing ordering
-Chol fact OK in 0.015600s, total 0.015600s, no pert=0, pert=0.0000e+000, nnz=11325 (dim 150x150)
-LS (pen): -4.4937e+001, 2 steps, Step width: 0.500000
+Chol fact OK in 0.000000s, total 0.000000s, no pert=0, pert=0.0000e+00, nnz=171 (dim 18x18)
+LS (pen): -9.3657e-01, 1 steps, Step width: 1.000000
  
-object(x_  2) =  2.0751171533907467E+001
-||grad(x)||_2 =  1.9416558956086625E+000
+object(x_  2) =   1.1693821977246430E+00
+||grad(x)||_2 =   3.3265895474836649E+00
         --- end of   2 in. iter ---
 
 Reusing ordering
-Chol fact OK in 0.000000s, total 0.000000s, no pert=0, pert=0.0000e+000, nnz=11325 (dim 150x150)
-LS (pen): -2.0070e+000, 1 steps, Step width: 1.000000
+Chol fact OK in 0.000000s, total 0.000000s, no pert=0, pert=0.0000e+00, nnz=171 (dim 18x18)
+LS (pen): -2.4156e-01, 1 steps, Step width: 1.000000
  
-object(x_  3) =  1.9639182806453988E+001
-||grad(x)||_2 =  3.8778620848390316E-001
+object(x_  3) =   1.0162470526356082E+00
+||grad(x)||_2 =   1.2907692853435728E+00
         --- end of   3 in. iter ---
 
 Reusing ordering
-Chol fact OK in 0.000000s, total 0.000000s, no pert=0, pert=0.0000e+000, nnz=11325 (dim 150x150)
-LS (pen): -1.2880e-001, 1 steps, Step width: 1.000000
+Chol fact OK in 0.000000s, total 0.000000s, no pert=0, pert=0.0000e+00, nnz=171 (dim 18x18)
+LS (pen): -8.7931e-02, 1 steps, Step width: 1.000000
  
-object(x_  4) =  1.9570764058418433E+001
-||grad(x)||_2 =  3.3970920960340718E-002
+object(x_  4) =   9.6302455631351114E-01
+||grad(x)||_2 =   3.9252883743105177E-01
         --- end of   4 in. iter ---
 
 Reusing ordering
-Chol fact OK in 0.031200s, total 0.031200s, no pert=0, pert=0.0000e+000, nnz=11325 (dim 150x150)
-LS (pen): -1.4831e-003, 1 steps, Step width: 1.000000
+Chol fact OK in 0.000000s, total 0.000000s, no pert=0, pert=0.0000e+00, nnz=171 (dim 18x18)
+LS (pen): -1.5831e-02, 1 steps, Step width: 1.000000
  
-object(x_  5) =  1.9570015303137893E+001
-||grad(x)||_2 =  5.8928259062555974E-004
+object(x_  5) =   9.5423495049983886E-01
+||grad(x)||_2 =   6.4241876974752227E-02
         --- end of   5 in. iter ---
+
+Reusing ordering
+Chol fact OK in 0.000000s, total 0.000000s, no pert=0, pert=0.0000e+00, nnz=171 (dim 18x18)
+LS (pen): -5.8677e-04, 1 steps, Step width: 1.000000
+ 
+object(x_  6) =   9.5393420435675536E-01
+||grad(x)||_2 =   2.4763374197242982E-03
+        --- end of   6 in. iter ---
 
 Unconstr min OK
 ************ Result of outer step   2 **********
-Objective                4.6123927353957143E+001
-Augmented Lagrangian     1.9570015303137893E+001
-|f(x) - f(x_old)|        2.5613917453673218E+002
-|f(x) - Lagr(x)|         2.6553912050819250E+001
-Grad augm. lagr.         5.8928259062555974E-004
-Feasibility (max)        4.8300970112904897E+000
+Objective                 1.7277857044306661E+00
+Augmented Lagrangian      9.5393420435675536E-01
+|f(x) - f(x_old)|         4.5316826051825743E+00
+|f(x) - Lagr(x)|          7.7385150007391079E-01
+Grad augm. lagr.          2.4763374197242982E-03
+Feasibility (max)         1.8019132874906060E-01
 Feasibility eqx      
 Feasibility ineq     
-Feasibility box          2.4686811522236719E-002
-Feasibility m.ineq       4.8300970112904897E+000
-Complementarity          3.7500000000000006E-002
-Minimal penalty          5.0000000000000000E-001
-Newton steps                                   5
-Inner steps                                    5
-<<<<<<< .mine
-Linesearch steps                               9
-Time of the minimization step         0.530403 s
-  - factorizations in the step       0.0468003 s
-=======
-Linesearch steps                               5
-Time of the minimization step         0.156001 s
-  - factorizations in the step               0 s
->>>>>>> .r975
-************************************************
- 
-<<<<<<< .mine
-************* Start of outer step   3 **********
-object(x_  0) =  1.5764335203324258E+003
-||grad(x)||_2 =  1.8093365300245364E+003
-=======
-************* Start of outer step   2 **********
-object(x_  0) =  3.2906771652088906E+002
-||grad(x)||_2 =  6.7103698099156730E+001
->>>>>>> .r975
-        --- start of inner iter ---
- 
-Reusing ordering
-Chol fact OK in 0.000000s, total 0.000000s, no pert=0, pert=0.0000e+000, nnz=11325 (dim 150x150)
-LS (pen): -7.9209e+002, 2 steps, Step width: 0.500000
- 
-<<<<<<< .mine
-object(x_  1) =  1.2632706774653961E+003
-||grad(x)||_2 =  1.1577040715671619E+003
-=======
-object(x_  1) =  2.6673721757307635E+002
-||grad(x)||_2 =  4.3645835107304833E+001
->>>>>>> .r975
-        --- end of   1 in. iter ---
-
-Reusing ordering
-Chol fact OK in 0.000000s, total 0.000000s, no pert=0, pert=0.0000e+000, nnz=11325 (dim 150x150)
-LS (pen): -6.1175e+002, 1 steps, Step width: 1.000000
- 
-<<<<<<< .mine
-object(x_  2) =  8.5590419326034043E+002
-||grad(x)||_2 =  5.1336403483162553E+002
-=======
-object(x_  2) =  1.8293476657899970E+002
-||grad(x)||_2 =  1.8728895529582193E+001
->>>>>>> .r975
-        --- end of   2 in. iter ---
-
-Reusing ordering
-Chol fact OK in 0.000000s, total 0.000000s, no pert=0, pert=0.0000e+000, nnz=11325 (dim 150x150)
-LS (pen): -4.0287e+002, 1 steps, Step width: 1.000000
- 
-<<<<<<< .mine
-object(x_  3) =  5.8778777757471983E+002
-||grad(x)||_2 =  2.2711268439845412E+002
-=======
-object(x_  3) =  1.4061902343161836E+002
-||grad(x)||_2 =  7.8013771736074826E+000
->>>>>>> .r975
-        --- end of   3 in. iter ---
-
-Reusing ordering
-Chol fact OK in 0.000000s, total 0.000000s, no pert=0, pert=0.0000e+000, nnz=11325 (dim 150x150)
-LS (pen): -2.6313e+002, 1 steps, Step width: 1.000000
- 
-<<<<<<< .mine
-object(x_  4) =  4.1293489244159957E+002
-||grad(x)||_2 =  9.9991141579843671E+001
-=======
-object(x_  4) =  1.1973524055846576E+002
-||grad(x)||_2 =  3.0723107999976063E+000
->>>>>>> .r975
-        --- end of   4 in. iter ---
-
-Reusing ordering
-Chol fact OK in 0.000000s, total 0.000000s, no pert=0, pert=0.0000e+000, nnz=11325 (dim 150x150)
-LS (pen): -1.6861e+002, 1 steps, Step width: 1.000000
- 
-<<<<<<< .mine
-object(x_  5) =  3.0123309990831103E+002
-||grad(x)||_2 =  4.3562009310464262E+001
-=======
-object(x_  5) =  1.1110313447739748E+002
-||grad(x)||_2 =  1.0479292389553767E+000
->>>>>>> .r975
-        --- end of   5 in. iter ---
-
-Reusing ordering
-Chol fact OK in 0.031200s, total 0.031200s, no pert=0, pert=0.0000e+000, nnz=11325 (dim 150x150)
-LS (pen): -1.0400e+002, 1 steps, Step width: 1.000000
- 
-<<<<<<< .mine
-object(x_  6) =  2.3275702752227278E+002
-||grad(x)||_2 =  1.8533619952513270E+001
-=======
-object(x_  6) =  1.0890883723020949E+002
-||grad(x)||_2 =  2.5262904966904787E-001
->>>>>>> .r975
-        --- end of   6 in. iter ---
-
-Reusing ordering
-Chol fact OK in 0.000000s, total 0.000000s, no pert=0, pert=0.0000e+000, nnz=11325 (dim 150x150)
-LS (pen): -5.9322e+001, 1 steps, Step width: 1.000000
- 
-<<<<<<< .mine
-object(x_  7) =  1.9419819628567882E+002
-||grad(x)||_2 =  7.4802587152596134E+000
-=======
-object(x_  7) =  1.0870318531492074E+002
-||grad(x)||_2 =  2.5704204479337273E-002
->>>>>>> .r975
-        --- end of   7 in. iter ---
-
-Reusing ordering
-Chol fact OK in 0.000000s, total 0.000000s, no pert=0, pert=0.0000e+000, nnz=11325 (dim 150x150)
-LS (pen): -2.8581e+001, 1 steps, Step width: 1.000000
- 
-<<<<<<< .mine
-object(x_  8) =  1.7612356880700941E+002
-||grad(x)||_2 =  2.6774784826278237E+000
-=======
-object(x_  8) =  1.0870067017893706E+002
-||grad(x)||_2 =  3.3920604632149470E-004
->>>>>>> .r975
-        --- end of   8 in. iter ---
-
-Reusing ordering
-Chol fact OK in 0.031200s, total 0.031200s, no pert=0, pert=0.0000e+000, nnz=11325 (dim 150x150)
-LS (pen): -9.5350e+000, 1 steps, Step width: 1.000000
- 
-object(x_  9) =  1.7040860272173200E+002
-||grad(x)||_2 =  7.2560377879386484E-001
-        --- end of   9 in. iter ---
-
-Reusing ordering
-Chol fact OK in 0.000000s, total 0.000000s, no pert=0, pert=0.0000e+000, nnz=11325 (dim 150x150)
-LS (pen): -1.4604e+000, 1 steps, Step width: 1.000000
- 
-object(x_ 10) =  1.6960435575770140E+002
-||grad(x)||_2 =  1.0130830855965620E-001
-        --- end of  10 in. iter ---
-
-Reusing ordering
-Chol fact OK in 0.000000s, total 0.000000s, no pert=0, pert=0.0000e+000, nnz=11325 (dim 150x150)
-LS (pen): -4.4386e-002, 1 steps, Step width: 1.000000
- 
-object(x_ 11) =  1.6958168608830874E+002
-||grad(x)||_2 =  3.0132961844453652E-003
-        --- end of  11 in. iter ---
-
-Unconstr min OK
-<<<<<<< .mine
-************ Result of outer step   3 **********
-Objective                9.3778414270232091E+001
-Augmented Lagrangian     1.6958168608830874E+002
-|f(x) - f(x_old)|        4.7654486916274948E+001
-|f(x) - Lagr(x)|         7.5803271818076652E+001
-Grad augm. lagr.         3.0132961844453652E-003
-Feasibility (max)        3.2090916531160469E+000
-=======
-************ Result of outer step   2 **********
-Objective                6.8460862567054647E+001
-Augmented Lagrangian     1.0870067017893706E+002
-|f(x) - f(x_old)|        2.6244480893484592E+001
-|f(x) - Lagr(x)|         4.0239807611882412E+001
-Grad augm. lagr.         3.3920604632149470E-004
-Feasibility (max)        5.7746090082218862E+000
->>>>>>> .r975
-Feasibility eqx      
-Feasibility ineq     
-<<<<<<< .mine
-Feasibility box          1.6538692398512336E-001
-Feasibility m.ineq       3.2090916531160469E+000
-Complementarity          5.2187140768418024E-002
-Minimal penalty          2.5000000000000000E-001
-Newton steps                                  11
-Inner steps                                   11
-Linesearch steps                              12
-Time of the minimization step          1.12321 s
-  - factorizations in the step       0.0624004 s
-=======
-Feasibility box          9.6895863346047172E-003
-Feasibility m.ineq       5.7746090082218862E+000
-Complementarity          3.7500000000000006E-002
-Minimal penalty          5.0000000000000000E-001
-Newton steps                                   8
-Inner steps                                    8
-Linesearch steps                               9
-Time of the minimization step         0.249602 s
-  - factorizations in the step               0 s
->>>>>>> .r975
-************************************************
- 
-<<<<<<< .mine
-************* Start of outer step   4 **********
-object(x_  0) =  2.2253815744781241E+003
-||grad(x)||_2 =  3.5846056293607614E+002
-=======
-************* Start of outer step   3 **********
-object(x_  0) =  2.4821606224804418E+003
-||grad(x)||_2 =  2.4249096212317295E+002
->>>>>>> .r975
-        --- start of inner iter ---
- 
-Reusing ordering
-Chol fact OK in 0.000000s, total 0.000000s, no pert=0, pert=0.0000e+000, nnz=11325 (dim 150x150)
-LS (pen): -9.7137e+002, 1 steps, Step width: 1.000000
- 
-<<<<<<< .mine
-object(x_  1) =  1.5801503510095708E+003
-||grad(x)||_2 =  1.5806927701667246E+002
-=======
-object(x_  1) =  1.7263107242962292E+003
-||grad(x)||_2 =  1.0740693477456492E+002
->>>>>>> .r975
-        --- end of   1 in. iter ---
-
-Reusing ordering
-Chol fact OK in 0.000000s, total 0.000000s, no pert=0, pert=0.0000e+000, nnz=11325 (dim 150x150)
-LS (pen): -6.2349e+002, 1 steps, Step width: 1.000000
- 
-<<<<<<< .mine
-object(x_  2) =  1.1671817762529217E+003
-||grad(x)||_2 =  6.8801560181689752E+001
-=======
-object(x_  2) =  1.2318032433597341E+003
-||grad(x)||_2 =  4.7153604022376463E+001
->>>>>>> .r975
-        --- end of   2 in. iter ---
-
-Reusing ordering
-Chol fact OK in 0.031200s, total 0.031200s, no pert=0, pert=0.0000e+000, nnz=11325 (dim 150x150)
-LS (pen): -3.8235e+002, 1 steps, Step width: 1.000000
- 
-<<<<<<< .mine
-object(x_  3) =  9.1592532702755989E+002
-||grad(x)||_2 =  2.9122363524041589E+001
-=======
-object(x_  3) =  9.2040054827081303E+002
-||grad(x)||_2 =  2.0327769908112597E+001
->>>>>>> .r975
-        --- end of   3 in. iter ---
-
-Reusing ordering
-Chol fact OK in 0.000000s, total 0.000000s, no pert=0, pert=0.0000e+000, nnz=11325 (dim 150x150)
-LS (pen): -2.1193e+002, 1 steps, Step width: 1.000000
- 
-<<<<<<< .mine
-object(x_  4) =  7.7892681703099561E+002
-||grad(x)||_2 =  1.1585302226740492E+001
-=======
-object(x_  4) =  7.3746539587869688E+002
-||grad(x)||_2 =  8.4133608276940226E+000
->>>>>>> .r975
-        --- end of   4 in. iter ---
-
-Reusing ordering
-Chol fact OK in 0.000000s, total 0.000000s, no pert=0, pert=0.0000e+000, nnz=11325 (dim 150x150)
-LS (pen): -9.4716e+001, 1 steps, Step width: 1.000000
- 
-<<<<<<< .mine
-object(x_  5) =  7.1975755840339320E+002
-||grad(x)||_2 =  3.9754405573456753E+000
-=======
-object(x_  5) =  6.4544888970528029E+002
-||grad(x)||_2 =  3.1725453201479250E+000
->>>>>>> .r975
-        --- end of   5 in. iter ---
-
-Reusing ordering
-Chol fact OK in 0.031200s, total 0.031200s, no pert=0, pert=0.0000e+000, nnz=11325 (dim 150x150)
-LS (pen): -2.6514e+001, 1 steps, Step width: 1.000000
- 
-<<<<<<< .mine
-object(x_  6) =  7.0424348598941469E+002
-||grad(x)||_2 =  9.5366758888791747E-001
-=======
-object(x_  6) =  6.1222873118205348E+002
-||grad(x)||_2 =  9.6265722854331048E-001
->>>>>>> .r975
-        --- end of   6 in. iter ---
-
-Reusing ordering
-<<<<<<< .mine
-Chol fact OK in 0.000000s, total 0.000000s, no pert=0, pert=0.0000e+000, nnz=11325 (dim 150x150)
-LS (pen): -2.7105e+000, 1 steps, Step width: 1.000000
-=======
-Chol fact OK in 0.000000s, total 0.000000s, no pert=0, pert=0.0000e+000, nnz=903 (dim 42x42)
-LS (pen): -1.0736e+001, 1 steps, Step width: 1.000000
->>>>>>> .r975
- 
-<<<<<<< .mine
-object(x_  7) =  7.0279581787671009E+002
-||grad(x)||_2 =  9.4670302599448544E-002
-=======
-object(x_  7) =  6.0618068916038158E+002
-||grad(x)||_2 =  1.7368300785969726E-001
->>>>>>> .r975
-        --- end of   7 in. iter ---
-
-Reusing ordering
-Chol fact OK in 0.000000s, total 0.000000s, no pert=0, pert=0.0000e+000, nnz=11325 (dim 150x150)
-LS (pen): -3.3866e-002, 1 steps, Step width: 1.000000
- 
-<<<<<<< .mine
-object(x_  8) =  7.0277873694662230E+002
-||grad(x)||_2 =  1.2424039274009518E-003
-=======
-object(x_  8) =  6.0589934765248302E+002
-||grad(x)||_2 =  8.9273347881150510E-003
->>>>>>> .r975
-        --- end of   8 in. iter ---
-
-Unconstr min OK
-<<<<<<< .mine
-************ Result of outer step   4 **********
-Objective                3.2799488060393469E+002
-Augmented Lagrangian     7.0277873694662230E+002
-|f(x) - f(x_old)|        2.3421646633370261E+002
-|f(x) - Lagr(x)|         3.7478385634268761E+002
-Grad augm. lagr.         1.2424039274009518E-003
-Feasibility (max)        2.2816738841356705E+000
-=======
-************ Result of outer step   3 **********
-Objective                2.9755042319513586E+002
-Augmented Lagrangian     6.0589934765248302E+002
-|f(x) - f(x_old)|        2.2908956062808122E+002
-|f(x) - Lagr(x)|         3.0834892445734715E+002
-Grad augm. lagr.         8.9273347881150510E-003
-Feasibility (max)        3.9434903068467970E+000
->>>>>>> .r975
-Feasibility eqx      
-Feasibility ineq     
-<<<<<<< .mine
-Feasibility box          2.1420045734651569E-001
-Feasibility m.ineq       2.2816738841356705E+000
-Complementarity          1.0575447642367271E-001
-Minimal penalty          1.2500000000000000E-001
-=======
-Feasibility box          7.4483426514524928E-002
-Feasibility m.ineq       3.9434903068467970E+000
-Complementarity          2.9143691668656848E-002
-Minimal penalty          2.5000000000000000E-001
->>>>>>> .r975
-Newton steps                                   8
-Inner steps                                    8
-Linesearch steps                               8
-<<<<<<< .mine
-Time of the minimization step         0.920406 s
-  - factorizations in the step       0.0624004 s
-=======
-Time of the minimization step         0.218401 s
-  - factorizations in the step               0 s
->>>>>>> .r975
-************************************************
- 
-<<<<<<< .mine
-************* Start of outer step   5 **********
-object(x_  0) =  8.9041005259292451E+003
-||grad(x)||_2 =  4.2345816233986346E+002
-=======
-************* Start of outer step   4 **********
-object(x_  0) =  1.7738322282870461E+006
-||grad(x)||_2 =  1.2216884324476907E+007
->>>>>>> .r975
-        --- start of inner iter ---
- 
-Reusing ordering
-Chol fact OK in 0.000000s, total 0.000000s, no pert=0, pert=0.0000e+000, nnz=11325 (dim 150x150)
-LS (pen): -4.0030e+003, 4 steps, Step width: 0.125000
- 
-<<<<<<< .mine
-object(x_  1) =  8.4332101233254762E+003
-||grad(x)||_2 =  3.7568763790683039E+002
-=======
-object(x_  1) =  1.1828113790273762E+006
-||grad(x)||_2 =  5.4297267131932229E+006
->>>>>>> .r975
-        --- end of   1 in. iter ---
-
-Reusing ordering
-Chol fact OK in 0.000000s, total 0.000000s, no pert=0, pert=0.0000e+000, nnz=11325 (dim 150x150)
-LS (pen): -3.8262e+003, 3 steps, Step width: 0.250000
- 
-<<<<<<< .mine
-object(x_  2) =  7.5843107470471805E+003
-||grad(x)||_2 =  3.0887500563880565E+002
-=======
-object(x_  2) =  7.8882426418073929E+005
-||grad(x)||_2 =  2.4128859648602498E+006
->>>>>>> .r975
-        --- end of   2 in. iter ---
-
-Reusing ordering
-Chol fact OK in 0.000000s, total 0.000000s, no pert=0, pert=0.0000e+000, nnz=11325 (dim 150x150)
-LS (pen): -3.3835e+003, 3 steps, Step width: 0.250000
- 
-<<<<<<< .mine
-object(x_  3) =  6.8319393802800187E+003
-||grad(x)||_2 =  2.6723214998953682E+002
-=======
-object(x_  3) =  5.2632034071241284E+005
-||grad(x)||_2 =  1.0724541879782381E+006
->>>>>>> .r975
-        --- end of   3 in. iter ---
-
-Reusing ordering
-Chol fact OK in 0.000000s, total 0.000000s, no pert=0, pert=0.0000e+000, nnz=11325 (dim 150x150)
-LS (pen): -3.0914e+003, 3 steps, Step width: 0.250000
- 
-<<<<<<< .mine
-object(x_  4) =  6.1453573369530459E+003
-||grad(x)||_2 =  3.1126478281991410E+002
-=======
-object(x_  4) =  3.5128905342433625E+005
-||grad(x)||_2 =  4.7668681533051131E+005
->>>>>>> .r975
-        --- end of   4 in. iter ---
-
-Reusing ordering
-Chol fact OK in 0.000000s, total 0.000000s, no pert=0, pert=0.0000e+000, nnz=11325 (dim 150x150)
-LS (pen): -2.7191e+003, 2 steps, Step width: 0.500000
- 
-<<<<<<< .mine
-object(x_  5) =  5.0789642641302489E+003
-||grad(x)||_2 =  6.5606929095468413E+003
-=======
-object(x_  5) =  2.3453142339468951E+005
-||grad(x)||_2 =  2.1186978530347988E+005
->>>>>>> .r975
-        --- end of   5 in. iter ---
-
-Reusing ordering
-Chol fact OK in 0.000000s, total 0.000000s, no pert=0, pert=0.0000e+000, nnz=11325 (dim 150x150)
-LS (pen): -1.9718e+003, 2 steps, Step width: 0.500000
- 
-<<<<<<< .mine
-object(x_  6) =  4.2915833249093348E+003
-||grad(x)||_2 =  5.0993100337168426E+003
-=======
-object(x_  6) =  1.5664466877480826E+005
-||grad(x)||_2 =  9.4164085126641687E+004
->>>>>>> .r975
-        --- end of   6 in. iter ---
-
-Reusing ordering
-Chol fact OK in 0.000000s, total 0.000000s, no pert=0, pert=0.0000e+000, nnz=11325 (dim 150x150)
-LS (pen): -1.5637e+003, 1 steps, Step width: 1.000000
- 
-<<<<<<< .mine
-object(x_  7) =  3.2679791228324730E+003
-||grad(x)||_2 =  4.1621701447638879E+003
-=======
-object(x_  7) =  1.0471778753981720E+005
-||grad(x)||_2 =  4.1847464473143540E+004
->>>>>>> .r975
-        --- end of   7 in. iter ---
-
-Reusing ordering
-Chol fact OK in 0.031200s, total 0.031200s, no pert=0, pert=0.0000e+000, nnz=11325 (dim 150x150)
-LS (pen): -8.3448e+002, 1 steps, Step width: 1.000000
- 
-<<<<<<< .mine
-object(x_  8) =  2.7330305622451524E+003
-||grad(x)||_2 =  2.5585272593053751E+003
-=======
-object(x_  8) =  7.0070482381619469E+004
-||grad(x)||_2 =  1.8597309029870630E+004
->>>>>>> .r975
-        --- end of   8 in. iter ---
-
-Reusing ordering
-Chol fact OK in 0.000000s, total 0.000000s, no pert=0, pert=0.0000e+000, nnz=11325 (dim 150x150)
-LS (pen): -3.4728e+002, 1 steps, Step width: 1.000000
- 
-<<<<<<< .mine
-object(x_  9) =  2.5171857827138065E+003
-||grad(x)||_2 =  1.5320687880109449E+003
-=======
-object(x_  9) =  4.6970495939378576E+004
-||grad(x)||_2 =  8.2640662581238885E+003
->>>>>>> .r975
-        --- end of   9 in. iter ---
-
-Reusing ordering
-Chol fact OK in 0.000000s, total 0.000000s, no pert=0, pert=0.0000e+000, nnz=11325 (dim 150x150)
-LS (pen): -1.0277e+002, 1 steps, Step width: 1.000000
- 
-<<<<<<< .mine
-object(x_ 10) =  2.4553847159305669E+003
-||grad(x)||_2 =  1.0611101756945018E+003
-=======
-object(x_ 10) =  3.1578115681123360E+004
-||grad(x)||_2 =  3.6718296084958392E+003
->>>>>>> .r975
-        --- end of  10 in. iter ---
-
-Reusing ordering
-Chol fact OK in 0.000000s, total 0.000000s, no pert=0, pert=0.0000e+000, nnz=11325 (dim 150x150)
-LS (pen): -2.8152e+001, 1 steps, Step width: 1.000000
- 
-<<<<<<< .mine
-object(x_ 11) =  2.4377762734490452E+003
-||grad(x)||_2 =  8.5875146133367878E+002
-=======
-object(x_ 11) =  2.1282274479259548E+004
-||grad(x)||_2 =  1.6308707961606224E+003
->>>>>>> .r975
-        --- end of  11 in. iter ---
-
-Reusing ordering
-Chol fact OK in 0.031200s, total 0.031200s, no pert=0, pert=0.0000e+000, nnz=11325 (dim 150x150)
-LS (pen): -1.6835e+001, 1 steps, Step width: 1.000000
- 
-<<<<<<< .mine
-object(x_ 12) =  2.4269304400504179E+003
-||grad(x)||_2 =  7.6022098507466421E+002
-=======
-object(x_ 12) =  1.4449536839139277E+004
-||grad(x)||_2 =  7.2394123679118820E+002
->>>>>>> .r975
-        --- end of  12 in. iter ---
-
-Reusing ordering
-Chol fact OK in 0.000000s, total 0.000000s, no pert=0, pert=0.0000e+000, nnz=11325 (dim 150x150)
-LS (pen): -1.5773e+001, 1 steps, Step width: 1.000000
- 
-<<<<<<< .mine
-object(x_ 13) =  2.4165242260121322E+003
-||grad(x)||_2 =  6.9200435916666083E+002
-=======
-object(x_ 13) =  9.9310469278742694E+003
-||grad(x)||_2 =  3.2086228826200733E+002
->>>>>>> .r975
-        --- end of  13 in. iter ---
-
-Reusing ordering
-Chol fact OK in 0.000000s, total 0.000000s, no pert=0, pert=0.0000e+000, nnz=11325 (dim 150x150)
-LS (pen): -1.4630e+001, 1 steps, Step width: 1.000000
- 
-<<<<<<< .mine
-object(x_ 14) =  2.4066965950635376E+003
-||grad(x)||_2 =  6.2566484845756963E+002
-=======
-object(x_ 14) =  6.9599230211646018E+003
-||grad(x)||_2 =  1.4170188719128220E+002
->>>>>>> .r975
-        --- end of  14 in. iter ---
-
-Reusing ordering
-Chol fact OK in 0.031200s, total 0.031200s, no pert=0, pert=0.0000e+000, nnz=11325 (dim 150x150)
-LS (pen): -1.4560e+001, 1 steps, Step width: 1.000000
- 
-<<<<<<< .mine
-object(x_ 15) =  2.3969470893320104E+003
-||grad(x)||_2 =  5.8072708820330092E+002
-=======
-object(x_ 15) =  5.0378920063748410E+003
-||grad(x)||_2 =  6.2082360090327413E+001
->>>>>>> .r975
-        --- end of  15 in. iter ---
-
-Reusing ordering
-Chol fact OK in 0.000000s, total 0.000000s, no pert=0, pert=0.0000e+000, nnz=11325 (dim 150x150)
-LS (pen): -1.4324e+001, 1 steps, Step width: 1.000000
- 
-<<<<<<< .mine
-object(x_ 16) =  2.3873455046278168E+003
-||grad(x)||_2 =  5.2775870148228501E+002
-=======
-object(x_ 16) =  3.8391009130120156E+003
-||grad(x)||_2 =  2.6718615608109911E+001
->>>>>>> .r975
-        --- end of  16 in. iter ---
-
-Reusing ordering
-Chol fact OK in 0.000000s, total 0.000000s, no pert=0, pert=0.0000e+000, nnz=11325 (dim 150x150)
-LS (pen): -1.3947e+001, 1 steps, Step width: 1.000000
- 
-<<<<<<< .mine
-object(x_ 17) =  2.3780862681686212E+003
-||grad(x)||_2 =  4.6816133329070271E+002
-=======
-object(x_ 17) =  3.1477935553277057E+003
-||grad(x)||_2 =  1.1044826218806431E+001
->>>>>>> .r975
-        --- end of  17 in. iter ---
-
-Reusing ordering
-Chol fact OK in 0.000000s, total 0.000000s, no pert=0, pert=0.0000e+000, nnz=11325 (dim 150x150)
-LS (pen): -1.3203e+001, 1 steps, Step width: 1.000000
- 
-<<<<<<< .mine
-object(x_ 18) =  2.3692874255115648E+003
-||grad(x)||_2 =  3.9565840340477223E+002
-=======
-object(x_ 18) =  2.8096290383275036E+003
-||grad(x)||_2 =  4.1622984575785917E+000
->>>>>>> .r975
-        --- end of  18 in. iter ---
-
-Reusing ordering
-Chol fact OK in 0.031200s, total 0.031200s, no pert=0, pert=0.0000e+000, nnz=11325 (dim 150x150)
-LS (pen): -1.1898e+001, 1 steps, Step width: 1.000000
- 
-<<<<<<< .mine
-object(x_ 19) =  2.3614005028443835E+003
-||grad(x)||_2 =  3.2009297265365825E+002
-=======
-object(x_ 19) =  2.6923875616456489E+003
-||grad(x)||_2 =  1.2608336215919749E+000
->>>>>>> .r975
-        --- end of  19 in. iter ---
-
-Reusing ordering
-Chol fact OK in 0.000000s, total 0.000000s, no pert=0, pert=0.0000e+000, nnz=11325 (dim 150x150)
-LS (pen): -9.7998e+000, 1 steps, Step width: 1.000000
- 
-<<<<<<< .mine
-object(x_ 20) =  2.3551948713816519E+003
-||grad(x)||_2 =  2.2850887758090272E+002
-=======
-object(x_ 20) =  2.6725038206553809E+003
-||grad(x)||_2 =  2.2705048600698693E-001
->>>>>>> .r975
-        --- end of  20 in. iter ---
-
-Reusing ordering
-Chol fact OK in 0.031200s, total 0.031200s, no pert=0, pert=0.0000e+000, nnz=11325 (dim 150x150)
-LS (pen): -6.0484e+000, 1 steps, Step width: 1.000000
- 
-<<<<<<< .mine
-object(x_ 21) =  2.3512924747343759E+003
-||grad(x)||_2 =  1.2096057193112368E+002
-=======
-object(x_ 21) =  2.6716648661001018E+003
-||grad(x)||_2 =  1.2862405555715037E-002
->>>>>>> .r975
-        --- end of  21 in. iter ---
-
-Reusing ordering
-Chol fact OK in 0.000000s, total 0.000000s, no pert=0, pert=0.0000e+000, nnz=11325 (dim 150x150)
-LS (pen): -3.7060e+000, 1 steps, Step width: 1.000000
- 
-<<<<<<< .mine
-object(x_ 22) =  2.3488396268993411E+003
-||grad(x)||_2 =  6.2002980737890866E+001
-=======
-object(x_ 22) =  2.6716621186661432E+003
-||grad(x)||_2 =  6.5514821753843394E-005
->>>>>>> .r975
-        --- end of  22 in. iter ---
-
-Reusing ordering
-Chol fact OK in 0.000000s, total 0.000000s, no pert=0, pert=0.0000e+000, nnz=11325 (dim 150x150)
-LS (pen): -2.5055e+000, 1 steps, Step width: 1.000000
- 
-object(x_ 23) =  2.3471885635278295E+003
-||grad(x)||_2 =  3.2289399060390672E+001
-        --- end of  23 in. iter ---
-
-Reusing ordering
-Chol fact OK in 0.000000s, total 0.000000s, no pert=0, pert=0.0000e+000, nnz=11325 (dim 150x150)
-LS (pen): -1.6374e+000, 1 steps, Step width: 1.000000
- 
-object(x_ 24) =  2.3461058721289119E+003
-||grad(x)||_2 =  1.6848386048161196E+001
-        --- end of  24 in. iter ---
-
-Reusing ordering
-Chol fact OK in 0.031200s, total 0.031200s, no pert=0, pert=0.0000e+000, nnz=11325 (dim 150x150)
-LS (pen): -1.0837e+000, 1 steps, Step width: 1.000000
- 
-object(x_ 25) =  2.3453895369167694E+003
-||grad(x)||_2 =  8.8903856236994105E+000
-        --- end of  25 in. iter ---
-
-Reusing ordering
-Chol fact OK in 0.000000s, total 0.000000s, no pert=0, pert=0.0000e+000, nnz=11325 (dim 150x150)
-LS (pen): -7.0574e-001, 1 steps, Step width: 1.000000
- 
-object(x_ 26) =  2.3449435164661409E+003
-||grad(x)||_2 =  4.6486017218525655E+000
-        --- end of  26 in. iter ---
-
-Reusing ordering
-Chol fact OK in 0.000000s, total 0.000000s, no pert=0, pert=0.0000e+000, nnz=11325 (dim 150x150)
-LS (pen): -3.9448e-001, 1 steps, Step width: 1.000000
- 
-object(x_ 27) =  2.3446901207475357E+003
-||grad(x)||_2 =  2.1491363004170090E+000
-        --- end of  27 in. iter ---
-
-Reusing ordering
-Chol fact OK in 0.031200s, total 0.031200s, no pert=0, pert=0.0000e+000, nnz=11325 (dim 150x150)
-LS (pen): -1.9598e-001, 1 steps, Step width: 1.000000
- 
-object(x_ 28) =  2.3445666612662417E+003
-||grad(x)||_2 =  8.3449446165527907E-001
-        --- end of  28 in. iter ---
-
-Reusing ordering
-Chol fact OK in 0.000000s, total 0.000000s, no pert=0, pert=0.0000e+000, nnz=11325 (dim 150x150)
-LS (pen): -6.2733e-002, 1 steps, Step width: 1.000000
- 
-object(x_ 29) =  2.3445298745286291E+003
-||grad(x)||_2 =  2.1934760896622169E-001
-        --- end of  29 in. iter ---
-
-Reusing ordering
-Chol fact OK in 0.000000s, total 0.000000s, no pert=0, pert=0.0000e+000, nnz=11325 (dim 150x150)
-LS (pen): -6.7912e-003, 1 steps, Step width: 1.000000
- 
-object(x_ 30) =  2.3445262475874424E+003
-||grad(x)||_2 =  2.3179120959214577E-002
-        --- end of  30 in. iter ---
-
-Reusing ordering
-Chol fact OK in 0.031200s, total 0.031200s, no pert=0, pert=0.0000e+000, nnz=11325 (dim 150x150)
-LS (pen): -8.7030e-005, 1 steps, Step width: 1.000000
- 
-object(x_ 31) =  2.3445262036846170E+003
-||grad(x)||_2 =  3.1918006818370165E-004
-        --- end of  31 in. iter ---
-
-Unconstr min OK
-<<<<<<< .mine
-************ Result of outer step   5 **********
-Objective                1.5447926277924944E+003
-Augmented Lagrangian     2.3445262036846170E+003
-|f(x) - f(x_old)|        1.2167977471885597E+003
-|f(x) - Lagr(x)|         7.9973357589212264E+002
-Grad augm. lagr.         3.1918006818370165E-004
-Feasibility (max)        1.1195013057440517E+000
-=======
-************ Result of outer step   4 **********
-Objective                1.5226811279662797E+003
-Augmented Lagrangian     2.6716621186661432E+003
-|f(x) - f(x_old)|        1.2251307047711439E+003
-|f(x) - Lagr(x)|         1.1489809906998635E+003
-Grad augm. lagr.         6.5514821753843394E-005
-Feasibility (max)        2.4345306621398772E+000
->>>>>>> .r975
-Feasibility eqx      
-Feasibility ineq     
-<<<<<<< .mine
-Feasibility box          2.2823545256065136E-001
-Feasibility m.ineq       1.1195013057440517E+000
-Complementarity          7.4126706748987664E-002
-Minimal penalty          6.2500000000000000E-002
-Newton steps                                  31
-Inner steps                                   31
-Linesearch steps                              42
-Time of the minimization step          3.21362 s
-  - factorizations in the step        0.249602 s
-=======
-Feasibility box          3.9985792841849416E-002
-Feasibility m.ineq       2.4345306621398772E+000
-Complementarity          1.6080882843448833E-002
-Minimal penalty          1.2500000000000000E-001
-Newton steps                                  22
-Inner steps                                   22
-Linesearch steps                              22
-Time of the minimization step         0.624004 s
-  - factorizations in the step               0 s
->>>>>>> .r975
-************************************************
- 
-<<<<<<< .mine
-************* Start of outer step   6 **********
-object(x_  0) =  1.1869948034127166E+004
-||grad(x)||_2 =  5.3120594878363943E+002
-=======
-************* Start of outer step   5 **********
-object(x_  0) =  2.3119095118118534E+005
-||grad(x)||_2 =  2.6293940991539741E+004
->>>>>>> .r975
-        --- start of inner iter ---
- 
-Reusing ordering
-Chol fact OK in 0.000000s, total 0.000000s, no pert=0, pert=0.0000e+000, nnz=11325 (dim 150x150)
-LS (pen): -5.4381e+003, 3 steps, Step width: 0.250000
- 
-<<<<<<< .mine
-object(x_  1) =  1.0661842508053196E+004
-||grad(x)||_2 =  4.1935915713148728E+002
-=======
-object(x_  1) =  1.5411101186689449E+005
-||grad(x)||_2 =  1.1685013364287499E+004
->>>>>>> .r975
-        --- end of   1 in. iter ---
-
-Reusing ordering
-Chol fact OK in 0.000000s, total 0.000000s, no pert=0, pert=0.0000e+000, nnz=11325 (dim 150x150)
-LS (pen): -4.7922e+003, 1 steps, Step width: 1.000000
- 
-<<<<<<< .mine
-object(x_  2) =  7.4808762623125176E+003
-||grad(x)||_2 =  1.8392907527500168E+002
-=======
-object(x_  2) =  1.0274589750704213E+005
-||grad(x)||_2 =  5.1921551629283667E+003
->>>>>>> .r975
-        --- end of   2 in. iter ---
-
-Reusing ordering
-Chol fact OK in 0.000000s, total 0.000000s, no pert=0, pert=0.0000e+000, nnz=11325 (dim 150x150)
-LS (pen): -3.0208e+003, 1 steps, Step width: 1.000000
- 
-<<<<<<< .mine
-object(x_  3) =  5.4862949093383459E+003
-||grad(x)||_2 =  7.9574429272380556E+001
-=======
-object(x_  3) =  6.8534726045354822E+004
-||grad(x)||_2 =  2.3064419091796440E+003
->>>>>>> .r975
-        --- end of   3 in. iter ---
-
-Reusing ordering
-Chol fact OK in 0.031200s, total 0.031200s, no pert=0, pert=0.0000e+000, nnz=11325 (dim 150x150)
-LS (pen): -1.7767e+003, 1 steps, Step width: 1.000000
- 
-<<<<<<< .mine
-object(x_  4) =  4.3268881091661742E+003
-||grad(x)||_2 =  3.3364536668664243E+001
-=======
-object(x_  4) =  4.5775551112276160E+004
-||grad(x)||_2 =  1.0239056060960162E+003
->>>>>>> .r975
-        --- end of   4 in. iter ---
-
-Reusing ordering
-Chol fact OK in 0.000000s, total 0.000000s, no pert=0, pert=0.0000e+000, nnz=11325 (dim 150x150)
-LS (pen): -8.9499e+002, 1 steps, Step width: 1.000000
- 
-<<<<<<< .mine
-object(x_  5) =  3.7576377401060945E+003
-||grad(x)||_2 =  1.3080696844551918E+001
-=======
-object(x_  5) =  3.0674897336536153E+004
-||grad(x)||_2 =  4.5389448590545265E+002
->>>>>>> .r975
-        --- end of   5 in. iter ---
-
-Reusing ordering
-Chol fact OK in 0.000000s, total 0.000000s, no pert=0, pert=0.0000e+000, nnz=11325 (dim 150x150)
-LS (pen): -3.1966e+002, 1 steps, Step width: 1.000000
- 
-<<<<<<< .mine
-object(x_  6) =  3.5646732502626937E+003
-||grad(x)||_2 =  4.4179928200361944E+000
-=======
-object(x_  6) =  2.0715063273014814E+004
-||grad(x)||_2 =  2.0056402233823920E+002
->>>>>>> .r975
-        --- end of   6 in. iter ---
-
-Reusing ordering
-Chol fact OK in 0.031200s, total 0.031200s, no pert=0, pert=0.0000e+000, nnz=11325 (dim 150x150)
-LS (pen): -5.3859e+001, 1 steps, Step width: 1.000000
- 
-<<<<<<< .mine
-object(x_  7) =  3.5348649260387356E+003
-||grad(x)||_2 =  1.0140689693172664E+000
-=======
-object(x_  7) =  1.4233029203879938E+004
-||grad(x)||_2 =  8.7985341265780988E+001
->>>>>>> .r975
-        --- end of   7 in. iter ---
-
-Reusing ordering
-Chol fact OK in 0.000000s, total 0.000000s, no pert=0, pert=0.0000e+000, nnz=11325 (dim 150x150)
-LS (pen): -1.8112e+000, 1 steps, Step width: 1.000000
- 
-<<<<<<< .mine
-object(x_  8) =  3.5339395547402501E+003
-||grad(x)||_2 =  9.3125330518870134E-002
-=======
-object(x_  8) =  1.0138601096456903E+004
-||grad(x)||_2 =  3.7973672969566337E+001
->>>>>>> .r975
-        --- end of   8 in. iter ---
-
-Reusing ordering
-Chol fact OK in 0.000000s, total 0.000000s, no pert=0, pert=0.0000e+000, nnz=11325 (dim 150x150)
-LS (pen): -2.4762e-003, 1 steps, Step width: 1.000000
- 
-<<<<<<< .mine
-object(x_  9) =  3.5339383115040782E+003
-||grad(x)||_2 =  1.8913006481257302E-003
-=======
-object(x_  9) =  7.7187679910644392E+003
-||grad(x)||_2 =  1.5793118144540813E+001
->>>>>>> .r975
-        --- end of   9 in. iter ---
-
-Unconstr min OK
-************ Result of outer step   6 **********
-Objective                2.9197963098589908E+003
-Augmented Lagrangian     3.5339383115040782E+003
-|f(x) - f(x_old)|        1.3750036820664964E+003
-|f(x) - Lagr(x)|         6.1414200164508748E+002
-Grad augm. lagr.         1.8913006481257302E-003
-Feasibility (max)        4.2227083258330811E-001
-Feasibility eqx      
-Feasibility ineq     
-Feasibility box          8.5902255365757612E-003
-Feasibility m.ineq       4.2227083258330811E-001
-Complementarity          1.9945961048612598E-003
-Minimal penalty          3.1250000000000000E-002
-Newton steps                                   9
-Inner steps                                    9
-Linesearch steps                              11
-Time of the minimization step         0.936006 s
-  - factorizations in the step       0.0624004 s
-************************************************
- 
-************* Start of outer step   7 **********
-object(x_  0) =  5.5794225935229306E+003
-||grad(x)||_2 =  1.2335673116841767E+002
-        --- start of inner iter ---
- 
-Reusing ordering
-Chol fact OK in 0.000000s, total 0.000000s, no pert=0, pert=0.0000e+000, nnz=11325 (dim 150x150)
-LS (pen): -1.3865e+003, 5 steps, Step width: 0.062500
- 
-<<<<<<< .mine
-object(x_  1) =  5.4954315651993638E+003
-||grad(x)||_2 =  1.1600716603201786E+002
-        --- end of   1 in. iter ---
-
-Reusing ordering
-Chol fact OK in 0.000000s, total 0.000000s, no pert=0, pert=0.0000e+000, nnz=11325 (dim 150x150)
-LS (pen): -1.3164e+003, 4 steps, Step width: 0.125000
- 
-object(x_  2) =  5.3406639830304321E+003
-||grad(x)||_2 =  1.0263955177029430E+002
-        --- end of   2 in. iter ---
-
-Reusing ordering
-Chol fact OK in 0.031200s, total 0.031200s, no pert=0, pert=0.0000e+000, nnz=11325 (dim 150x150)
-LS (pen): -1.2002e+003, 4 steps, Step width: 0.125000
- 
-object(x_  3) =  5.1995572474983337E+003
-||grad(x)||_2 =  9.0783420674767584E+001
-        --- end of   3 in. iter ---
-
-Reusing ordering
-Chol fact OK in 0.000000s, total 0.000000s, no pert=0, pert=0.0000e+000, nnz=11325 (dim 150x150)
-LS (pen): -1.0927e+003, 3 steps, Step width: 0.250000
- 
-object(x_  4) =  4.9573683878833062E+003
-||grad(x)||_2 =  7.1441749155557673E+001
-        --- end of   4 in. iter ---
-
-Reusing ordering
-Chol fact OK in 0.000000s, total 0.000000s, no pert=0, pert=0.0000e+000, nnz=11325 (dim 150x150)
-LS (pen): -8.9983e+002, 4 steps, Step width: 0.125000
- 
-object(x_  5) =  4.8515923167001592E+003
-||grad(x)||_2 =  6.3175882713396902E+001
-        --- end of   5 in. iter ---
-
-Reusing ordering
-Chol fact OK in 0.000000s, total 0.000000s, no pert=0, pert=0.0000e+000, nnz=11325 (dim 150x150)
-LS (pen): -8.1053e+002, 3 steps, Step width: 0.250000
- 
-object(x_  6) =  4.6721316812813893E+003
-||grad(x)||_2 =  5.7974206175242614E+001
-        --- end of   6 in. iter ---
-
-Reusing ordering
-Chol fact OK in 0.031200s, total 0.031200s, no pert=0, pert=0.0000e+000, nnz=11325 (dim 150x150)
-LS (pen): -6.4990e+002, 3 steps, Step width: 0.250000
- 
-object(x_  7) =  4.5283100362429977E+003
-||grad(x)||_2 =  4.6963231670915526E+001
-        --- end of   7 in. iter ---
-
-Reusing ordering
-Chol fact OK in 0.031200s, total 0.031200s, no pert=0, pert=0.0000e+000, nnz=11325 (dim 150x150)
-LS (pen): -5.1025e+002, 4 steps, Step width: 0.125000
- 
-object(x_  8) =  4.4683593286685245E+003
-||grad(x)||_2 =  4.2235244485871853E+001
-        --- end of   8 in. iter ---
-
-Reusing ordering
-Chol fact OK in 0.000000s, total 0.000000s, no pert=0, pert=0.0000e+000, nnz=11325 (dim 150x150)
-LS (pen): -4.4796e+002, 4 steps, Step width: 0.125000
- 
-object(x_  9) =  4.4157312400036235E+003
-||grad(x)||_2 =  3.8248748262982517E+001
-        --- end of   9 in. iter ---
-
-Reusing ordering
-Chol fact OK in 0.000000s, total 0.000000s, no pert=0, pert=0.0000e+000, nnz=11325 (dim 150x150)
-LS (pen): -3.9143e+002, 3 steps, Step width: 0.250000
- 
-object(x_ 10) =  4.3292745185843560E+003
-||grad(x)||_2 =  7.7943105276126403E+001
-=======
-object(x_ 10) =  6.4833225702986047E+003
-||grad(x)||_2 =  6.0319585875738442E+000
->>>>>>> .r975
-        --- end of  10 in. iter ---
-
-Reusing ordering
-Chol fact OK in 0.000000s, total 0.000000s, no pert=0, pert=0.0000e+000, nnz=11325 (dim 150x150)
-LS (pen): -2.9276e+002, 2 steps, Step width: 0.500000
- 
-<<<<<<< .mine
-object(x_ 11) =  4.2164131730164090E+003
-||grad(x)||_2 =  1.1406067639397073E+005
-=======
-object(x_ 11) =  6.0224711242914918E+003
-||grad(x)||_2 =  1.8881417551966466E+000
->>>>>>> .r975
-        --- end of  11 in. iter ---
-
-Reusing ordering
-Chol fact OK in 0.000000s, total 0.000000s, no pert=0, pert=0.0000e+000, nnz=11325 (dim 150x150)
-LS (pen): -1.4837e+002, 1 steps, Step width: 1.000000
- 
-<<<<<<< .mine
-object(x_ 12) =  4.1292747367695047E+003
-||grad(x)||_2 =  5.3362916155754821E+004
-=======
-object(x_ 12) =  5.9318398398770487E+003
-||grad(x)||_2 =  3.7141833859866080E-001
->>>>>>> .r975
-        --- end of  12 in. iter ---
-
-Reusing ordering
-Chol fact OK in 0.000000s, total 0.000000s, no pert=0, pert=0.0000e+000, nnz=11325 (dim 150x150)
-LS (pen): -1.6556e+001, 1 steps, Step width: 1.000000
- 
-<<<<<<< .mine
-object(x_ 13) =  4.1203280808881991E+003
-||grad(x)||_2 =  2.4079334829016196E+004
-=======
-object(x_ 13) =  5.9265733625324965E+003
-||grad(x)||_2 =  2.5896207918912104E-002
->>>>>>> .r975
-        --- end of  13 in. iter ---
-
-Reusing ordering
-Chol fact OK in 0.000000s, total 0.000000s, no pert=0, pert=0.0000e+000, nnz=11325 (dim 150x150)
-LS (pen): -6.2646e-001, 1 steps, Step width: 1.000000
- 
-<<<<<<< .mine
-object(x_ 14) =  4.1199487858031525E+003
-||grad(x)||_2 =  1.0830674855902758E+004
-=======
-object(x_ 14) =  5.9265420556233848E+003
-||grad(x)||_2 =  1.9691658174171144E-004
->>>>>>> .r975
-        --- end of  14 in. iter ---
-
-<<<<<<< .mine
-Reusing ordering
-Chol fact OK in 0.000000s, total 0.031200s, no pert=0, pert=0.0000e+000, nnz=11325 (dim 150x150)
-LS (pen): -2.6986e-001, 1 steps, Step width: 1.000000
-=======
-Unconstr min OK
-************ Result of outer step   5 **********
-Objective                4.5287466432438805E+003
-Augmented Lagrangian     5.9265420556233848E+003
-|f(x) - f(x_old)|        3.0060655152776008E+003
-|f(x) - Lagr(x)|         1.3977954123795043E+003
-Grad augm. lagr.         1.9691658174171144E-004
-Feasibility (max)        8.8970358856022336E-001
-Feasibility eqx      
-Feasibility ineq     
-Feasibility box          1.5187116280752902E-002
-Feasibility m.ineq       8.8970358856022336E-001
-Complementarity          4.7802249830186209E-003
-Minimal penalty          6.2500000000000000E-002
-Newton steps                                  14
-Inner steps                                   14
-Linesearch steps                              14
-Time of the minimization step         0.452403 s
-  - factorizations in the step               0 s
-************************************************
->>>>>>> .r975
- 
-<<<<<<< .mine
-object(x_ 15) =  4.1197671885169766E+003
-||grad(x)||_2 =  4.9156999873500345E+003
-        --- end of  15 in. iter ---
-
-Reusing ordering
-Chol fact OK in 0.000000s, total 0.000000s, no pert=0, pert=0.0000e+000, nnz=11325 (dim 150x150)
-LS (pen): -2.0914e-001, 1 steps, Step width: 1.000000
-=======
-************* Start of outer step   6 **********
-object(x_  0) =  1.2750048246457891E+004
-||grad(x)||_2 =  4.4478768389710140E+001
-        --- start of inner iter ---
->>>>>>> .r975
- 
-object(x_ 16) =  4.1196258124057049E+003
-||grad(x)||_2 =  2.2577714343401803E+003
-        --- end of  16 in. iter ---
-
-Reusing ordering
-Chol fact OK in 0.000000s, total 0.000000s, no pert=0, pert=0.0000e+000, nnz=11325 (dim 150x150)
-LS (pen): -1.7371e-001, 1 steps, Step width: 1.000000
- 
-<<<<<<< .mine
-object(x_ 17) =  4.1195075189883410E+003
-||grad(x)||_2 =  1.0572117883441804E+003
-        --- end of  17 in. iter ---
-=======
-object(x_  1) =  1.0059427723262907E+004
-||grad(x)||_2 =  1.8639387430308577E+001
-        --- end of   1 in. iter ---
->>>>>>> .r975
-
-Reusing ordering
-Chol fact OK in 0.031200s, total 0.031200s, no pert=0, pert=0.0000e+000, nnz=11325 (dim 150x150)
-LS (pen): -1.5657e-001, 1 steps, Step width: 1.000000
- 
-<<<<<<< .mine
-object(x_ 18) =  4.1194026041671423E+003
-||grad(x)||_2 =  4.9945971215136535E+002
-        --- end of  18 in. iter ---
-=======
-object(x_  2) =  8.6363443692925957E+003
-||grad(x)||_2 =  7.2412057599412822E+000
-        --- end of   2 in. iter ---
->>>>>>> .r975
-
-Reusing ordering
-Chol fact OK in 0.000000s, total 0.000000s, no pert=0, pert=0.0000e+000, nnz=11325 (dim 150x150)
-LS (pen): -1.0944e-001, 1 steps, Step width: 1.000000
- 
-<<<<<<< .mine
-object(x_ 19) =  4.1193314448866813E+003
-||grad(x)||_2 =  2.3948434379160838E+002
-        --- end of  19 in. iter ---
-=======
-object(x_  3) =  8.0678553794180189E+003
-||grad(x)||_2 =  2.3519664696521736E+000
-        --- end of   3 in. iter ---
->>>>>>> .r975
-
-Reusing ordering
-Chol fact OK in 0.000000s, total 0.000000s, no pert=0, pert=0.0000e+000, nnz=11325 (dim 150x150)
-LS (pen): -6.8816e-002, 1 steps, Step width: 1.000000
- 
-<<<<<<< .mine
-object(x_ 20) =  4.1192853367955440E+003
-||grad(x)||_2 =  1.2163316876794310E+002
-        --- end of  20 in. iter ---
-=======
-object(x_  4) =  7.9430249349742880E+003
-||grad(x)||_2 =  4.9209250837086743E-001
-        --- end of   4 in. iter ---
->>>>>>> .r975
-
-Reusing ordering
-Chol fact OK in 0.000000s, total 0.000000s, no pert=0, pert=0.0000e+000, nnz=11325 (dim 150x150)
-LS (pen): -5.4811e-002, 1 steps, Step width: 1.000000
- 
-<<<<<<< .mine
-object(x_ 21) =  4.1192483723535470E+003
-||grad(x)||_2 =  6.6403463939326798E+001
-        --- end of  21 in. iter ---
-=======
-object(x_  5) =  7.9348917221474385E+003
-||grad(x)||_2 =  3.4958291415481388E-002
-        --- end of   5 in. iter ---
->>>>>>> .r975
-
-Reusing ordering
-Chol fact OK in 0.000000s, total 0.000000s, no pert=0, pert=0.0000e+000, nnz=11325 (dim 150x150)
-LS (pen): -4.3053e-002, 1 steps, Step width: 1.000000
- 
-<<<<<<< .mine
-object(x_ 22) =  4.1192196628536276E+003
-||grad(x)||_2 =  3.8885611591037353E+001
-        --- end of  22 in. iter ---
-=======
-object(x_  6) =  7.9348443879575752E+003
-||grad(x)||_2 =  2.2081157073730771E-004
-        --- end of   6 in. iter ---
->>>>>>> .r975
-
-<<<<<<< .mine
-Reusing ordering
-Chol fact OK in 0.031200s, total 0.031200s, no pert=0, pert=0.0000e+000, nnz=11325 (dim 150x150)
-LS (pen): -3.4177e-002, 1 steps, Step width: 1.000000
-=======
-Unconstr min OK
-************ Result of outer step   6 **********
-Objective                6.6439014194941128E+003
-Augmented Lagrangian     7.9348443879575752E+003
-|f(x) - f(x_old)|        2.1151547762502323E+003
-|f(x) - Lagr(x)|         1.2909429684634624E+003
-Grad augm. lagr.         2.2081157073730771E-004
-Feasibility (max)        3.7438175827264780E-001
-Feasibility eqx      
-Feasibility ineq     
-Feasibility box          5.1027161894184186E-004
-Feasibility m.ineq       3.7438175827264780E-001
-Complementarity          2.4039709411792474E-004
-Minimal penalty          3.1250000000000000E-002
+Feasibility box           0.0000000000000000E+00
+Feasibility m.ineq        1.8019132874906060E-01
+Complementarity           8.3904241447579825E-02
+Minimal penalty           4.1666666666666669E-01
 Newton steps                                   6
 Inner steps                                    6
-Linesearch steps                               6
-Time of the minimization step         0.187201 s
+Linesearch steps                               8
+Time of the minimization step             0.03 s
   - factorizations in the step               0 s
 ************************************************
->>>>>>> .r975
  
-<<<<<<< .mine
-object(x_ 23) =  4.1191964640849365E+003
-||grad(x)||_2 =  2.4674263803261919E+001
-        --- end of  23 in. iter ---
-
-Reusing ordering
-Chol fact OK in 0.000000s, total 0.000000s, no pert=0, pert=0.0000e+000, nnz=11325 (dim 150x150)
-LS (pen): -3.2916e-002, 1 steps, Step width: 1.000000
-=======
-************* Start of outer step   7 **********
-object(x_  0) =  1.1353249060063206E+004
-||grad(x)||_2 =  2.2179110244214016E+001
-        --- start of inner iter ---
->>>>>>> .r975
- 
-object(x_ 24) =  4.1191737609593220E+003
-||grad(x)||_2 =  1.6869287987426631E+001
-        --- end of  24 in. iter ---
-
-Reusing ordering
-Chol fact OK in 0.000000s, total 0.000000s, no pert=0, pert=0.0000e+000, nnz=11325 (dim 150x150)
-LS (pen): -3.6919e-002, 1 steps, Step width: 1.000000
- 
-<<<<<<< .mine
-object(x_ 25) =  4.1191479980239192E+003
-||grad(x)||_2 =  1.2288330872007871E+001
-        --- end of  25 in. iter ---
-=======
-object(x_  1) =  9.8591249618175952E+003
-||grad(x)||_2 =  8.8007351499614437E+000
-        --- end of   1 in. iter ---
->>>>>>> .r975
-
-Reusing ordering
-Chol fact OK in 0.000000s, total 0.000000s, no pert=0, pert=0.0000e+000, nnz=11325 (dim 150x150)
-LS (pen): -4.6936e-002, 1 steps, Step width: 1.000000
- 
-<<<<<<< .mine
-object(x_ 26) =  4.1191149942845695E+003
-||grad(x)||_2 =  9.5041653276410170E+000
-        --- end of  26 in. iter ---
-=======
-object(x_  2) =  9.2160533813437069E+003
-||grad(x)||_2 =  3.0016046517516268E+000
-        --- end of   2 in. iter ---
->>>>>>> .r975
-
-Reusing ordering
-Chol fact OK in 0.000000s, total 0.000000s, no pert=0, pert=0.0000e+000, nnz=11325 (dim 150x150)
-LS (pen): -6.5964e-002, 1 steps, Step width: 1.000000
- 
-<<<<<<< .mine
-object(x_ 27) =  4.1190700589739954E+003
-||grad(x)||_2 =  7.4191094077021589E+000
-        --- end of  27 in. iter ---
-=======
-object(x_  3) =  9.0516374613824082E+003
-||grad(x)||_2 =  7.0547351486670684E-001
-        --- end of   3 in. iter ---
->>>>>>> .r975
-
-Reusing ordering
-Chol fact OK in 0.000000s, total 0.000000s, no pert=0, pert=0.0000e+000, nnz=11325 (dim 150x150)
-LS (pen): -5.6811e-002, 1 steps, Step width: 1.000000
- 
-<<<<<<< .mine
-object(x_ 28) =  4.1190333249841115E+003
-||grad(x)||_2 =  5.6088033566168551E+000
-        --- end of  28 in. iter ---
-=======
-object(x_  4) =  9.0373295161389487E+003
-||grad(x)||_2 =  6.5367893077119918E-002
-        --- end of   4 in. iter ---
->>>>>>> .r975
-
-Reusing ordering
-Chol fact OK in 0.000000s, total 0.000000s, no pert=0, pert=0.0000e+000, nnz=11325 (dim 150x150)
-LS (pen): -3.5267e-002, 1 steps, Step width: 1.000000
- 
-<<<<<<< .mine
-object(x_ 29) =  4.1190102175107495E+003
-||grad(x)||_2 =  3.7852286309311074E+000
-        --- end of  29 in. iter ---
-=======
-object(x_  5) =  9.0371870610827191E+003
-||grad(x)||_2 =  6.9556985437822750E-004
-        --- end of   5 in. iter ---
->>>>>>> .r975
-
-Reusing ordering
-Chol fact OK in 0.031200s, total 0.031200s, no pert=0, pert=0.0000e+000, nnz=11325 (dim 150x150)
-LS (pen): -2.5261e-002, 1 steps, Step width: 1.000000
- 
-object(x_ 30) =  4.1189932405752024E+003
-||grad(x)||_2 =  2.3550037708473437E+000
-        --- end of  30 in. iter ---
-
-Reusing ordering
-Chol fact OK in 0.000000s, total 0.000000s, no pert=0, pert=0.0000e+000, nnz=11325 (dim 150x150)
-LS (pen): -2.2075e-002, 1 steps, Step width: 1.000000
- 
-object(x_ 31) =  4.1189782300303559E+003
-||grad(x)||_2 =  1.3956336153389917E+000
-        --- end of  31 in. iter ---
-
-Reusing ordering
-Chol fact OK in 0.000000s, total 0.000000s, no pert=0, pert=0.0000e+000, nnz=11325 (dim 150x150)
-LS (pen): -2.1986e-002, 1 steps, Step width: 1.000000
- 
-object(x_ 32) =  4.1189635843308006E+003
-||grad(x)||_2 =  7.6960749489562053E-001
-        --- end of  32 in. iter ---
-
-Reusing ordering
-Chol fact OK in 0.000000s, total 0.000000s, no pert=0, pert=0.0000e+000, nnz=11325 (dim 150x150)
-LS (pen): -1.3775e-002, 1 steps, Step width: 1.000000
- 
-object(x_ 33) =  4.1189548688713512E+003
-||grad(x)||_2 =  4.2684596761973176E-001
-        --- end of  33 in. iter ---
-
-Reusing ordering
-Chol fact OK in 0.000000s, total 0.000000s, no pert=0, pert=0.0000e+000, nnz=11325 (dim 150x150)
-LS (pen): -8.8183e-003, 1 steps, Step width: 1.000000
- 
-object(x_ 34) =  4.1189486601414610E+003
-||grad(x)||_2 =  2.5374573271459622E-001
-        --- end of  34 in. iter ---
-
-Reusing ordering
-Chol fact OK in 0.015600s, total 0.015600s, no pert=0, pert=0.0000e+000, nnz=11325 (dim 150x150)
-LS (pen): -1.1440e-002, 1 steps, Step width: 1.000000
- 
-object(x_ 35) =  4.1189410052951653E+003
-||grad(x)||_2 =  1.2875939878291492E-001
-        --- end of  35 in. iter ---
-
-Reusing ordering
-Chol fact OK in 0.000000s, total 0.000000s, no pert=0, pert=0.0000e+000, nnz=11325 (dim 150x150)
-LS (pen): -6.7280e-003, 1 steps, Step width: 1.000000
- 
-object(x_ 36) =  4.1189370232373449E+003
-||grad(x)||_2 =  3.8910883468495368E-002
-        --- end of  36 in. iter ---
-
-Reusing ordering
-Chol fact OK in 0.000000s, total 0.000000s, no pert=0, pert=0.0000e+000, nnz=11325 (dim 150x150)
-LS (pen): -7.1978e-004, 1 steps, Step width: 1.000000
- 
-object(x_ 37) =  4.1189366472485917E+003
-||grad(x)||_2 =  3.8111212491755927E-003
-        --- end of  37 in. iter ---
-
-Unconstr min OK
-************ Result of outer step   7 **********
-<<<<<<< .mine
-Objective                3.7352433499923013E+003
-Augmented Lagrangian     4.1189366472485917E+003
-|f(x) - f(x_old)|        8.1544704013331057E+002
-|f(x) - Lagr(x)|         3.8369329725629041E+002
-Grad augm. lagr.         3.8111212491755927E-003
-Feasibility (max)        1.4321390166878697E-001
-=======
-Objective                8.2703550783809005E+003
-Augmented Lagrangian     9.0371870610827191E+003
-|f(x) - f(x_old)|        1.6264536588867877E+003
-|f(x) - Lagr(x)|         7.6683198270181856E+002
-Grad augm. lagr.         6.9556985437822750E-004
-Feasibility (max)        1.2650654278695581E-001
->>>>>>> .r975
-Feasibility eqx      
-Feasibility ineq     
-<<<<<<< .mine
-Feasibility box          6.6315815869029812E-003
-Feasibility m.ineq       1.4321390166878697E-001
-Complementarity          1.3702764831216017E-003
-=======
-Feasibility box          6.3494640926350178E-006
-Feasibility m.ineq       1.2650654278695581E-001
-Complementarity          3.6059564117688707E-005
->>>>>>> .r975
-Minimal penalty          1.5625000000000000E-002
-Newton steps                                  37
-Inner steps                                   37
-Linesearch steps                              65
-Time of the minimization step          3.99363 s
-  - factorizations in the step        0.202801 s
-************************************************
- 
-************* Start of outer step   8 **********
-<<<<<<< .mine
-object(x_  0) =  4.6120783215321371E+003
-||grad(x)||_2 =  3.4470728096851388E+001
-=======
-object(x_  0) =  9.8798873954258106E+003
-||grad(x)||_2 =  7.8979646794905376E+000
->>>>>>> .r975
+************* Start of outer step   3 **********
+object(x_  0) =   5.6337004608585675E+00
+||grad(x)||_2 =   7.0991312476848051E+01
         --- start of inner iter ---
  
 Reusing ordering
-Chol fact OK in 0.000000s, total 0.000000s, no pert=0, pert=0.0000e+000, nnz=11325 (dim 150x150)
-LS (pen): -4.0450e+002, 5 steps, Step width: 0.062500
+Chol fact OK in 0.000000s, total 0.000000s, no pert=0, pert=0.0000e+00, nnz=171 (dim 18x18)
+LS (pen): -2.5955e+00, 1 steps, Step width: 1.000000
  
-<<<<<<< .mine
-object(x_  1) =  4.5875765069250556E+003
-||grad(x)||_2 =  3.2392776376013600E+001
-=======
-object(x_  1) =  9.4536759369954871E+003
-||grad(x)||_2 =  2.6238652374746718E+000
->>>>>>> .r975
+object(x_  1) =   3.9652541651604976E+00
+||grad(x)||_2 =   3.1753536412342896E+01
         --- end of   1 in. iter ---
 
 Reusing ordering
-Chol fact OK in 0.031200s, total 0.031200s, no pert=0, pert=0.0000e+000, nnz=11325 (dim 150x150)
-LS (pen): -3.7620e+002, 4 steps, Step width: 0.125000
+Chol fact OK in 0.000000s, total 0.000000s, no pert=0, pert=0.0000e+00, nnz=171 (dim 18x18)
+LS (pen): -1.5834e+00, 1 steps, Step width: 1.000000
  
-<<<<<<< .mine
-object(x_  2) =  4.5433789639894767E+003
-||grad(x)||_2 =  2.8586985743644995E+001
-=======
-object(x_  2) =  9.3536474642664925E+003
-||grad(x)||_2 =  5.7691386607741835E-001
->>>>>>> .r975
+object(x_  2) =   2.9203147366553184E+00
+||grad(x)||_2 =   1.3683076257202766E+01
         --- end of   2 in. iter ---
 
 Reusing ordering
-Chol fact OK in 0.000000s, total 0.031200s, no pert=0, pert=0.0000e+000, nnz=11325 (dim 150x150)
-LS (pen): -3.2920e+002, 4 steps, Step width: 0.125000
+Chol fact OK in 0.010000s, total 0.010000s, no pert=0, pert=0.0000e+00, nnz=171 (dim 18x18)
+LS (pen): -9.3394e-01, 1 steps, Step width: 1.000000
  
-<<<<<<< .mine
-object(x_  3) =  4.5047058610677359E+003
-||grad(x)||_2 =  2.5211258979770054E+001
-=======
-object(x_  3) =  9.3463425775525266E+003
-||grad(x)||_2 =  4.5266143882907943E-002
->>>>>>> .r975
+object(x_  3) =   2.3100834302342452E+00
+||grad(x)||_2 =   5.6666399677009176E+00
         --- end of   3 in. iter ---
 
 Reusing ordering
-Chol fact OK in 0.000000s, total 0.000000s, no pert=0, pert=0.0000e+000, nnz=11325 (dim 150x150)
-LS (pen): -2.8679e+002, 4 steps, Step width: 0.125000
+Chol fact OK in 0.000000s, total 0.000000s, no pert=0, pert=0.0000e+00, nnz=171 (dim 18x18)
+LS (pen): -4.7948e-01, 1 steps, Step width: 1.000000
  
-<<<<<<< .mine
-object(x_  4) =  4.4710214838621359E+003
-||grad(x)||_2 =  2.3303735202746569E+001
-=======
-object(x_  4) =  9.3462919369439478E+003
-||grad(x)||_2 =  3.3251800029884549E-004
->>>>>>> .r975
+object(x_  4) =   2.0041824762357132E+00
+||grad(x)||_2 =   2.1441368881136182E+00
         --- end of   4 in. iter ---
 
 Reusing ordering
-Chol fact OK in 0.000000s, total 0.000000s, no pert=0, pert=0.0000e+000, nnz=11325 (dim 150x150)
-LS (pen): -2.4835e+002, 3 steps, Step width: 0.250000
+Chol fact OK in 0.000000s, total 0.000000s, no pert=0, pert=0.0000e+00, nnz=171 (dim 18x18)
+LS (pen): -1.7888e-01, 1 steps, Step width: 1.000000
  
-object(x_  5) =  4.4161905072587269E+003
-||grad(x)||_2 =  2.1638121098373887E+001
+object(x_  5) =   1.8955031926148773E+00
+||grad(x)||_2 =   6.5384443168840456E-01
         --- end of   5 in. iter ---
 
 Reusing ordering
-Chol fact OK in 0.031200s, total 0.031200s, no pert=0, pert=0.0000e+000, nnz=11325 (dim 150x150)
-LS (pen): -1.8226e+002, 4 steps, Step width: 0.125000
+Chol fact OK in 0.000000s, total 0.000000s, no pert=0, pert=0.0000e+00, nnz=171 (dim 18x18)
+LS (pen): -3.3342e-02, 1 steps, Step width: 1.000000
  
-object(x_  6) =  4.3947893917712681E+003
-||grad(x)||_2 =  2.0003366484090883E+001
+object(x_  6) =   1.8768523033976410E+00
+||grad(x)||_2 =   1.1533838153197998E-01
         --- end of   6 in. iter ---
 
 Reusing ordering
-Chol fact OK in 0.031200s, total 0.031200s, no pert=0, pert=0.0000e+000, nnz=11325 (dim 150x150)
-LS (pen): -1.5495e+002, 4 steps, Step width: 0.125000
+Chol fact OK in 0.000000s, total 0.000000s, no pert=0, pert=0.0000e+00, nnz=171 (dim 18x18)
+LS (pen): -1.4382e-03, 1 steps, Step width: 1.000000
  
-object(x_  7) =  4.3765963186790814E+003
-||grad(x)||_2 =  1.8470557510366458E+001
+object(x_  7) =   1.8761119143352725E+00
+||grad(x)||_2 =   5.2568282766831962E-03
         --- end of   7 in. iter ---
 
-Reusing ordering
-Chol fact OK in 0.000000s, total 0.000000s, no pert=0, pert=0.0000e+000, nnz=11325 (dim 150x150)
-LS (pen): -1.3092e+002, 4 steps, Step width: 0.125000
- 
-object(x_  8) =  4.3612273351437852E+003
-||grad(x)||_2 =  1.7103985512949741E+001
-        --- end of   8 in. iter ---
-
-Reusing ordering
-Chol fact OK in 0.000000s, total 0.000000s, no pert=0, pert=0.0000e+000, nnz=11325 (dim 150x150)
-LS (pen): -1.0991e+002, 3 steps, Step width: 0.250000
- 
-object(x_  9) =  4.3370180437883373E+003
-||grad(x)||_2 =  2.0531806066610052E+001
-        --- end of   9 in. iter ---
-
-Reusing ordering
-Chol fact OK in 0.000000s, total 0.000000s, no pert=0, pert=0.0000e+000, nnz=11325 (dim 150x150)
-LS (pen): -7.5272e+001, 3 steps, Step width: 0.250000
- 
-object(x_ 10) =  4.3204549892626110E+003
-||grad(x)||_2 =  3.7645369587995951E+001
-        --- end of  10 in. iter ---
-
-Reusing ordering
-Chol fact OK in 0.031200s, total 0.031200s, no pert=0, pert=0.0000e+000, nnz=11325 (dim 150x150)
-LS (pen): -5.0103e+001, 2 steps, Step width: 0.500000
- 
-object(x_ 11) =  4.3012422076760249E+003
-||grad(x)||_2 =  1.1219056055583363E+002
-        --- end of  11 in. iter ---
-
-Reusing ordering
-Chol fact OK in 0.000000s, total 0.000000s, no pert=0, pert=0.0000e+000, nnz=11325 (dim 150x150)
-LS (pen): -1.8733e+001, 1 steps, Step width: 1.000000
- 
-object(x_ 12) =  4.2910787334955330E+003
-||grad(x)||_2 =  7.9717136522746458E+001
-        --- end of  12 in. iter ---
-
-Reusing ordering
-Chol fact OK in 0.000000s, total 0.000000s, no pert=0, pert=0.0000e+000, nnz=11325 (dim 150x150)
-LS (pen): -4.3303e-001, 1 steps, Step width: 1.000000
- 
-object(x_ 13) =  4.2908496334314004E+003
-||grad(x)||_2 =  6.0695268617672461E+001
-        --- end of  13 in. iter ---
-
-Reusing ordering
-Chol fact OK in 0.031200s, total 0.031200s, no pert=0, pert=0.0000e+000, nnz=11325 (dim 150x150)
-LS (pen): -4.4399e-002, 1 steps, Step width: 1.000000
- 
-object(x_ 14) =  4.2908207445048720E+003
-||grad(x)||_2 =  5.5865021958411340E+001
-        --- end of  14 in. iter ---
-
-Reusing ordering
-Chol fact OK in 0.000000s, total 0.000000s, no pert=0, pert=0.0000e+000, nnz=11325 (dim 150x150)
-LS (pen): -2.7306e-002, 1 steps, Step width: 1.000000
- 
-object(x_ 15) =  4.2908030736722358E+003
-||grad(x)||_2 =  4.8808226678621367E+001
-        --- end of  15 in. iter ---
-
-Reusing ordering
-Chol fact OK in 0.000000s, total 0.000000s, no pert=0, pert=0.0000e+000, nnz=11325 (dim 150x150)
-LS (pen): -1.6959e-002, 1 steps, Step width: 1.000000
- 
-object(x_ 16) =  4.2907922284750621E+003
-||grad(x)||_2 =  4.5314333709740112E+001
-        --- end of  16 in. iter ---
-
-Reusing ordering
-Chol fact OK in 0.000000s, total 0.000000s, no pert=0, pert=0.0000e+000, nnz=11325 (dim 150x150)
-LS (pen): -9.0253e-003, 1 steps, Step width: 1.000000
- 
-object(x_ 17) =  4.2907864661642961E+003
-||grad(x)||_2 =  3.5654337224405708E+001
-        --- end of  17 in. iter ---
-
-Reusing ordering
-Chol fact OK in 0.000000s, total 0.000000s, no pert=0, pert=0.0000e+000, nnz=11325 (dim 150x150)
-LS (pen): -5.2671e-003, 1 steps, Step width: 1.000000
- 
-object(x_ 18) =  4.2907829936412363E+003
-||grad(x)||_2 =  2.8206567493262003E+001
-        --- end of  18 in. iter ---
-
-Reusing ordering
-Chol fact OK in 0.000000s, total 0.031200s, no pert=0, pert=0.0000e+000, nnz=11325 (dim 150x150)
-LS (pen): -4.0030e-003, 1 steps, Step width: 1.000000
- 
-object(x_ 19) =  4.2907803227921686E+003
-||grad(x)||_2 =  2.0972484738583820E+001
-        --- end of  19 in. iter ---
-
-Reusing ordering
-Chol fact OK in 0.000000s, total 0.000000s, no pert=0, pert=0.0000e+000, nnz=11325 (dim 150x150)
-LS (pen): -3.2461e-003, 1 steps, Step width: 1.000000
- 
-object(x_ 20) =  4.2907781281932293E+003
-||grad(x)||_2 =  1.4108958816015292E+001
-        --- end of  20 in. iter ---
-
-Reusing ordering
-Chol fact OK in 0.000000s, total 0.000000s, no pert=0, pert=0.0000e+000, nnz=11325 (dim 150x150)
-LS (pen): -2.9114e-003, 1 steps, Step width: 1.000000
- 
-object(x_ 21) =  4.2907761665931685E+003
-||grad(x)||_2 =  9.3625926144708647E+000
-        --- end of  21 in. iter ---
-
-Reusing ordering
-Chol fact OK in 0.000000s, total 0.000000s, no pert=0, pert=0.0000e+000, nnz=11325 (dim 150x150)
-LS (pen): -2.2530e-003, 1 steps, Step width: 1.000000
- 
-object(x_ 22) =  4.2907746750034748E+003
-||grad(x)||_2 =  6.5669579379386178E+000
-        --- end of  22 in. iter ---
-
-Reusing ordering
-Chol fact OK in 0.000000s, total 0.000000s, no pert=0, pert=0.0000e+000, nnz=11325 (dim 150x150)
-LS (pen): -2.0436e-003, 1 steps, Step width: 1.000000
- 
-object(x_ 23) =  4.2907732522749702E+003
-||grad(x)||_2 =  4.8835232079730861E+000
-        --- end of  23 in. iter ---
-
-Reusing ordering
-Chol fact OK in 0.031200s, total 0.031200s, no pert=0, pert=0.0000e+000, nnz=11325 (dim 150x150)
-LS (pen): -2.4305e-003, 1 steps, Step width: 1.000000
- 
-object(x_ 24) =  4.2907716169838677E+003
-||grad(x)||_2 =  3.4681350048017188E+000
-        --- end of  24 in. iter ---
-
-Reusing ordering
-Chol fact OK in 0.000000s, total 0.000000s, no pert=0, pert=0.0000e+000, nnz=11325 (dim 150x150)
-LS (pen): -1.8495e-003, 1 steps, Step width: 1.000000
- 
-object(x_ 25) =  4.2907704183207843E+003
-||grad(x)||_2 =  2.0038315649889675E+000
-        --- end of  25 in. iter ---
-
-Reusing ordering
-Chol fact OK in 0.000000s, total 0.031200s, no pert=0, pert=0.0000e+000, nnz=11325 (dim 150x150)
-LS (pen): -1.1373e-003, 1 steps, Step width: 1.000000
- 
-object(x_ 26) =  4.2907696553964324E+003
-||grad(x)||_2 =  1.0790329940473726E+000
-        --- end of  26 in. iter ---
-
-Reusing ordering
-Chol fact OK in 0.000000s, total 0.000000s, no pert=0, pert=0.0000e+000, nnz=11325 (dim 150x150)
-LS (pen): -9.7507e-004, 1 steps, Step width: 1.000000
- 
-object(x_ 27) =  4.2907689666918232E+003
-||grad(x)||_2 =  6.2296196975674312E-001
-        --- end of  27 in. iter ---
-
-Reusing ordering
-Chol fact OK in 0.015600s, total 0.015600s, no pert=0, pert=0.0000e+000, nnz=11325 (dim 150x150)
-LS (pen): -1.4665e-003, 1 steps, Step width: 1.000000
- 
-object(x_ 28) =  4.2907678608401293E+003
-||grad(x)||_2 =  4.1784967520831107E-001
-        --- end of  28 in. iter ---
-
-Reusing ordering
-Chol fact OK in 0.000000s, total 0.000000s, no pert=0, pert=0.0000e+000, nnz=11325 (dim 150x150)
-LS (pen): -3.8572e-003, 1 steps, Step width: 1.000000
- 
-object(x_ 29) =  4.2907650877650613E+003
-||grad(x)||_2 =  2.9238675040983592E-001
-        --- end of  29 in. iter ---
-
-Reusing ordering
-Chol fact OK in 0.000000s, total 0.000000s, no pert=0, pert=0.0000e+000, nnz=11325 (dim 150x150)
-LS (pen): -4.9488e-003, 1 steps, Step width: 1.000000
- 
-object(x_ 30) =  4.2907617803467583E+003
-||grad(x)||_2 =  1.7662813452780793E-001
-        --- end of  30 in. iter ---
-
-Reusing ordering
-Chol fact OK in 0.000000s, total 0.000000s, no pert=0, pert=0.0000e+000, nnz=11325 (dim 150x150)
-LS (pen): -4.3382e-003, 1 steps, Step width: 1.000000
- 
-object(x_ 31) =  4.2907591090183705E+003
-||grad(x)||_2 =  8.4304247292247170E-002
-        --- end of  31 in. iter ---
-
-Reusing ordering
-Chol fact OK in 0.000000s, total 0.000000s, no pert=0, pert=0.0000e+000, nnz=11325 (dim 150x150)
-LS (pen): -8.9755e-004, 1 steps, Step width: 1.000000
- 
-object(x_ 32) =  4.2907586300434596E+003
-||grad(x)||_2 =  1.5230952788652241E-002
-        --- end of  32 in. iter ---
-
-Reusing ordering
-Chol fact OK in 0.031200s, total 0.031200s, no pert=0, pert=0.0000e+000, nnz=11325 (dim 150x150)
-LS (pen): -1.3952e-005, 1 steps, Step width: 1.000000
- 
-object(x_ 33) =  4.2907586229914541E+003
-||grad(x)||_2 =  2.5308954300620593E-004
-        --- end of  33 in. iter ---
-
 Unconstr min OK
-************ Result of outer step   8 **********
-<<<<<<< .mine
-Objective                4.1543284042513360E+003
-Augmented Lagrangian     4.2907586229914541E+003
-|f(x) - f(x_old)|        4.1908505425903468E+002
-|f(x) - Lagr(x)|         1.3643021874011811E+002
-Grad augm. lagr.         2.5308954300620593E-004
-Feasibility (max)        3.6188872531056397E-002
-=======
-Objective                9.0864348229310508E+003
-Augmented Lagrangian     9.3462919369439478E+003
-|f(x) - f(x_old)|        8.1607974455015028E+002
-|f(x) - Lagr(x)|         2.5985711401289700E+002
-Grad augm. lagr.         3.3251800029884549E-004
-Feasibility (max)        3.1406436115503304E-002
->>>>>>> .r975
+************ Result of outer step   3 **********
+Objective                 1.9201270797851573E+00
+Augmented Lagrangian      1.8761119143352725E+00
+|f(x) - f(x_old)|         1.9234137535449114E-01
+|f(x) - Lagr(x)|          4.4015165449884819E-02
+Grad augm. lagr.          5.2568282766831962E-03
+Feasibility (max)         3.2997630536556237E-02
 Feasibility eqx      
 Feasibility ineq     
-<<<<<<< .mine
-Feasibility box          2.6348913850888218E-003
-Feasibility m.ineq       3.6188872531056397E-002
-Complementarity          3.5998774134935987E-004
-=======
-Feasibility box          1.5887411767367704E-007
-Feasibility m.ineq       3.1406436115503304E-002
-Complementarity          5.4089346176533060E-006
->>>>>>> .r975
-Minimal penalty          7.8125000000000000E-003
-Newton steps                                  33
-Inner steps                                   33
-Linesearch steps                              62
-Time of the minimization step          3.69722 s
-  - factorizations in the step        0.234002 s
+Feasibility box           1.7846704524228083E-03
+Feasibility m.ineq        3.2997630536556237E-02
+Complementarity           1.3166857100191843E-02
+Minimal penalty           2.0833333333333334E-01
+Newton steps                                   7
+Inner steps                                    7
+Linesearch steps                               7
+Time of the minimization step             0.06 s
+  - factorizations in the step            0.01 s
 ************************************************
  
-************* Start of outer step   9 **********
-<<<<<<< .mine
-object(x_  0) =  4.3507574395361162E+003
-||grad(x)||_2 =  9.0646199151298372E+000
-=======
-object(x_  0) =  9.4459855034866850E+003
-||grad(x)||_2 =  2.4696167355409560E+000
->>>>>>> .r975
+************* Start of outer step   4 **********
+object(x_  0) =   2.0518673863439671E+00
+||grad(x)||_2 =   1.6675604819047214E+00
         --- start of inner iter ---
  
 Reusing ordering
-Chol fact OK in 0.031200s, total 0.031200s, no pert=0, pert=0.0000e+000, nnz=11325 (dim 150x150)
-LS (pen): -5.9853e+001, 4 steps, Step width: 0.125000
+Chol fact OK in 0.000000s, total 0.000000s, no pert=0, pert=0.0000e+00, nnz=171 (dim 18x18)
+LS (pen): -1.0245e-01, 1 steps, Step width: 1.000000
  
-<<<<<<< .mine
-object(x_  1) =  4.3437370840642652E+003
-||grad(x)||_2 =  7.9422898348634465E+000
-=======
-object(x_  1) =  9.3895775386366713E+003
-||grad(x)||_2 =  5.2633827170615632E-001
->>>>>>> .r975
+object(x_  1) =   1.9923631820714087E+00
+||grad(x)||_2 =   5.7514860255626754E-01
         --- end of   1 in. iter ---
 
 Reusing ordering
-<<<<<<< .mine
-Chol fact OK in 0.000000s, total 0.000000s, no pert=0, pert=0.0000e+000, nnz=11325 (dim 150x150)
-LS (pen): -4.9080e+001, 3 steps, Step width: 0.250000
-=======
-Chol fact OK in 0.000000s, total 0.000000s, no pert=0, pert=0.0000e+000, nnz=903 (dim 42x42)
-LS (pen): -7.2459e+000, 1 steps, Step width: 1.000000
->>>>>>> .r975
+Chol fact OK in 0.000000s, total 0.000000s, no pert=0, pert=0.0000e+00, nnz=171 (dim 18x18)
+LS (pen): -1.4684e-02, 1 steps, Step width: 1.000000
  
-<<<<<<< .mine
-object(x_  2) =  4.3329402330895537E+003
-||grad(x)||_2 =  6.0317934636821127E+000
-=======
-object(x_  2) =  9.3857761537810475E+003
-||grad(x)||_2 =  3.8241846681051725E-002
->>>>>>> .r975
+object(x_  2) =   1.9842665578234615E+00
+||grad(x)||_2 =   8.8923305965591601E-02
         --- end of   2 in. iter ---
 
 Reusing ordering
-Chol fact OK in 0.000000s, total 0.000000s, no pert=0, pert=0.0000e+000, nnz=11325 (dim 150x150)
-LS (pen): -3.2495e+001, 4 steps, Step width: 0.125000
+Chol fact OK in 0.000000s, total 0.000000s, no pert=0, pert=0.0000e+00, nnz=171 (dim 18x18)
+LS (pen): -4.5528e-04, 1 steps, Step width: 1.000000
  
-<<<<<<< .mine
-object(x_  3) =  4.3291278200814995E+003
-||grad(x)||_2 =  5.3046993860568374E+000
-=======
-object(x_  3) =  9.3857537988708045E+003
-||grad(x)||_2 =  2.3754951073630672E-004
->>>>>>> .r975
+object(x_  3) =   1.9840340690940543E+00
+||grad(x)||_2 =   2.9614636692613656E-03
         --- end of   3 in. iter ---
 
-Reusing ordering
-Chol fact OK in 0.000000s, total 0.000000s, no pert=0, pert=0.0000e+000, nnz=11325 (dim 150x150)
-LS (pen): -2.6432e+001, 4 steps, Step width: 0.125000
- 
-object(x_  4) =  4.3260270482082151E+003
-||grad(x)||_2 =  4.6646560416558254E+000
-        --- end of   4 in. iter ---
-
-Reusing ordering
-Chol fact OK in 0.000000s, total 0.000000s, no pert=0, pert=0.0000e+000, nnz=11325 (dim 150x150)
-LS (pen): -2.1391e+001, 3 steps, Step width: 0.250000
- 
-object(x_  5) =  4.3213284832079289E+003
-||grad(x)||_2 =  3.5844990772134193E+000
-        --- end of   5 in. iter ---
-
-Reusing ordering
-Chol fact OK in 0.015600s, total 0.015600s, no pert=0, pert=0.0000e+000, nnz=11325 (dim 150x150)
-LS (pen): -1.3522e+001, 3 steps, Step width: 0.250000
- 
-object(x_  6) =  4.3183604919714462E+003
-||grad(x)||_2 =  2.7717968953756613E+000
-        --- end of   6 in. iter ---
-
-Reusing ordering
-Chol fact OK in 0.000000s, total 0.000000s, no pert=0, pert=0.0000e+000, nnz=11325 (dim 150x150)
-LS (pen): -8.3712e+000, 2 steps, Step width: 0.500000
- 
-object(x_  7) =  4.3151819328795291E+003
-||grad(x)||_2 =  1.6178244615356536E+000
-        --- end of   7 in. iter ---
-
-Reusing ordering
-Chol fact OK in 0.000000s, total 0.000000s, no pert=0, pert=0.0000e+000, nnz=11325 (dim 150x150)
-LS (pen): -2.6232e+000, 1 steps, Step width: 1.000000
- 
-object(x_  8) =  4.3138117498391020E+003
-||grad(x)||_2 =  4.8424861267890373E-001
-        --- end of   8 in. iter ---
-
-Reusing ordering
-Chol fact OK in 0.000000s, total 0.000000s, no pert=0, pert=0.0000e+000, nnz=11325 (dim 150x150)
-LS (pen): -1.8963e-002, 1 steps, Step width: 1.000000
- 
-object(x_  9) =  4.3138013715045117E+003
-||grad(x)||_2 =  2.1912805200724525E-001
-        --- end of   9 in. iter ---
-
-Reusing ordering
-Chol fact OK in 0.000000s, total 0.000000s, no pert=0, pert=0.0000e+000, nnz=11325 (dim 150x150)
-LS (pen): -3.9982e-003, 1 steps, Step width: 1.000000
- 
-object(x_ 10) =  4.3137988514631406E+003
-||grad(x)||_2 =  1.2028628258589924E-001
-        --- end of  10 in. iter ---
-
-Reusing ordering
-Chol fact OK in 0.000000s, total 0.000000s, no pert=0, pert=0.0000e+000, nnz=11325 (dim 150x150)
-LS (pen): -1.5800e-003, 1 steps, Step width: 1.000000
- 
-object(x_ 11) =  4.3137979529759014E+003
-||grad(x)||_2 =  4.9201251974077653E-002
-        --- end of  11 in. iter ---
-
-Reusing ordering
-Chol fact OK in 0.031200s, total 0.031200s, no pert=0, pert=0.0000e+000, nnz=11325 (dim 150x150)
-LS (pen): -9.6571e-005, 1 steps, Step width: 1.000000
- 
-object(x_ 12) =  4.3137979027546380E+003
-||grad(x)||_2 =  5.8674182489612398E-003
-        --- end of  12 in. iter ---
-
 Unconstr min OK
-************ Result of outer step   9 **********
-<<<<<<< .mine
-Objective                4.2863005551761435E+003
-Augmented Lagrangian     4.3137979027546380E+003
-|f(x) - f(x_old)|        1.3197215092480747E+002
-|f(x) - Lagr(x)|         2.7497347578494555E+001
-Grad augm. lagr.         5.8674182489612398E-003
-Feasibility (max)        6.3219177722930895E-003
-=======
-Objective                9.3353874338136484E+003
-Augmented Lagrangian     9.3857537988708045E+003
-|f(x) - f(x_old)|        2.4895261088259758E+002
-|f(x) - Lagr(x)|         5.0366365057156145E+001
-Grad augm. lagr.         2.3754951073630672E-004
-Feasibility (max)        5.3540802001953106E-003
->>>>>>> .r975
+************ Result of outer step   4 **********
+Objective                 1.9874050786551689E+00
+Augmented Lagrangian      1.9840340690940543E+00
+|f(x) - f(x_old)|         6.7277998870011624E-02
+|f(x) - Lagr(x)|          3.3710095611145796E-03
+Grad augm. lagr.          2.9614636692613656E-03
+Feasibility (max)         3.5735487937927244E-03
 Feasibility eqx      
 Feasibility ineq     
-<<<<<<< .mine
-Feasibility box          6.6095938080196768E-004
-Feasibility m.ineq       6.3219177722930895E-003
-Complementarity          6.4469782264119484E-005
-=======
-Feasibility box          8.3719427720860478E-009
-Feasibility m.ineq       5.3540802001953106E-003
-Complementarity          8.1134019264799584E-007
->>>>>>> .r975
-Minimal penalty          3.9062500000000000E-003
-<<<<<<< .mine
-Newton steps                                  12
-Inner steps                                   12
-Linesearch steps                              28
-Time of the minimization step          1.34161 s
-  - factorizations in the step       0.0780005 s
-=======
+Feasibility box           8.2363678141370380E-05
+Feasibility m.ineq        3.5735487937927244E-03
+Complementarity           1.9750285650287766E-03
+Minimal penalty           1.0416666666666667E-01
 Newton steps                                   3
 Inner steps                                    3
 Linesearch steps                               3
-Time of the minimization step        0.0936006 s
+Time of the minimization step             0.03 s
   - factorizations in the step               0 s
->>>>>>> .r975
 ************************************************
  
-************* Start of outer step  10 **********
-<<<<<<< .mine
-object(x_  0) =  4.3172697574067679E+003
-||grad(x)||_2 =  2.4042206782262530E+000
-=======
-object(x_  0) =  9.3912994256589118E+003
-||grad(x)||_2 =  6.6727054717496503E-001
->>>>>>> .r975
+************* Start of outer step   5 **********
+object(x_  0) =   1.9985717603599569E+00
+||grad(x)||_2 =   2.3918826675606028E-01
         --- start of inner iter ---
  
 Reusing ordering
-Chol fact OK in 0.031200s, total 0.031200s, no pert=0, pert=0.0000e+000, nnz=11325 (dim 150x150)
-LS (pen): -3.9481e+000, 3 steps, Step width: 0.250000
+Chol fact OK in 0.000000s, total 0.000000s, no pert=0, pert=0.0000e+00, nnz=171 (dim 18x18)
+LS (pen): -2.1729e-03, 1 steps, Step width: 1.000000
  
-<<<<<<< .mine
-object(x_  1) =  4.3164046002912382E+003
-||grad(x)||_2 =  1.7780068562221334E+000
-=======
-object(x_  1) =  9.3880362608973755E+003
-||grad(x)||_2 =  5.8914676903664052E-002
->>>>>>> .r975
+object(x_  1) =   1.9974263856765742E+00
+||grad(x)||_2 =   2.3822311619898912E-02
         --- end of   1 in. iter ---
 
 Reusing ordering
-Chol fact OK in 0.000000s, total 0.031200s, no pert=0, pert=0.0000e+000, nnz=11325 (dim 150x150)
-LS (pen): -2.3540e+000, 2 steps, Step width: 0.500000
+Chol fact OK in 0.000000s, total 0.000000s, no pert=0, pert=0.0000e+00, nnz=171 (dim 18x18)
+LS (pen): -1.8404e-05, 1 steps, Step width: 1.000000
  
-<<<<<<< .mine
-object(x_  2) =  4.3155145945366176E+003
-||grad(x)||_2 =  9.5663260977149056E-001
-=======
-object(x_  2) =  9.3880071862244058E+003
-||grad(x)||_2 =  5.5944731089468762E-004
->>>>>>> .r975
+object(x_  2) =   1.9974171276755683E+00
+||grad(x)||_2 =   2.3024709786629403E-04
         --- end of   2 in. iter ---
 
-Reusing ordering
-Chol fact OK in 0.000000s, total 0.000000s, no pert=0, pert=0.0000e+000, nnz=11325 (dim 150x150)
-LS (pen): -6.8609e-001, 1 steps, Step width: 1.000000
- 
-object(x_  3) =  4.3151610803966732E+003
-||grad(x)||_2 =  1.5336453221118646E-001
-        --- end of   3 in. iter ---
-
-Reusing ordering
-Chol fact OK in 0.015600s, total 0.015600s, no pert=0, pert=0.0000e+000, nnz=11325 (dim 150x150)
-LS (pen): -1.9031e-003, 1 steps, Step width: 1.000000
- 
-object(x_  4) =  4.3151600954997512E+003
-||grad(x)||_2 =  3.5289261862856997E-002
-        --- end of   4 in. iter ---
-
-Reusing ordering
-Chol fact OK in 0.000000s, total 0.000000s, no pert=0, pert=0.0000e+000, nnz=11325 (dim 150x150)
-LS (pen): -4.7513e-005, 1 steps, Step width: 1.000000
- 
-object(x_  5) =  4.3151600699625087E+003
-||grad(x)||_2 =  4.7287140640551182E-003
-        --- end of   5 in. iter ---
-
 Unconstr min OK
-************ Result of outer step  10 **********
-<<<<<<< .mine
-Objective                4.3117305743546858E+003
-Augmented Lagrangian     4.3151600699625087E+003
-|f(x) - f(x_old)|        2.5430019178542352E+001
-|f(x) - Lagr(x)|         3.4294956078229006E+000
-Grad augm. lagr.         4.7287140640551182E-003
-Feasibility (max)        7.5561046600341791E-004
-=======
-Objective                9.3818751914105396E+003
-Augmented Lagrangian     9.3880071862244058E+003
-|f(x) - f(x_old)|        4.6487757596891242E+001
-|f(x) - Lagr(x)|         6.1319948138661857E+000
-Grad augm. lagr.         5.5944731089468762E-004
-Feasibility (max)        6.2710285186767572E-004
->>>>>>> .r975
+************ Result of outer step   5 **********
+Objective                 1.9988685336621081E+00
+Augmented Lagrangian      1.9974171276755683E+00
+|f(x) - f(x_old)|         1.1463455006939238E-02
+|f(x) - Lagr(x)|          1.4514059865398110E-03
+Grad augm. lagr.          2.3024709786629403E-04
+Feasibility (max)         3.0207672119140626E-04
 Feasibility eqx      
 Feasibility ineq     
-<<<<<<< .mine
-Feasibility box          7.5710054793629790E-005
-Feasibility m.ineq       7.5561046600341791E-004
-Complementarity          6.1054590252521060E-006
-=======
-Feasibility box          1.8491401245241703E-010
-Feasibility m.ineq       6.2710285186767572E-004
-Complementarity          1.2170102889719935E-007
->>>>>>> .r975
-Minimal penalty          1.9531250000000000E-003
-<<<<<<< .mine
-Newton steps                                   5
-Inner steps                                    5
-Linesearch steps                               8
-Time of the minimization step         0.561604 s
-  - factorizations in the step       0.0468003 s
-=======
+Feasibility box           5.9761486833648433E-06
+Feasibility m.ineq        3.0207672119140626E-04
+Complementarity           2.9625428475431651E-04
+Minimal penalty           5.2083333333333336E-02
 Newton steps                                   2
 Inner steps                                    2
 Linesearch steps                               2
-Time of the minimization step         0.109201 s
-  - factorizations in the step               0 s
->>>>>>> .r975
-************************************************
- 
-************* Start of outer step  11 **********
-<<<<<<< .mine
-object(x_  0) =  4.3152577478788116E+003
-||grad(x)||_2 =  5.6590696210984681E-001
-=======
-object(x_  0) =  9.3881617966882113E+003
-||grad(x)||_2 =  1.4462972745742619E-001
->>>>>>> .r975
-        --- start of inner iter ---
- 
-Reusing ordering
-Chol fact OK in 0.000000s, total 0.000000s, no pert=0, pert=0.0000e+000, nnz=11325 (dim 150x150)
-LS (pen): -1.1712e-001, 1 steps, Step width: 1.000000
- 
-<<<<<<< .mine
-object(x_  1) =  4.3151995995786201E+003
-||grad(x)||_2 =  4.7681576868803281E+000
-=======
-object(x_  1) =  9.3880721499705178E+003
-||grad(x)||_2 =  3.2716374538775692E-003
->>>>>>> .r975
-        --- end of   1 in. iter ---
-
-Reusing ordering
-Chol fact OK in 0.015600s, total 0.015600s, no pert=0, pert=0.0000e+000, nnz=11325 (dim 150x150)
-LS (pen): -1.0878e-003, 1 steps, Step width: 1.000000
- 
-object(x_  2) =  4.3151989857276940E+003
-||grad(x)||_2 =  1.4303981548202758E+000
-        --- end of   2 in. iter ---
-
-Reusing ordering
-Chol fact OK in 0.000000s, total 0.000000s, no pert=0, pert=0.0000e+000, nnz=11325 (dim 150x150)
-LS (pen): -4.4069e-004, 1 steps, Step width: 1.000000
- 
-object(x_  3) =  4.3151987059831381E+003
-||grad(x)||_2 =  7.2738677343960412E-001
-        --- end of   3 in. iter ---
-
-Reusing ordering
-Chol fact OK in 0.031200s, total 0.031200s, no pert=0, pert=0.0000e+000, nnz=11325 (dim 150x150)
-LS (pen): -2.1174e-004, 1 steps, Step width: 1.000000
- 
-object(x_  4) =  4.3151985682704681E+003
-||grad(x)||_2 =  3.2376441216078516E-001
-        --- end of   4 in. iter ---
-
-Reusing ordering
-Chol fact OK in 0.000000s, total 0.000000s, no pert=0, pert=0.0000e+000, nnz=11325 (dim 150x150)
-LS (pen): -1.1590e-004, 1 steps, Step width: 1.000000
- 
-object(x_  5) =  4.3151984916438014E+003
-||grad(x)||_2 =  1.5139083340946935E-001
-        --- end of   5 in. iter ---
-
-Reusing ordering
-Chol fact OK in 0.031200s, total 0.031200s, no pert=0, pert=0.0000e+000, nnz=11325 (dim 150x150)
-LS (pen): -8.4780e-005, 1 steps, Step width: 1.000000
- 
-object(x_  6) =  4.3151984334815770E+003
-||grad(x)||_2 =  7.6037154511182745E-002
-        --- end of   6 in. iter ---
-
-Reusing ordering
-Chol fact OK in 0.000000s, total 0.000000s, no pert=0, pert=0.0000e+000, nnz=11325 (dim 150x150)
-LS (pen): -7.1171e-005, 1 steps, Step width: 1.000000
- 
-object(x_  7) =  4.3151983879964255E+003
-||grad(x)||_2 =  3.4013696620638030E-002
-        --- end of   7 in. iter ---
-
-Reusing ordering
-Chol fact OK in 0.031200s, total 0.031200s, no pert=0, pert=0.0000e+000, nnz=11325 (dim 150x150)
-LS (pen): -2.2049e-005, 1 steps, Step width: 1.000000
- 
-object(x_  8) =  4.3151983757683074E+003
-||grad(x)||_2 =  8.6624784595037314E-003
-        --- end of   8 in. iter ---
-
-Unconstr min OK
-************ Result of outer step  11 **********
-<<<<<<< .mine
-Objective                4.3148992301050212E+003
-Augmented Lagrangian     4.3151983757683074E+003
-|f(x) - f(x_old)|        3.1686557503353470E+000
-|f(x) - Lagr(x)|         2.9914566328625369E-001
-Grad augm. lagr.         8.6624784595037314E-003
-Feasibility (max)        6.5884399414062501E-005
-=======
-Objective                9.3874371669629763E+003
-Augmented Lagrangian     9.3880721499705178E+003
-|f(x) - f(x_old)|        5.5619755524367065E+000
-|f(x) - Lagr(x)|         6.3498300754145021E-001
-Grad augm. lagr.         3.2716374538775692E-003
-Feasibility (max)        6.4389038085937490E-005
->>>>>>> .r975
-Feasibility eqx      
-Feasibility ineq     
-<<<<<<< .mine
-Feasibility box          3.6646439166324178E-006
-Feasibility m.ineq       6.5884399414062501E-005
-Complementarity          5.7698401214429467E-007
-=======
-Feasibility box          2.2198800313991259E-009
-Feasibility m.ineq       6.4389038085937490E-005
-Complementarity          1.8255154334579910E-008
->>>>>>> .r975
-Minimal penalty          9.7656250000000000E-004
-<<<<<<< .mine
-Newton steps                                   8
-Inner steps                                    8
-Linesearch steps                               8
-Time of the minimization step         0.920406 s
-  - factorizations in the step        0.109201 s
-=======
-Newton steps                                   1
-Inner steps                                    1
-Linesearch steps                               1
-Time of the minimization step        0.0780005 s
-  - factorizations in the step               0 s
->>>>>>> .r975
-************************************************
- 
-************* Start of outer step  12 **********
-<<<<<<< .mine
-object(x_  0) =  4.3151999164490690E+003
-||grad(x)||_2 =  1.0681009882878870E-001
-=======
-object(x_  0) =  9.3880757539660190E+003
-||grad(x)||_2 =  3.2317287915380244E-002
->>>>>>> .r975
-        --- start of inner iter ---
- 
-Reusing ordering
-Chol fact OK in 0.000000s, total 0.000000s, no pert=0, pert=0.0000e+000, nnz=11325 (dim 150x150)
-LS (pen): -1.7875e-003, 1 steps, Step width: 1.000000
- 
-<<<<<<< .mine
-object(x_  1) =  4.3151990207002655E+003
-||grad(x)||_2 =  8.7927105586043403E-003
-=======
-object(x_  1) =  9.3880734156251383E+003
-||grad(x)||_2 =  1.6997308967298309E-004
->>>>>>> .r975
-        --- end of   1 in. iter ---
-
-Unconstr min OK
-************ Result of outer step  12 **********
-<<<<<<< .mine
-Objective                4.3151770068278811E+003
-Augmented Lagrangian     4.3151990207002655E+003
-|f(x) - f(x_old)|        2.7777672285992594E-001
-|f(x) - Lagr(x)|         2.2013872384377464E-002
-Grad augm. lagr.         8.7927105586043403E-003
-Feasibility (max)        2.9706726074218742E-004
-=======
-Objective                9.3880940198750741E+003
-Augmented Lagrangian     9.3880734156251383E+003
-|f(x) - f(x_old)|        6.5685291209774732E-001
-|f(x) - Lagr(x)|         2.0604249935786356E-002
-Grad augm. lagr.         1.6997308967298309E-004
-Feasibility (max)        5.0000000000000001E-009
->>>>>>> .r975
-Feasibility eqx      
-Feasibility ineq     
-<<<<<<< .mine
-Feasibility box          2.2039533454813780E-005
-Feasibility m.ineq       2.9706726074218742E-004
-Complementarity          2.5026279221475529E-007
-=======
-Feasibility box          1.9731984784656892E-010
-Feasibility m.ineq       5.0000000000000001E-009
-Complementarity          2.7382731501869859E-009
->>>>>>> .r975
-Minimal penalty          4.8828125000000000E-004
-Newton steps                                   1
-Inner steps                                    1
-Linesearch steps                               1
-<<<<<<< .mine
-Time of the minimization step         0.156001 s
-=======
-Time of the minimization step        0.0780005 s
->>>>>>> .r975
+Time of the minimization step             0.02 s
   - factorizations in the step               0 s
 ************************************************
  
-************* Start of outer step  13 **********
-<<<<<<< .mine
-object(x_  0) =  4.3151990421722958E+003
-||grad(x)||_2 =  1.8315232165173077E-002
-=======
-object(x_  0) =  9.3880734532549795E+003
-||grad(x)||_2 =  1.7006305210031547E-003
->>>>>>> .r975
+************* Start of outer step   6 **********
+object(x_  0) =   1.9995807551473397E+00
+||grad(x)||_2 =   3.8228432067938016E-02
         --- start of inner iter ---
  
 Reusing ordering
-Chol fact OK in 0.000000s, total 0.000000s, no pert=0, pert=0.0000e+000, nnz=11325 (dim 150x150)
-LS (pen): -2.0509e-005, 1 steps, Step width: 1.000000
+Chol fact OK in 0.000000s, total 0.000000s, no pert=0, pert=0.0000e+00, nnz=171 (dim 18x18)
+LS (pen): -3.0623e-05, 1 steps, Step width: 1.000000
  
-<<<<<<< .mine
-object(x_  1) =  4.3151990319130618E+003
-||grad(x)||_2 =  4.4026109087939484E-004
-=======
-object(x_  1) =  9.3880734499671798E+003
-||grad(x)||_2 =  4.7612126814798412E-007
->>>>>>> .r975
+object(x_  1) =   1.9995652893966258E+00
+||grad(x)||_2 =   6.9722392971589516E-04
         --- end of   1 in. iter ---
 
 Unconstr min OK
-************ Result of outer step  13 **********
-<<<<<<< .mine
-Objective                4.3151982403341544E+003
-Augmented Lagrangian     4.3151990319130618E+003
-|f(x) - f(x_old)|        2.1233506273347302E-002
-|f(x) - Lagr(x)|         7.9157890741043957E-004
-Grad augm. lagr.         4.4026109087939484E-004
-Feasibility (max)        1.1113281249999999E-006
-=======
-Objective                9.3880763957950276E+003
-Augmented Lagrangian     9.3880734499671798E+003
-|f(x) - f(x_old)|        1.7624080046516610E-002
-|f(x) - Lagr(x)|         2.9458278477250133E-003
-Grad augm. lagr.         4.7612126814798412E-007
-Feasibility (max)        1.0000000000000000E-010
->>>>>>> .r975
+************ Result of outer step   6 **********
+Objective                 1.9998897379933769E+00
+Augmented Lagrangian      1.9995652893966258E+00
+|f(x) - f(x_old)|         1.0212043312687324E-03
+|f(x) - Lagr(x)|          3.2444859675107018E-04
+Grad augm. lagr.          6.9722392971589516E-04
+Feasibility (max)         2.7079772949218746E-05
 Feasibility eqx      
 Feasibility ineq     
-<<<<<<< .mine
-Feasibility box          9.1929019044192125E-007
-Feasibility m.ineq       1.1113281249999999E-006
-Complementarity          9.7872980310863381E-008
-=======
-Feasibility box          1.6542687796849847E-012
-Feasibility m.ineq       1.0000000000000000E-010
-Complementarity          4.1074097252804795E-010
->>>>>>> .r975
-Minimal penalty          2.4414062500000000E-004
+Feasibility box           4.0983773614084502E-08
+Feasibility m.ineq        2.7079772949218746E-05
+Complementarity           4.4438142713147469E-05
+Minimal penalty           2.6041666666666668E-02
 Newton steps                                   1
 Inner steps                                    1
 Linesearch steps                               1
-<<<<<<< .mine
-Time of the minimization step         0.124801 s
-=======
-Time of the minimization step        0.0624004 s
->>>>>>> .r975
+Time of the minimization step             0.01 s
   - factorizations in the step               0 s
 ************************************************
  
-************* Start of outer step  14 **********
-<<<<<<< .mine
-object(x_  0) =  4.3151990325105153E+003
-||grad(x)||_2 =  1.4669472335389148E-002
-=======
-object(x_  0) =  9.3880734518161935E+003
-||grad(x)||_2 =  5.3452688033583462E-004
->>>>>>> .r975
+************* Start of outer step   7 **********
+object(x_  0) =   1.9999273784943903E+00
+||grad(x)||_2 =   7.5978606706335978E-03
         --- start of inner iter ---
  
 Reusing ordering
-<<<<<<< .mine
-Chol fact OK in 0.000000s, total 0.000000s, no pert=0, pert=0.0000e+000, nnz=11325 (dim 150x150)
-LS (pen): -3.1612e-007, 1 steps, Step width: 1.000000
-=======
-Chol fact OK in 0.000000s, total 0.000000s, no pert=0, pert=0.0000e+000, nnz=903 (dim 42x42)
-LS (pen): -3.2646e-007, 1 steps, Step width: 1.000000
->>>>>>> .r975
+Chol fact OK in 0.000000s, total 0.000000s, no pert=0, pert=0.0000e+00, nnz=171 (dim 18x18)
+LS (pen): -5.7043e-07, 1 steps, Step width: 1.000000
  
-<<<<<<< .mine
-object(x_  1) =  4.3151990323575310E+003
-||grad(x)||_2 =  1.2009329613412428E-003
-=======
-object(x_  1) =  9.3880734516529774E+003
-||grad(x)||_2 =  4.7051363060922688E-008
->>>>>>> .r975
+object(x_  1) =   1.9999270926848809E+00
+||grad(x)||_2 =   2.6662636097993360E-05
         --- end of   1 in. iter ---
 
 Unconstr min OK
-************ Result of outer step  14 **********
-<<<<<<< .mine
-Objective                4.3151990005922617E+003
-Augmented Lagrangian     4.3151990323575310E+003
-|f(x) - f(x_old)|        7.6025810722057940E-004
-|f(x) - Lagr(x)|         3.1765269341121893E-005
-Grad augm. lagr.         1.2009329613412428E-003
-Feasibility (max)        3.4570312499999993E-007
-=======
-Objective                9.3880736134950512E+003
-Augmented Lagrangian     9.3880734516529774E+003
-|f(x) - f(x_old)|        2.7822999763884582E-003
-|f(x) - Lagr(x)|         1.6184207379410509E-004
-Grad augm. lagr.         4.7051363060922688E-008
-Feasibility (max)        1.0000000000000000E-010
->>>>>>> .r975
+************ Result of outer step   7 **********
+Objective                 2.0000039439394128E+00
+Augmented Lagrangian      1.9999270926848809E+00
+|f(x) - f(x_old)|         1.1420594603595013E-04
+|f(x) - Lagr(x)|          7.6851254531939972E-05
+Grad augm. lagr.          2.6662636097993360E-05
+Feasibility (max)         1.8265485230086042E-07
 Feasibility eqx      
 Feasibility ineq     
-<<<<<<< .mine
-Feasibility box          4.8878906154730897E-008
-Feasibility m.ineq       3.4570312499999993E-007
-Complementarity          7.3851065588428417E-009
-=======
-Feasibility box          0.0000000000000000E+000
-Feasibility m.ineq       1.0000000000000000E-010
-Complementarity          6.1611145879207200E-011
->>>>>>> .r975
-Minimal penalty          1.2207031250000000E-004
+Feasibility box           1.8265485230086042E-07
+Feasibility m.ineq        0.0000000000000000E+00
+Complementarity           6.6657214069721206E-06
+Minimal penalty           1.3020833333333334E-02
 Newton steps                                   1
 Inner steps                                    1
 Linesearch steps                               1
-<<<<<<< .mine
-Time of the minimization step         0.109201 s
+Time of the minimization step             0.01 s
   - factorizations in the step               0 s
 ************************************************
  
-************* Start of outer step  15 **********
-object(x_  0) =  4.3151990323805539E+003
-||grad(x)||_2 =  1.3972902178124207E-003
+************* Start of outer step   8 **********
+object(x_  0) =   1.9999878842122552E+00
+||grad(x)||_2 =   3.9049483757067110E-04
         --- start of inner iter ---
  
 Reusing ordering
-Chol fact OK in 0.031200s, total 0.031200s, no pert=0, pert=0.0000e+000, nnz=11325 (dim 150x150)
-LS (pen): -4.4695e-010, 1 steps, Step width: 1.000000
+Chol fact OK in 0.000000s, total 0.000000s, no pert=0, pert=0.0000e+00, nnz=171 (dim 18x18)
+LS (pen): -4.2680e-10, 1 steps, Step width: 1.000000
  
-object(x_  1) =  4.3151990323803420E+003
-||grad(x)||_2 =  1.5476008646095918E-006
+object(x_  1) =   1.9999878839988880E+00
+||grad(x)||_2 =   9.9012624273046868E-08
         --- end of   1 in. iter ---
 
 Unconstr min OK
-************ Result of outer step  15 **********
-Objective                4.3151990275496864E+003
-Augmented Lagrangian     4.3151990323803420E+003
-|f(x) - f(x_old)|        2.6957424779538997E-005
-|f(x) - Lagr(x)|         4.8306555981980637E-006
-Grad augm. lagr.         1.5476008646095918E-006
-Feasibility (max)        6.6250000000000001E-008
+************ Result of outer step   8 **********
+Objective                 2.0000003376476374E+00
+Augmented Lagrangian      1.9999878839988880E+00
+|f(x) - f(x_old)|         3.6062917754264845E-06
+|f(x) - Lagr(x)|          1.2453648749355395E-05
+Grad augm. lagr.          9.9012624273046868E-08
+Feasibility (max)         5.4739663306319745E-09
 Feasibility eqx      
 Feasibility ineq     
-Feasibility box          3.2865778535043409E-008
-Feasibility m.ineq       6.6250000000000001E-008
-Complementarity          2.6414092178235151E-009
-Minimal penalty          6.1035156250000000E-005
+Feasibility box           5.4739663306319745E-09
+Feasibility m.ineq        0.0000000000000000E+00
+Complementarity           9.9985821104581800E-07
+Minimal penalty           6.5104166666666670E-03
 Newton steps                                   1
 Inner steps                                    1
 Linesearch steps                               1
-Time of the minimization step         0.156001 s
-  - factorizations in the step       0.0312002 s
-=======
-Time of the minimization step        0.0312002 s
+Time of the minimization step             0.01 s
   - factorizations in the step               0 s
->>>>>>> .r975
+************************************************
+ 
+************* Start of outer step   9 **********
+object(x_  0) =   1.9999980044628505E+00
+||grad(x)||_2 =   7.2778844883517464E-05
+        --- start of inner iter ---
+ 
+Reusing ordering
+Chol fact OK in 0.000000s, total 0.000000s, no pert=0, pert=0.0000e+00, nnz=171 (dim 18x18)
+LS (pen):  -7.3616e-12 (small full step)
+ 
+object(x_  1) =   1.9999980044591672E+00
+||grad(x)||_2 =   2.3660654908130224E-09
+        --- end of   1 in. iter ---
+
+Unconstr min OK
+************ Result of outer step   9 **********
+Objective                 2.0000000127804971E+00
+Augmented Lagrangian      1.9999980044591672E+00
+|f(x) - f(x_old)|         3.2486714030000030E-07
+|f(x) - Lagr(x)|          2.0083213299049163E-06
+Grad augm. lagr.          2.3660654908130224E-09
+Feasibility (max)         1.4137242088313145E-10
+Feasibility eqx      
+Feasibility ineq     
+Feasibility box           1.4137242088313145E-10
+Feasibility m.ineq        0.0000000000000000E+00
+Complementarity           1.4997873165687270E-07
+Minimal penalty           3.2552083333333335E-03
+Newton steps                                   1
+Inner steps                                    1
+Linesearch steps                               0
+Time of the minimization step             0.01 s
+  - factorizations in the step               0 s
 ************************************************
  
 *******************************************************************************
 PenLab converged: optimal solution
 *******************************************************************************
-<<<<<<< .mine
-Objective                4.3151990275496864E+003
-Augmented Lagrangian     4.3151990323803420E+003
-Relative precision       1.1194514012812686E-009
-Compl. Slackness         2.6414092178235151E-009
-Grad augm. lagr.         1.5476008646095918E-006
-Feasibility (max)        3.2865778535043409E-008
-=======
-Objective                9.3880736134950512E+003
-Augmented Lagrangian     9.3880734516529774E+003
-Relative precision       1.7239114269562432E-008
-Compl. Slackness         6.1611145879207200E-011
-Grad augm. lagr.         4.7051363060922688E-008
-Feasibility (max)        0.0000000000000000E+000
->>>>>>> .r975
+Objective                 2.0000000127804971E+00
+Augmented Lagrangian      1.9999980044591672E+00
+Relative precision        1.0041606585356220E-06
+Compl. Slackness          1.4997873165687270E-07
+Grad augm. lagr.          2.3660654908130224E-09
+Feasibility (max)         1.4137242088313145E-10
 Feasibility eqx      
 Feasibility ineq     
-Feasibility box          3.2865778535043409E-008
-Minimal penalty          6.1035156250000000E-005
-Newton steps                                 170
-Inner steps                                  170
-Linesearch steps                             264
+Feasibility box           1.4137242088313145E-10
+Minimal penalty           3.9062500000000000E-03
+Newton steps                                  29
+Inner steps                                   29
+Linesearch steps                              30
 Number of evaluations of
-   - function values                         279
-   - gradient values                         185
-   - hessian values                          170
+   - function values                          40
+   - gradient values                          38
+   - hessian values                           29
 Time statistics
-<<<<<<< .mine
-   - total process time                19.4221 s
-   - all minimization steps            18.6265 s
-   - all factorizations                1.27921 s
-   - function values evaluation        2.65202 s
-   - gradient values evaluation        3.94683 s
-   - hessian values evaluation         10.1245 s
-=======
-   - total process time                2.82362 s
-   - all minimization steps            2.62082 s
-   - all factorizations                      0 s
-   - function values evaluation       0.265202 s
-   - gradient values evaluation       0.561604 s
-   - hessian values evaluation         1.40401 s
->>>>>>> .r975
+   - total process time                   0.28 s
+   - all minimization steps               0.23 s
+   - all factorizations                   0.01 s
+   - function values evaluation           0.05 s
+   - gradient values evaluation           0.06 s
+   - hessian values evaluation            0.06 s
 *******************************************************************************
  

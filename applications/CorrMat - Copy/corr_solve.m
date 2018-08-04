@@ -6,10 +6,10 @@
 
 kappa=10;
 %% nearest correlation matrix
-penm = corr_define(HH);
+penm = corr_define;
 
 %% nearest correlation matrix with element-wise constraints
-%penm = corr_define_bound;
+penm = corr_define_bound;
 
 %% nearest correlation matrix with constrained condition number
 %penm = corr_define_cond(kappa);
