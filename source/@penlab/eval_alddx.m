@@ -96,9 +96,10 @@ function [status] = eval_alddx(obj)
       % TODO vectorize
       ind=obj.xboxindbar;
       if ~isempty(ind)
-      for k=ind
+      for k=ind'
         kuser=obj.xboxmap(k);
         diagxbox(kuser) = diagxbox(kuser) + obj.uxbox(k)*obj.pxbox(k)*obj.phibar_D2(xboxx(k));
+   %     diagxbox(kuser) = diagxbox(kuser) + obj.uxbox(k).*obj.pxbox(k).*obj.phibar_D2(xboxx(k));
       end
       end
 
