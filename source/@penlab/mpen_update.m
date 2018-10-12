@@ -7,7 +7,10 @@ function  [] = mpen_update(obj)
   pnew(idx)=p_update(obj.PYbox(idx), obj.allopts.mpenalty_update, obj.allopts.mpenalty_border, obj.allopts.mpenalty_min);
 
   if ~isempty(obj.Yboxindbar)
-  for k=obj.Yboxindbar
+  %for k=obj.Yboxindbar
+  indarray=obj.Yboxindbar;
+  for k_ind=1:length(indarray)
+    k = indarray(k_ind);
     Ykx = obj.Y{obj.Yboxmap(k)};
     Akx=obj.Yboxshift(k)*speye(size(Ykx)) + obj.Yboxmlt(k)*Ykx;
 
