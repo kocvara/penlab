@@ -49,7 +49,8 @@ end
   penm.userdata=sdpdata;
 
   penm.Nx=sdpdata.Nx; 
-  penm.lbx=[zeros(m,1);-Inf];
+  %penm.lbx=[zeros(m,1);-Inf];  
+  penm.lbxbar=[zeros(m,1);-Inf];
   %penm.ubx=[1.7.*ones(m,1);Inf];
     penm.ubx=[1.0.*ones(m,1);Inf];
 
