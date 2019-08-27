@@ -1,6 +1,6 @@
 Problem name: NCM, Example 7.1 from PENLAB paper, no constraints
 Description:  a scalar and a full matrix as variables
-Start time:   27-Aug-2019 12:16:39
+Start time:   27-Aug-2019 12:22:21
 All option settings (* = set by user):
   outlev                : 2 
   outlev_file           : 5 
@@ -125,7 +125,7 @@ Minimal penalty           8.3333333333333337E-01
 Newton steps                                   3
 Inner steps                                    3
 Linesearch steps                               3
-Time of the minimization step             0.07 s
+Time of the minimization step             0.08 s
   - factorizations in the step               0 s
 ************************************************
  
@@ -165,7 +165,7 @@ Minimal penalty           4.1666666666666669E-01
 Newton steps                                   2
 Inner steps                                    2
 Linesearch steps                               2
-Time of the minimization step             0.05 s
+Time of the minimization step             0.06 s
   - factorizations in the step               0 s
 ************************************************
  
@@ -205,7 +205,7 @@ Minimal penalty           2.0833333333333334E-01
 Newton steps                                   2
 Inner steps                                    2
 Linesearch steps                               2
-Time of the minimization step             0.02 s
+Time of the minimization step             0.04 s
   - factorizations in the step               0 s
 ************************************************
  
@@ -254,7 +254,7 @@ object(x_  0) =   1.3701104911258040E-03
 ||grad(x)||_2 =   1.9861837736486546E-01
         --- start of inner iter ---
  
-Chol fact OK in 0.010000s, total 0.010000s, no pert=0, pert=0.0000e+00, nnz=231 (dim 21x21)
+Chol fact OK in 0.000000s, total 0.000000s, no pert=0, pert=0.0000e+00, nnz=231 (dim 21x21)
 LS (pen): -3.2903e-03, 1 steps, Step width: 1.000000
  
 object(x_  1) =  -1.0413347224250656E-04
@@ -286,7 +286,7 @@ Newton steps                                   2
 Inner steps                                    2
 Linesearch steps                               2
 Time of the minimization step             0.02 s
-  - factorizations in the step            0.01 s
+  - factorizations in the step               0 s
 ************************************************
  
 ************* Start of outer step   6 **********
@@ -325,7 +325,7 @@ Minimal penalty           2.6041666666666668E-02
 Newton steps                                   2
 Inner steps                                    2
 Linesearch steps                               2
-Time of the minimization step             0.03 s
+Time of the minimization step             0.01 s
   - factorizations in the step               0 s
 ************************************************
  
@@ -334,7 +334,7 @@ object(x_  0) =   2.0878974191184310E-03
 ||grad(x)||_2 =   3.0285044410537455E-02
         --- start of inner iter ---
  
-Chol fact OK in 0.000000s, total 0.000000s, no pert=0, pert=0.0000e+00, nnz=231 (dim 21x21)
+Chol fact OK in 0.010000s, total 0.010000s, no pert=0, pert=0.0000e+00, nnz=231 (dim 21x21)
 LS (pen): -7.2294e-05, 1 steps, Step width: 1.000000
  
 object(x_  1) =   2.0575107698218116E-03
@@ -358,8 +358,8 @@ Minimal penalty           1.3020833333333334E-02
 Newton steps                                   1
 Inner steps                                    1
 Linesearch steps                               1
-Time of the minimization step             0.02 s
-  - factorizations in the step               0 s
+Time of the minimization step             0.01 s
+  - factorizations in the step            0.01 s
 ************************************************
  
 ************* Start of outer step   8 **********
@@ -391,7 +391,7 @@ Minimal penalty           6.5104166666666670E-03
 Newton steps                                   1
 Inner steps                                    1
 Linesearch steps                               1
-Time of the minimization step             0.03 s
+Time of the minimization step                0 s
   - factorizations in the step               0 s
 ************************************************
  
@@ -457,7 +457,7 @@ Minimal penalty           1.6276041666666667E-03
 Newton steps                                   1
 Inner steps                                    1
 Linesearch steps                               1
-Time of the minimization step             0.01 s
+Time of the minimization step             0.02 s
   - factorizations in the step               0 s
 ************************************************
  
@@ -490,7 +490,7 @@ Minimal penalty           8.1380208333333337E-04
 Newton steps                                   1
 Inner steps                                    1
 Linesearch steps                               1
-Time of the minimization step             0.01 s
+Time of the minimization step             0.02 s
   - factorizations in the step               0 s
 ************************************************
  
@@ -515,11 +515,11 @@ Number of evaluations of
    - gradient values                          29
    - hessian values                           18
 Time statistics
-   - total process time                   0.68 s
+   - total process time                   0.62 s
    - all minimization steps                0.3 s
    - all factorizations                   0.01 s
-   - function values evaluation           0.08 s
-   - gradient values evaluation           0.05 s
-   - hessian values evaluation            0.11 s
+   - function values evaluation           0.03 s
+   - gradient values evaluation           0.07 s
+   - hessian values evaluation            0.08 s
 *******************************************************************************
  
