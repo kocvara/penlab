@@ -10,11 +10,11 @@ nelem=par.nelem;
 nnod=par.nnod;
 nloads=par.nloads;
 
-V = .5*nelem;
+V = .3*nelem;
 mlin = 0;
 AA = Aik;
-Vi = 1;
-rScale=0.1;
+Vi = .5;
+rScale=0.01;
 
 AStiff=spalloc(nnod,nnod,10);
 
@@ -40,15 +40,15 @@ fmodata.AA=AA;
 
 
 % Algorithmic parameters
-fmodata.rScale = .1;
+fmodata.rScale = 1.1;
 fmodata.Vi = Inf;
 
 
-Y0 = 1.1.*eye(3,3);
+Y0 = 10000.1.*eye(3,3);
 x0 = 0.;
 
 % Lower & Upper bounds on eigenvalues
-El = 3.333e-3;El = 0;
+El = 3.333e-3; %El = 0;
 Eu = Vi;
 
 fff = rScale*RHS(:,i);

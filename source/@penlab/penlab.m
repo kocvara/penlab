@@ -325,6 +325,7 @@ classdef penlab < handle
     [ret] = phibar(obj,t);
     [ret] = phibar_D(obj,t);
     [ret] = phibar_D2(obj,t);
+    [ret] = fufu(obj,x);
     [status] = eval_alx(obj);
     [status] = eval_aldx(obj);
     [status] = eval_alddx(obj);

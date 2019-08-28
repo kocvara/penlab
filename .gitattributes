@@ -15,12 +15,22 @@
 *.PDF	 diff=astextplain
 *.rtf	 diff=astextplain
 *.RTF	 diff=astextplain
-*.mlx -crlf -diff -merge
-*.mat -crlf -diff -merge
-*.fig -crlf -diff -merge
-*.p -crlf -diff -merge
-*.slx -crlf -diff -merge
-*.mdl -crlf -diff -merge
-*.mexa64 -crlf -diff -merge
-*.mexw64 -crlf -diff -merge
-*.mexmaci64 -crlf -diff -merge
+
+*.m             text diff=matlab
+*.mu            text diff=matlab
+
+# Binary files
+# ============
+*.p             binary
+*.mex*          binary
+*.fig           binary
+*.mat           binary
+*.mdl           binary
+*.slx           binary
+*.mdlp          binary
+*.slxp          binary
+*.sldd          binary
+*.mltbx         binary
+*.mlappinstall  binary
+*.mlpkginstall  binary
+*.mn            binary

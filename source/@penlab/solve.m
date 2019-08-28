@@ -190,13 +190,34 @@ function [ifail] = solve(obj)
 
     % unconstr minimization step
     if (obj.Neq==0)
-        %fnc.obj=@(xtmp) auglagr(xtmp,u,p,'',ps);
-        %fnc.obj_grad=@(xtmp) auglagr_D(xtmp,u,p,'',ps);
-        %fnc.obj_hess=@(xtmp) auglagr_D2(xtmp,u,p,'',ps);
-
-        [nFlagMin,rResults]=obj.unconstr_min();
-        lagrx=rResults(1);
-        obj.rNormG=rResults(2);
+%         fnc.obj=@(xtmp) auglagr(xtmp,u,p,'',ps);
+%         fnc.obj_grad=@(xtmp) auglagr_D(xtmp,u,p,'',ps);
+%         fnc.obj_hess=@(xtmp) auglagr_D2(xtmp,u,p,'',ps);
+        
+%         foptions = optimset('Display', 'off');
+%         %foptions = optimset(foptions, 'MaxFunEvals',  round(numel(obj.xall) * maxFun / log(1+1)));
+%         psoptions = psoptimset(foptions, 'TolMesh',  1e-8);
+%         fun = @(x)(fufu(obj,x));
+%         [xopt, lagrx, ~, output] = patternsearch(fun,obj.xall,[],[],[],[],[],[],psoptions);   
+%         nFlagMin=0;
+%         output.iterations
+%         output.funccount
+        
+% if pbmiter>1
+%     nnn = obj.Nx-2*obj.Nineq;
+%     kkk=obj.ALddx;
+%     aaa=kkk(1:nnn,1:nnn);
+%     bbb=kkk(1:nnn,nnn+1:end);
+%     ccc=kkk(nnn+1:end,nnn+1:end);
+%     sss=aaa-bbb*inv(ccc)*bbb';
+%     mineig = min(eig(full(sss)));
+%     condnum = max(eig(full(sss)))/mineig;
+%  %   max(eig(full(kkk)))/min(eig(full(kkk)))
+%     fprintf('***Minimal eigenvalue of S: %4.2e; Condition number of S:  %4.2e\n',mineig,condnum);
+% end
+       [nFlagMin,rResults]=obj.unconstr_min();
+       lagrx=rResults(1);
+       obj.rNormG=rResults(2);
         % or without rResults??
         %lagrx=obj.ALx;
         %obj.rNormG=norm(obj.ALdx);

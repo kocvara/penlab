@@ -74,7 +74,10 @@ function [status] = eval_aldx(obj)
 
     % matrix variable - log barrier (strict feasibility)
     if ~isempty(obj.Yboxindbar)
-    for k=obj.Yboxindbar
+    %for k=obj.Yboxindbar
+    indarray=obj.Yboxindbar;
+    for k_ind=1:length(indarray)
+      k = indarray(k_ind);
       % convert the matrix box constraint to the form:   +/-Y +/-bound >=0
       pkx=obj.PYbox(k);
       Ykx = Y{obj.Yboxmap(k)};

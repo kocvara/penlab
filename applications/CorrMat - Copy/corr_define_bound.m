@@ -1,6 +1,6 @@
-function [penm] = corr_define(H)
-% CORR_DEFINE defines PenLab structure for the
-% nearest correlation matrix problem.
+function [penm] = corr_define_bound(H)
+% CORR_DEFINE defines PenLab structure for the,
+% nearest correlation matrix with the constrained elements.
 % Both input arguments are optional to redefine the default values.
 %
 % Call:
@@ -15,17 +15,13 @@ function [penm] = corr_define(H)
 
   penm = [];
 
-  penm.probname = 'NCM, Example 7.1 from PENLAB paper, no constraints';
+  penm.probname = 'NCM, Example 7.1 from PENLAB paper, constrained elements';
   penm.comment  = 'a scalar and a full matrix as variables';
 
   % matrix H
   if (nargin<1)
-    H = [1 -0.44 -.2 .81 -.46 -0.05;
-      -.44 1 .87 -.38 .81 -.58;
-      -.2 .87 1 -.17 .65 -.56;
-      .81 -.38 -.17 1 -.37 -.15;
-      -.46 .81 .65 -.37 1 .08;
-      -.05 -.58 -.56 -.15 .08 1];
+    H = bhwi01
+    
   end
 
   n = size(H,1);
@@ -46,6 +42,8 @@ function [penm] = corr_define(H)
   mlb = -Inf(n,n); mub = Inf(n,n); 
   % diag elements equal to one
   for i=1:n; mlb(i,i) = 1; mub(i,i) = 1; end;
+  % bounds on the corner element, only lower triangle
+  mlb(n,1) = 0.2;  mub(n,1) = 0.2;
   
   penm.lbYx=cell(1,1); 
   penm.ubYx=cell(1,1); 

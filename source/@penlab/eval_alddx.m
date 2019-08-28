@@ -96,9 +96,10 @@ function [status] = eval_alddx(obj)
       % TODO vectorize
       ind=obj.xboxindbar;
       if ~isempty(ind)
-      for k=ind
+      for k=ind'
         kuser=obj.xboxmap(k);
         diagxbox(kuser) = diagxbox(kuser) + obj.uxbox(k)*obj.pxbox(k)*obj.phibar_D2(xboxx(k));
+   %     diagxbox(kuser) = diagxbox(kuser) + obj.uxbox(k).*obj.pxbox(k).*obj.phibar_D2(xboxx(k));
       end
       end
 
@@ -132,7 +133,10 @@ function [status] = eval_alddx(obj)
 
     % matrix variable - log barrier (strict feasibility)
     if ~isempty(obj.Yboxindbar)
-    for k=obj.Yboxindbar
+    %for k=obj.Yboxindbar
+    indarray=obj.Yboxindbar;
+    for k_ind=1:length(indarray)
+      k = indarray(k_ind);
       % convert the matrix box constraint to the form:   +/-Y +/-bound >=0
       pkx=obj.PYbox(k);
       Ykx = Y{obj.Yboxmap(k)};

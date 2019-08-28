@@ -12,7 +12,10 @@ par = readdata;
 problem = fmo_define(par);
 penm = penlab(problem);
 penm.opts.mpenalty_update=.5;
+%penm.opts.mmlt_update=.3;
+%penm.opts.inner_stop_limit=.0001;
 %penm.opts.max_outer_iter=7;
+%penm.opts.outlev=3;
 solve(penm);
 
 % figure plot
