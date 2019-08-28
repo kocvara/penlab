@@ -7,6 +7,7 @@ function pmi = complib2pmi(fname)
 save fname fname
 clear all
 load fname
+delete fname.mat
 
 [n,m,A0,AA,mtred]=pmisof2(fname,0);
 
