@@ -30,6 +30,50 @@ function [penm] = ex1_define2()
   %penm.objhess = @ex1_objhess;
   %penm.conhess = @ex1_conhess;
   penm.lagrhess = @ex1_lagrhess;
+  
+end
+  
+  function [f,userdata] = ex1_objfun(x,Y,userdata)
+% objective function values for Example 1
+
+f = x(1)^2 + 4*x(2)^2 - x(3)^2 + x(1)*x(2) - 2*x(1)*x(3);
+
+end
+
+function [g,userdata] = ex1_confun(x,Y,userdata)
+% function values for Example 1
+
+g = zeros(2,1);
+g(1) = x(1)^2 + x(2)^2 + x(3)^2;
+g(2) = 2*x(1) + 6*x(2) + 4*x(3);
+
+end
+
+function [df, userdata]=ex1_objgrad(x,Y,userdata)
+% Gradients for Example 1, note that they are stored in columns!
+
+df = [ 2.*x(1) + x(2) - 2*x(3); 8.*x(2) + x(1); -2.*x(3) - 2.*x(1)];
+
+end
+
+function [dg, userdata]=ex1_congrad(x,Y,userdata)
+% Gradients for Example 1, note that they are stored in columns!
+
+dg = [ [ 2*x(1); 2*x(2); 2*x(3)] , [2; 6; 4]];
+
+end
+
+function [ddL, userdata] = ex1_lagrhess(x,Y,v,userdata)
+% Hessian of the lagrangian, Example 1
+%   H=nabla^2 f + sum v_i nabla^2 g_i
+% v should be of size NgNLN, e.i., in this example NgNLN=1
+
+  hess_f = [2, 1, -2; 1, 8, 0; -2, 0, -2];
+  hess_g = 2.*eye(3,3);
+
+  ddL = hess_f + v(1)*hess_g;
+
+end
 
 
 

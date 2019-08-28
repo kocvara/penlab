@@ -47,12 +47,12 @@ function [penm] = ncm1a_define()
   % keep the whole structure
   penm.userdata=userdata;
 
-  penm.Nx=5;
+  penm.Nx = 5;
 
   % starting point
   penm.xinit=[1;0;1;0;1];
 
-  penm.NgLIN=1;
+  penm.NgLIN = 1;
   penm.lbg = [1];
   penm.ubg = [1];
 
@@ -66,13 +66,18 @@ function [penm] = ncm1a_define()
 
   penm.confun = @(x,Y,userdata) deal(x(1)+x(3)+x(5), userdata);
   penm.congrad = @(x,Y,userdata) deal([1;0;1;0;1], userdata);
-  %penm.confun = @ncm1a_confun;
-  %penm.congrad = @ncm1a_congrad;
-  %penm.conhess = @sdp_conhess;  not needed because all linear
 
   penm.mconfun = @ncm1a_mconfun;
   penm.mcongrad = @(x,Y,k,i,userdata) deal(sparse(userdata.A{i}), userdata);
-  %penm.mcongrad = @ncm1a_mcongrad;
-  %hessian not needed, function is linear
+  
+end
+  
+  function [Akx, userdata] = mcm1a_mconfun(x,Y,k,userdata)
+% There is only one matrix variable A(x) = sum x(i)*userdata.A{i}
+
+  A=userdata.A;
+  Akx=x(1).*A{1} + x(2).*A{2} + x(3).*A{3} + x(4).*A{4} + x(5).*A{5};
+
+  end
 
 

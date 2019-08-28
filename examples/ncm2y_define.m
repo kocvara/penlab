@@ -57,4 +57,68 @@ function [penm] = ncm1y_define()
   penm.confun = @ncm2y_confun;
   penm.congrad = @ncm2y_congrad;
   %penm.conhess = @sdp_conhess;  not needed because all linear
+  
+end
+
+function [f,userdata] = ncm2y_objfun(x,Y,userdata)
+  % f = sum_ij  (y_ij - h_ij)^2
+  % matrix H is stored in userdata
+
+  YH = tril(Y{1}-userdata);
+  f = YH(:)'*YH(:);
+
+end
+
+function [df, userdata]=ncm2y_objgrad(x,Y,userdata)
+% return gradient of the objective w.r.t. all variables (even matrix)
+% return NYnnz x 1
+
+  % obj = sum(x_ij - h_ij)^2
+  % d/dx_ij obj = 2*(x_ij-h_ij)
+  % and we go only over lower triangle --> get indices which belong only to it
+  idx = find(tril(ones(size(Y{1}))));
+  YH = full(Y{1}-userdata);
+  df = 2*YH(idx);
+  
+end
+
+function [ddf, userdata] = ncm2y_objhess(x,Y,userdata)
+% Hessians of the objective function and constraints
+
+  [n m] = size(Y{1});
+  dim = n*(n+1)/2;
+  ddf = 2*speye(dim,dim);
+
+end
+
+function [g,userdata] = ncm2y_confun(x,Y,userdata)
+% only one constraints: tr(Y)=1, return value of the body of the cunstraint
+% thus tr(Y)
+% vector Ng x 1
+
+  g=diag(Y{1});
+
+end
+
+function [dg, userdata]=ncm2y_congrad(x,Y,userdata)
+% returns all constraints at once
+% vector Ng x Nx --> 1xNYnnz TODO no ... transpose! (Nx+NYnnz) x Ng
+% this needs to be improved to be automatic from size of Y
+% Y is organized as lower triangle column oriented
+
+  %dg=[1;0;0;0;0;0; 1;0;0;0;0; 1;0;0;0; 1;0;0; 1;0; 1];
+
+  % only the elements belonging to the diagonal of Y have derivative
+  % find their indices
+
+  % this is not the best way but for now ... :-(
+  [n m] = size(Y{1});
+  dim = n*(n+1)/2;
+  M = tril(ones(n)+eye(n));  % my variables are nonzero and these of diag are =2
+  idx_allvar = find(M);
+  idx_diagvar = find(M(idx_allvar)==2);
+
+  dg = sparse(idx_diagvar, [1:n], ones(n,1), dim,n);
+  
+end
 

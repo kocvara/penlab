@@ -34,5 +34,56 @@ function [penm] = ex3_define()
   % [optional] set starting point
   %penm.x = zeros(2,1);
   penm.x = [-2; 1];        % suggested starting point
+  
+end
+
+function [f,userdata] = ex3_objfun(x,Y,userdata)
+% objective function values for Example 3
+
+  f = 100*(x(2) - x(1)^2)^2 + (1 - x(1))^2;
+  
+end
+
+function [g,userdata] = ex3_confun(x,Y,userdata)
+% function values for Example 3
+
+  g = zeros(2,1);
+  g(1) = x(1)^2 + x(2);
+  g(2) = x(1)   + x(2)^2;
+  
+end
+
+function [df, userdata]=ex3_objgrad(x,Y,userdata)
+% Gradients for Example 3, note that they are stored in columns!
+
+  df = [-400*x(1)*(x(2)-x(1)^2) - 2*(1-x(1)); 200*(x(2)-x(1)^2)];
+  
+end
+
+function [dg, userdata]=ex3_congrad(x,Y,userdata)
+% Gradients for Example 3, note that they are stored in columns!
+
+  dg = [ 2*x(1), 1; 1, 2*x(2)];
+  
+end
+
+function [ddf, userdata] = ex3_objhess(x,Y,userdata)
+% Hessians of the objective function, Example 3
+
+  ddf = [1200*x(1)^2-400*x(2)+2, -400*x(1); -400*x(1), 200];
+  
+end
+
+function [ddgk, userdata] = ex3_conhess(x,Y,k,userdata)
+% Hessians of the constraints, Example 3
+
+  switch(k)
+  case (1)
+    ddgk = [2, 0; 0, 0];
+  case (2)
+    ddgk = [0, 0; 0, 2];
+  end
+  
+end
 
 
