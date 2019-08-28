@@ -45,3 +45,89 @@ function [penm] = ex72_define()
   
   penm.Yinit{1}=eye(6);
   penm.xinit = 1;
+
+end
+
+function [f,userdata] = ex72_objfun(x,Y,userdata)
+% Example 7.2, problem (17) from PENNON user's guide
+  % matrix H is stored in userdata
+
+  YH = svec2(x(1).*Y{1}-userdata.H);
+  f = YH(:)'*YH(:);
+  
+end
+
+function [df, userdata]=ex72_objgrad(x,Y,userdata)
+% Example 7.2, problem (17) from PENNON user's guide
+% return gradient of the objective w.r.t. all variables
+
+  % 
+  YH=svec2(x(1).*Y{1}-userdata.H);
+  
+  df(1) = sum(2*svec2(Y{1}).*YH);
+  df(2:length(YH)+1) = 2*x(1).*YH;
+  
+  df = df';
+  
+end
+
+function [ddf, userdata] = ex72_objhess(x,Y,userdata)
+% Example 7.2, problem (17) from PENNON user's guide
+% Hessians of the objective function and constraints
+  
+  YH=packmat(x(1).*Y{1}-userdata.H);
+  yy = packmat(Y{1});
+  n = length(yy);
+  ddf = zeros(n+1,n+1);
+  
+  ddf(1,1) = 2*sum(yy.^2);
+  ddf(1,2:n+1) = 2.*(x(1).*yy+YH);
+  ddf(2:n+1,1) = 2.*(x(1).*yy'+YH');
+  for i= 1:n
+      ddf(i+1,i+1) = 2*x(1)^2;
+  end
+  
+end
+
+function [g,userdata] = ex72_confun(x,Y,userdata)
+% Example 7.2, problem (17) from PENNON user's guide
+
+  % 
+  for i=1:length(Y{1})
+      g(i,1)=x(1)*Y{1}(i,i);
+  end
+
+end
+
+function [dg, userdata]=ex72_congrad(x,Y,userdata)
+% Example 7.2, problem (17) from PENNON user's guide
+% returns all constraints at once
+% rectangule matrix (Nx+NYnnz) x Ng
+
+  %
+  n =length(Y{1});
+  nn = n*(n+1)/2;
+  idiag = userdata.idiag;
+  
+  dg = sparse((nn+1),n); % #variables x #constraints
+  dg(1,:) = diag(Y{1});
+  
+  for i=1:n
+      dg(idiag(i)+1,i) = x(1);
+  end
+  
+end
+
+function [ddgk, userdata]=ex72_conhess(x,Y,k,userdata)
+% Example 7.2, problem (17) from PENNON user's guide
+
+  %
+  n =length(Y{1});
+  nn = n*(n+1)/2;
+  idiag = userdata.idiag;
+  
+  ddgk = zeros((nn+1),(nn+1));
+  ddgk(1,1) = 1;
+  ddgk(idiag(k)+1,idiag(k)+1) = 1;
+  
+end

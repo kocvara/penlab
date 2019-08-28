@@ -35,5 +35,50 @@ function [penm] = ex3_define_by_lagr()
   % [optional] set starting point
   %penm.x = zeros(2,1);
   penm.x = [-2; 1];        % suggested starting point
+  
+  end
+
+function [f,userdata] = ex3_objfun(x,Y,userdata)
+% objective function values for Example 3
+
+  f = 100*(x(2) - x(1)^2)^2 + (1 - x(1))^2;
+  
+end
+
+function [g,userdata] = ex3_confun(x,Y,userdata)
+% function values for Example 3
+
+  g = zeros(2,1);
+  g(1) = x(1)^2 + x(2);
+  g(2) = x(1)   + x(2)^2;
+  
+end
+
+function [df, userdata]=ex3_objgrad(x,Y,userdata)
+% Gradients for Example 3, note that they are stored in columns!
+
+  df = [-400*x(1)*(x(2)-x(1)^2) - 2*(1-x(1)); 200*(x(2)-x(1)^2)];
+  
+end
+
+function [dg, userdata]=ex3_congrad(x,Y,userdata)
+% Gradients for Example 3, note that they are stored in columns!
+
+  dg = [ 2*x(1), 1; 1, 2*x(2)];
+  
+end
+
+function [ddL, userdata] = ex3_lagrhess(x,Y,v,userdata)
+% Hessian of the lagrangian, Example 3
+%   H=nabla^2 f + sum v_i nabla^2 g_i
+% v should be of size NgNLN, thus in this example NgNLN=2
+
+  hess_f = [1200*x(1)^2-400*x(2)+2, -400*x(1); -400*x(1), 200];
+  hess_g1 = [2, 0; 0, 0];
+  hess_g2 = [0, 0; 0, 2];
+  ddL = hess_f + v(1)*hess_g1 + v(2)*hess_g2;
+  
+end
+
 
 
