@@ -57,7 +57,7 @@ function [status] = penlabtest(verbose)
     status = 0;
   end
   % examples
-  if (exist('ex1_define','file')~=2)
+  if (exist('ex1a_define','file')~=2)
     disp('Error: penlab/examples is not on the path.')
     status = 0;
   end
@@ -185,6 +185,17 @@ function [status] = penlabtest(verbose)
   else
     disp('SKIPPING sample NLP problems from AMPL')
   end
+  disp(' ')
+ 
+  disp('Running problems from "applications"...')
+  testset = { ...
+    { 'appl', 'applications/CorrMat', 2.0704979843315400E-03 }, ...
+    { 'appl', 'applications/Lyapunov', 5.0859024982784762E+00 }, ...
+    { 'appl', 'applications/SOF', -8.7142160179512174E-01 }, ...
+  };
+  feeder = @(no) penlabtestfeeder(no,testset);
+  ok = runset(feeder,verbose);
+  status = status * ok;
   disp(' ')
 
   % todo add more tests
