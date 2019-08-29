@@ -71,13 +71,46 @@ function [penm] = ncm1a_define()
   penm.mcongrad = @(x,Y,k,i,userdata) deal(sparse(userdata.A{i}), userdata);
   
 end
+
+function [f,userdata] = ncm1a_objfun(x,Y,userdata)
+  % f = sum_ij  (x_ij - h_ij)^2
+  % matrix H is stored in userdata
+
+  % I could build Y and do this, but let's write it directly
+  %YH = Y-userdata;
+  %f = YH(:)'*YH(:);
+
+  H=userdata.H;
+  f=(x(1)-H(1,1))^2 + 2*(x(2)-H(2,1))^2 + (x(3)-H(2,2))^2 + 2*(x(4)-H(3,2))^2 + (x(5)-H(3,3))^2;
+
+end
   
-  function [Akx, userdata] = mcm1a_mconfun(x,Y,k,userdata)
+function [df, userdata]=ncm1a_objgrad(x,Y,userdata)
+% return gradient of the objective w.r.t. all variables (even matrix)
+% return Nx x 1
+
+  H=userdata.H;
+  df=[ 2*(x(1)-H(1,1)); 
+       4*(x(2)-H(2,1)); 
+       2*(x(3)-H(2,2)); 
+       4*(x(4)-H(3,2));
+       2*(x(5)-H(3,3)) ];
+   
+end
+
+function [ddf, userdata] = ncm1a_objhess(x,Y,userdata)
+% Hessians of the objective function and constraints
+
+  ddf = diag([2,4,2,4,2]);  
+  
+end
+  
+function [Akx, userdata] = ncm1a_mconfun(x,Y,k,userdata)
 % There is only one matrix variable A(x) = sum x(i)*userdata.A{i}
 
   A=userdata.A;
   Akx=x(1).*A{1} + x(2).*A{2} + x(3).*A{3} + x(4).*A{4} + x(5).*A{5};
 
-  end
+end
 
 

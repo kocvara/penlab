@@ -21,14 +21,14 @@ else
     m=par.m; n=par.n; n1 = par.n1;
     BI=par.BI; DELTA=par.DELTA; f=par.f;
     
-    if i==1 & j==1
+    if isfield(userdata,'Ah')
+        Ah = userdata.Ah;
+    else
         Ah=sparse(n1,n1);
         for ii=1:m
             Ah=Ah+x(ii)*userdata.A{1,ii+1};
         end
         userdata.Ah = Ah;
-    else
-        Ah = userdata.Ah;
     end
     
     der = sparse(n1,n1);

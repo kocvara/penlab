@@ -87,7 +87,9 @@ function [status,name,prob,res] = penlabtestfeeder(no,testset)
   elseif (strcmpi(test{1},'ampl'))
     [status,name,prob] = ampl_feeder(test{2});
   elseif (strcmpi(test{1},'appl'))
-    [status,name,prob] = appl_feeder(test{2});    
+    [status,name,prob] = appl_feeder(test{2}); 
+  elseif (strcmpi(test{1},'exam'))
+    [status,name,prob] = exam_feeder(test{2});
   else
     % unknown test type
     status = -10;
@@ -249,7 +251,8 @@ function [status,name,prob] = ampl_feeder(amplfile)
 end
 
 function [status,name,prob] = appl_feeder(applfile)
-% AMPL_FEEDER reads AMPL nl file and sets up a penlab object.
+% APPL_FEEDER loads problems from directory "applications" and sets up 
+% a penlab object.
 % Returns 
 %   status~=0 if the file doesn't exist or there is a formating error,
 %     or any other error with initialization, otherwise 0 if all OK
@@ -267,8 +270,46 @@ function [status,name,prob] = appl_feeder(applfile)
   [path,name,ext] = fileparts(applfile);
 
   try 
-    addpath(strcat(path,'/',name))
+    addpath(genpath(strcat(path,'/',name)))
     penm = eval(strcat('test_',name));
+  catch
+    status = -1;
+    prob = [];
+    return;
+  end
+
+  try
+    prob = penlab(penm);
+    status = 0;
+  catch
+    status = -3;
+    prob = [];
+  end
+
+end
+
+function [status,name,prob] = exam_feeder(applfile)
+% AMPL_FEEDER loads problems form directory "examples" and sets up 
+% a penlab object.
+% Returns 
+%   status~=0 if the file doesn't exist or there is a formating error,
+%     or any other error with initialization, otherwise 0 if all OK
+%   name name of the problem (basename of the data file)
+%   prob penlab object
+%
+
+  if (isempty(applfile) || ~ischar(applfile))
+    status = -2;
+    name = 'EMPTY';
+    prob = [];
+    return;
+  end
+
+  [path,name,ext] = fileparts(applfile);
+
+  try 
+    addpath(genpath(strcat(path)))
+    penm = eval(strcat(name,'_define'));
   catch
     status = -1;
     prob = [];

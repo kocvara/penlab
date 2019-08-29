@@ -37,4 +37,4 @@ par.BI = BI;
 par.xy = xy;
 par.ijk = ijk;
 
-pic_ini(par);
+%pic_ini(par);

@@ -5,7 +5,7 @@ function  solve_vts
 % Example: >> solve_tto('GEO/t3x3.geo')
 %
 
-load stiffmat3
+load stiffmat2
 
 par.A = A; par.IA = IA; par.nelem=nelem; par.nnod=nnod;
 
