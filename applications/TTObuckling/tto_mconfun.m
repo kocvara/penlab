@@ -1,4 +1,4 @@
-function [Akx, userdata] = sdp_mconfun(x,Y,k,userdata)
+function [Akx, userdata] = tto_mconfun(x,Y,k,userdata)
 % evaluate A_k(x) based on sdpdata, k denotes a block number
 % sdpdata is a structure as obtained from readsdpa.m
 % note that we aim for A_k(x)<=0 thus A_k(x) is 'reversed' than usual:

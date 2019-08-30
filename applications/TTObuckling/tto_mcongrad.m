@@ -1,4 +1,4 @@
-function [Akdx, userdata] = sdp_mcongrad(x,Y,k,i,userdata)
+function [Akdx, userdata] = tto_mcongrad(x,Y,k,i,userdata)
 % Compute derivatives: d/dx_i A_k(x) based on the data from sdpdata
 % in this context it is in fact -F_i of the specific block
 

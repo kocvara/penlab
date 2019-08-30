@@ -8,6 +8,6 @@ function penm = test_TTOB()
 
 warning('off','MATLAB:nearlySingularMatrix')
 par = kobum('GEO/t3x3.geo');
-penm = tto_define(par);
+penm = ttob_define(par);
 
 

@@ -1,0 +1,1046 @@
+
+% This LaTeX was auto-generated from MATLAB code.
+% To make changes, update the MATLAB code and republish this document.
+
+\documentclass{article}
+\usepackage{graphicx}
+\usepackage{color}
+
+\sloppy
+\definecolor{lightgray}{gray}{0.5}
+\setlength{\parindent}{0pt}
+
+\begin{document}
+
+    
+    
+\section*{PENlab Manual, version 1.04 (January 2014)}
+
+\begin{par}
+
+\end{par} \vspace{1em}
+
+\subsection*{Contents}
+
+\begin{itemize}
+\setlength{\itemsep}{-1ex}
+   \item What is it?
+   \item How to install it?
+   \item How to use it?
+   \item How to initiate/set up the problem?
+   \item Elements of the penm structure
+   \item Call back functions
+   \item PENlab and YALMIP
+   \item Pre-programmed interfaces
+   \item Pre-programmed applications
+   \item Other useful utilities
+   \item Examples
+   \item Notes
+   \item Appendix 1, Glossary of penm elements
+   \item Appendix 2, List of PENlab options
+   \item Appendix 3, Definition of BMI input format
+   \item Appendix 4, Definition of PMI input format
+\end{itemize}
+
+
+\subsection*{What is it?}
+
+\begin{par}
+PENlab is Matlab® based toolbox for optimization of nonlinear functions with vector and matrix variables subject to vector and matrix constraints. At present, it can solve standard nonlinear optimization problems, linear and nonlinear semidefinite programming problems and any combination of the two. PENlab is based on the code PENNON by \begin{verbatim}PENOPT\end{verbatim}. PENlab was developed by Jan Fiala (The Numerical Algorithms Group Ltd.), Michal Kocvara (University of Birmingham) and Michael Stingl (University of Erlangen) and is distributed under GPLv3 license.
+\end{par} \vspace{1em}
+\begin{par}
+
+\end{par} \vspace{1em}
+
+
+\subsection*{How to install it?}
+
+\begin{par}
+Call \texttt{install} from the main directory. It adds PENlab directories to the Matlab Path. If any mexfiles are used, they need to be compiled separately at the moment. The current distribution constains mexfiles precompiled for MS Windows 32bit and Linux 64bit.
+\end{par} \vspace{1em}
+\begin{par}
+
+\end{par} \vspace{1em}
+
+
+\subsection*{How to use it?}
+
+\begin{par}
+It's based on Matlab objects so you need to construct the object first, i.e. initialize/read in the problem
+\end{par} \vspace{1em}
+\begin{verbatim}problem = penlab(problem\_data);\end{verbatim}
+\begin{par}
+Then you can optionally edit some stuff before calling the solver itself, for example, set up the user data to be passed to the callbacks, set starting point, set optional parameters,... Typically you just change the appropriate bits in the structure:
+\end{par} \vspace{1em}
+\begin{verbatim}problem.xinit = ...
+problem.Yinit = ...
+problem.opts.chosen\_option = ...\end{verbatim}
+\begin{par}
+or
+\end{par} \vspace{1em}
+\begin{verbatim}new\_opts = structure\_something
+problem.opts = new\_opts;\end{verbatim}
+\begin{par}
+Typically, all these changes inside the object are "monitored" by the object and it might not allow you to change the value (e.g. invalid option settings, wrong dimension of \texttt{xinit}, ...). In such a case you will get an error message and the structure is not changed. Or you might get a warning that something has been changed but it looks suspicious so it just points you that it might be wrong.
+\end{par} \vspace{1em}
+\begin{par}
+You can also always check how the problem is set or what are the default values used. Just read the appropriate part of the object, such as
+\end{par} \vspace{1em}
+\begin{verbatim}problem.opts     %option settings set by the user
+problem.allopts  %all options set, default values & user's ones
+...\end{verbatim}
+\begin{par}
+Some of these might be read-only and changes are not allowed.
+\end{par} \vspace{1em}
+\begin{par}
+When everything is ready, you invoke the solver
+\end{par} \vspace{1em}
+\begin{verbatim}problem.solve();\end{verbatim}
+\begin{par}
+Depending on option settings, you will see the progress or final message.
+\end{par} \vspace{1em}
+\begin{par}
+You can retrieve the results by
+\end{par} \vspace{1em}
+\begin{verbatim}problem.x, problem.Y, problem.ueq, problem.uineq, ...\end{verbatim}
+\begin{par}
+or you can change options or initialization and invoke \texttt{solve()} again to use the new settings.
+\end{par} \vspace{1em}
+\begin{par}
+
+\end{par} \vspace{1em}
+
+
+\subsection*{How to initiate/set up the problem?}
+
+\begin{par}
+At the moment the only option is to use structure which has all necessary elements set and pass it to the constructor. Here we will call the structure \texttt{penm}. Examples how to generate it are below or in directory \texttt{penlab\ensuremath{\backslash}examples}.
+\end{par} \vspace{1em}
+
+\begin{verbatim}problem = penlab(penm);\end{verbatim}
+    \begin{par}
+
+\end{par} \vspace{1em}
+
+
+\subsection*{Elements of the penm structure}
+
+\begin{par}
+\textbf{IMPORTANT NOTE}
+\end{par} \vspace{1em}
+\begin{par}
+Whenever matrix variables \texttt{Y\{1\}, Y\{2\}, ..., Y\{NY\}} are present, they will be vectorized. All elements of this new vector will be counted with indices starting with \texttt{(Nx+1)} (\texttt{Nx} = number of scalar variables), using the ordering \texttt{Y\{1\}, Y\{2\}, ..., Y\{NY\}}. Every \texttt{Y\{i\}} is assumed to be symmetric and thus only the \textbf{lower triangle is vectorized column-wise}. If any callback functions described below asks for derivatives with respect to \texttt{k} (\texttt{k\ensuremath{>}Nx}), it means it's one of the variables in one of the matrices \texttt{Y\{i\}}.
+\end{par} \vspace{1em}
+\begin{par}
+\textbf{Optional problem data}
+\end{par} \vspace{1em}
+\begin{itemize}
+\setlength{\itemsep}{-1ex}
+   \item [optional] \textbf{problem name and a comment} (e.g. source) just for logging   purposes. If probname is empty or not present, current time\&date and   default text is used, comment will stay empty.
+\end{itemize}
+\begin{verbatim}penm.probname = 'Example Problem 1'; penm.comment = 'comment comment';\end{verbatim}
+\begin{itemize}
+\setlength{\itemsep}{-1ex}
+   \item [optional] \textbf{userdata} will get always pass in and from any callback   function, can be anything. If not set, an empty array will be used   instead. Convenient to ease communication between the callbacks, store   temporary data  or data of the problem to compute with them, instead of   using global variables, persistent memory and similar.
+\end{itemize}
+\begin{verbatim}penm.userdata = [];\end{verbatim}
+\begin{itemize}
+\setlength{\itemsep}{-1ex}
+   \item [optional] \textbf{option settings} in a structure (different from defaults);   if empty or not present, defaults will be used. Can be changed even   after initialization.
+\end{itemize}
+\begin{verbatim}penm.opts=[];\end{verbatim}
+\begin{par}
+\textbf{Define decision variables}
+\end{par} \vspace{1em}
+\begin{itemize}
+\setlength{\itemsep}{-1ex}
+   \item \textbf{number of (ordinary) decision variables}  If the field is not present, \texttt{Nx=0}; lower/upper bounds for box  constraints will be ignored.
+\end{itemize}
+\begin{verbatim}penm.Nx = 7;\end{verbatim}
+\begin{itemize}
+\setlength{\itemsep}{-1ex}
+   \item \textbf{number of matrix variables}, should be the same as \texttt{length(Y)}. If the field is not present, \texttt{NY=0}; thus \texttt{Y\{:\}}, bounds etc. will be ignored.
+\end{itemize}
+\begin{verbatim}penm.NY = 3;\end{verbatim}
+\begin{itemize}
+\setlength{\itemsep}{-1ex}
+   \item cell array of length \texttt{NY} with a nonzero pattern of each of the matrix   variables. Each matrix will be vectorized and all its nonzeros in   the lower triangle will be considered as variables, the rest as constant   zeros. The utility '...' can   generate back the matrix and the exact position of the variable ...
+\end{itemize}
+\begin{verbatim}penm.Y\{1\} = ones(3);
+penm.Y\{2\} = spones(sprandsym(5,0.3));
+penm.Y\{3\} = spones(sprand(6,6,0.2));\end{verbatim}
+\begin{par}
+\textbf{Define box constraints on variables}
+\end{par} \vspace{1em}
+\begin{itemize}
+\setlength{\itemsep}{-1ex}
+   \item \textbf{box constraints} (lower/upper bounds) on the variables, \ensuremath{|}lbx \ensuremath{<}= x \ensuremath{<}= ubx\ensuremath{|}. If \texttt{lbx = -Inf}, it is not considered; similarly for \texttt{ubx = Inf}. So, e.g., by setting \texttt{lbx=-Inf}, \texttt{ubx=Inf} the variable is unbounded. Length of each array should be \texttt{Nx}. If one or both are missing, 'x' is considered as unconstrained from that side. Any \texttt{lbx\ensuremath{>}ubx} is considered as error. If lbx==ubx the variable will be fixed and won't have further effect.
+\end{itemize}
+\begin{verbatim}penm.lbx = [-Inf, -Inf, -1, 0, -3, -6, -77];
+penm.ubx = [10, Inf, Inf, 4, 66, 0, Inf];\end{verbatim}
+\begin{itemize}
+\setlength{\itemsep}{-1ex}
+   \item [optional] \textbf{box constraints treatment}, by default a penalty/barrier function is used to include box constraints into the Augmented Lagrangian which might cause that the variables are feasible only up to the given tolerance (see option settings). Alternatively, it is possible to apply barrier function to all or some of them instead and achieve strict feasibility. To do so, it is necessary to name all such box constraints in arrays penm.lbxbar, penm.ubxbar. Any named box constraints which actually don't exist (infinite bounds) are ignored.
+\end{itemize}
+\begin{verbatim}penm.lbxbar = [ 3, 4 ];
+penm.ubxbar = [1:penm.Nx];\end{verbatim}
+\begin{itemize}
+\setlength{\itemsep}{-1ex}
+   \item \textbf{lower, upper bounds on elements of \texttt{Y} variable} If used, it is a cell array of \texttt{m} matrices of the same size as matrix variables \texttt{Y\{1\},...,Y\{m\}}. Use empty matrix when constraints are not defined. If not present, the elements are unconstrained.
+\end{itemize}
+\begin{verbatim}penm.lbYx=cell(3,1); penm.lbYx\{2\}=-ones(3,3); penm.lbYx\{3\}=zeros(5,5);
+penm.ubYx=cell(3,1); penm.ubYx\{2\}=ones(3,3) ;\end{verbatim}
+\begin{itemize}
+\setlength{\itemsep}{-1ex}
+   \item \textbf{lower and upper bound on matrices \texttt{Y}} (as matrix inequalities, i.e.   bound on all eigenvalues).
+\end{itemize}
+\begin{verbatim}penm.lbY = [0, -Inf, 1];
+penm.ubY = [Inf, 0, 10];\end{verbatim}
+\begin{itemize}
+\setlength{\itemsep}{-1ex}
+   \item [optional] \textbf{matrix variable bounds treatment}, similarly to box constraints on \texttt{x} variables, it is possible to change the treatment of constraints on matrix variables \texttt{Y}. By default a reciprocal penalty/barrier function is used which might cause that the matrix variables are feasible only up to the given tolerance (see option settings). It is possible to switch some or all of them to logaritmic barrier which secures strict feasibility of \texttt{Y} during the whole computation. The way to do it is similar to \texttt{lbxbar} and \texttt{ubxbar}. All such matrix variable bounds need to be listed in arrays penm.lbYbar and penm.ubYbar. Any named constraints which actually don't exist (infinite bounds) are ignored.
+\end{itemize}
+\begin{verbatim}penm.lbYbar = [1:penm.NY];
+penm.ubYbar = [ 3 ];\end{verbatim}
+\begin{itemize}
+\setlength{\itemsep}{-1ex}
+   \item [optional] \textbf{box constraints on the elements of the matrix variables} only elements matching patterns of \texttt{Y\{\}} will be taken into account if the matrix is empty (\texttt{[]}) it is automatically considered as \texttt{+/-Inf} accordingly
+\end{itemize}
+\begin{verbatim}penm.lbYx\{1\} = - magic(3);
+penm.ubYx\{1\} = magic(3);
+penm.lbYx\{2\} = sparse(5,5);
+penm.ubYx\{3\} = 100;\end{verbatim}
+\begin{par}
+\textbf{Starting point}
+\end{par} \vspace{1em}
+\begin{par}
+is an optional input. When set, it should be ideally feasible. For a matrix variable \texttt{Y\{i\}}, the starting point \texttt{Yinit\{i\}} must be a symmetric matrix of the same non-zero pattern as \texttt{Y\{i\}}.
+\end{par} \vspace{1em}
+\begin{verbatim}penm.xinit=rand(penm.Nx,1);
+penm.Yinit\{1\} = 3.*eye(n);\end{verbatim}
+\begin{par}
+The starting point might be automatically modified within solve() * if barrier (for example, penm.lbxbar) is used and the point is not   feasible w.r.t. the box constraints (or very close to the boundary) * if option setting xinit\_mod = 1, in which case the point is adjusted   always so that it lays within box constraints
+\end{par} \vspace{1em}
+\begin{par}
+\textbf{Constraints}
+\end{par} \vspace{1em}
+\begin{itemize}
+\setlength{\itemsep}{-1ex}
+   \item Linear and nonlinear function constraints
+\end{itemize}
+\begin{verbatim}penm.NgNLN = 2;
+penm.NgLIN = 1;\end{verbatim}
+\begin{itemize}
+\setlength{\itemsep}{-1ex}
+   \item Linear and nonlinear matrix constraints
+\end{itemize}
+\begin{verbatim}penm.NANLN = 0;
+penm.NALIN = 1;\end{verbatim}
+\begin{itemize}
+\setlength{\itemsep}{-1ex}
+   \item Lower/upper bounds ... must be defined as finite at least on one   side; equality constraints defined by equal bounds
+\end{itemize}
+\begin{verbatim}penm.lbg = [-Inf, 0, 5];
+penm.ubg = [0, Inf, 5];
+penm.lbA = [0];
+penm.ubA = [Inf];\end{verbatim}
+\begin{par}
+
+\end{par} \vspace{1em}
+
+
+\subsection*{Call back functions}
+
+\begin{par}
+\textbf{IMPORTANT NOTE}
+\end{par} \vspace{1em}
+\begin{par}
+Whenever matrix variables \texttt{Y\{1\}, Y\{2\}, ..., Y\{NY\}} are present, they will be vectorized. All elements of this new vector will be counted with indices starting with \texttt{(Nx+1)} (\texttt{Nx} = number of scalar variables), using the ordering \texttt{Y\{1\}, Y\{2\}, ..., Y\{NY\}}. Every \texttt{Y\{i\}} is assumed to be symmetric and thus only the \textbf{lower triangle is vectorized column-wise}. If any callback functions described below asks for derivatives with respect to \texttt{k} (\texttt{k\ensuremath{>}Nx}), it means it's one of the variables in one of the matrices \texttt{Y\{i\}}.
+\end{par} \vspace{1em}
+\begin{par}
+Call back functions are used to evaluate objective function, function constraints and matrix constraint and their derivatives. First go \texttt{NLN} then \texttt{LIN}.
+\end{par} \vspace{1em}
+\begin{verbatim}penm.xxx = ...\end{verbatim}
+\begin{par}
+where \texttt{xxx} can be
+\end{par} \vspace{1em}
+\begin{verbatim}objfun, objgrad, objhess
+confun, congrad, conhess
+mconfun, mcongrad, mconhess\end{verbatim}
+\begin{par}
+alternatively objhess + conhess -\ensuremath{>} lagrhess
+\end{par} \vspace{1em}
+\begin{verbatim}[fx, userdata] = objfun(x,Y,userdata)\end{verbatim}
+\begin{par}
+returns a number
+\end{par} \vspace{1em}
+\begin{verbatim}[fdx, userdata] = objgrad(x,Y,userdata)\end{verbatim}
+\begin{par}
+returns a (possibly sparse) vector w.r.t. all variables (even matrix ones), if objfun doesn't depend on \texttt{Y} it can be just \texttt{Nx} long, otherwise \texttt{Nx+NYnnz}
+\end{par} \vspace{1em}
+\begin{par}
+Callbacks can be defined without \texttt{Y}, userdata as the parameters (really?) but they always need to return userdata. If userdata structure is not used, it should return \texttt{[]}.
+\end{par} \vspace{1em}
+\begin{par}
+The following 3 callbacks are used to evaluate the objective function:
+\end{par} \vspace{1em}
+
+\begin{verbatim}   function [f,   userdata] = objfun(x,Y,userdata)
+   function [df,  userdata] = objgrad(x,Y,userdata)
+   function [ddf, userdata] = objhess(x,Y,userdata)\end{verbatim}
+    \begin{par}
+which should return:
+\end{par} \vspace{1em}
+\begin{itemize}
+\setlength{\itemsep}{-1ex}
+   \item function value of the objective as a scalar \texttt{f},
+   \item gradient of the objective as a (possibly sparse) vector \texttt{df}   of dimensions \texttt{(Nx+NYnnz) x 1},
+   \item hessian of the objective as a (possibly sparse) matrix \texttt{ddf}   of dimensions \texttt{(Nx+NYnnz) x (Nx+NYnnz)} or empty matrix \texttt{[]}.
+\end{itemize}
+\begin{par}
+The following lines specify the signature of the callbacks to evaluate \texttt{NgNLN + NgLIN} (function) constraints, if present. If \texttt{NgNLN = NgLIN = 0}, these will not be referenced.
+\end{par} \vspace{1em}
+
+\begin{verbatim}   function [g,    userdata] = confun(x,Y,userdata)
+   function [dg,   userdata] = congrad(x,Y,userdata)
+   function [ddgk, userdata] = conhess(x,Y,k,userdata)\end{verbatim}
+    \begin{par}
+They should return:
+\end{par} \vspace{1em}
+\begin{itemize}
+\setlength{\itemsep}{-1ex}
+   \item function values of all constraints (\textbf{nonlinear followed by linear}) as a   vector \texttt{g} of dimensions \texttt{(NgNLN+NgLIN) x 1},
+   \item gradients of all constraints as a (possibly sparse) matrix \texttt{dg} of   dimensions \texttt{(Nx+NYnnz) x (NgNLN+NgLIN)},
+   \item hessian of the \texttt{k}-th nonlinear (function) constraint (\texttt{k=1..NgNLN})   as a (possibly sparse) matrix \texttt{ddgk} of dimensions   \texttt{(Nx+NYnnz) x (Nx+NYnnz)}; if \texttt{NgNLN = 0}, \texttt{conhess()} needn't be defined.
+\end{itemize}
+\begin{par}
+Alternatively, it is possible to specify \texttt{lagrhess()} callback instead of \texttt{objhess()} and \texttt{conhess()} which returns the hessian of the Lagrangian
+\end{par} \vspace{1em}
+
+\begin{verbatim}   ddL = hess F(x,Y) + sum_{k=1}^{NgNLN} v(k) * hess g_k(x,Y)\end{verbatim}
+    \begin{par}
+as a (possibly sparse) matrix  of dimensions \texttt{(Nx+NYnnz) x (Nx+NYnnz)} or empty matrix \texttt{[]}. If all three callbacks are defined, \texttt{lagrhess()} is used.
+\end{par} \vspace{1em}
+
+\begin{verbatim}   function [ddL, userdata] = lagrhess(x,Y,v,userdata)\end{verbatim}
+    \begin{par}
+Finally, the last four callbacks serve to evaluate \texttt{NANLN} nonlinear and \texttt{NALIN} linear matrix constraints. If \texttt{NANLN = NALIN = 0}, they needn't be defined. Callbacks \texttt{mconhess()} or \texttt{mconlagrhess()} compute 2nd derivatives of matrix constraints and need to be defined only if NANLN\ensuremath{>}0 (otherwise it is assumed that all matrix constraints are linear and thus their 2nd derivatives are zeros). Only one of these will be used, if both are defined, \texttt{mconlagrhess()} will be chosen. Note that although the return values are symmetric matrices, \textbf{both} triangles need to be present.
+\end{par} \vspace{1em}
+
+\begin{verbatim}   function [Ak,     userdata] = mconfun(x,Y,k,userdata)
+   function [dAki,   userdata] = mcongrad(x,Y,k,i,userdata)
+   function [ddAkij, userdata] = mconhess(x,Y,k,i,j,userdata)
+   function [ddMCLk, userdata] = mconlagrhess(x,Y,k,Umlt,userdata)\end{verbatim}
+    \begin{par}
+These should return:
+\end{par} \vspace{1em}
+\begin{itemize}
+\setlength{\itemsep}{-1ex}
+   \item a value of the \texttt{k}-th matrix constriant (\texttt{k=1..NANLN+NALIN})   as a dense or sparse symmetric matrix \texttt{Ak},
+   \item a derivative of the \texttt{k}-th matrix constraint (\texttt{k=1..NANLN+NALIN})   w.r.t. \texttt{i}-th variable (\texttt{i=1..Nx+NYnnz}) as a \textbf{sparse} symmetric   matrix of the appropriate dimension or empty matrix \texttt{[]}. The matrix   must be in the sparse format even if it has all values nonzero. Note   that callback \texttt{mcongrad()} is called within the constructor to retrieve   all derivatives (all \texttt{i}) of all matrix constraints (all \texttt{k}).   It records which derivatives were nonempty and the algorithm later asks   only for these. Therefore it is highly recommended to return empty matrix   \texttt{[]} whenever the matrix constraint doesn't depend on the variable   and also to carefully distinquish zero matrix (\texttt{sparse(m,m)}) and empty   matrix \texttt{[]}.
+   \item a 2nd derivative of the \texttt{k}-th nonlinear matrix constraint (\texttt{k=1..NANLN})   w.r.t. \texttt{i,j}-th variables (\texttt{i,j=1..Nx+NYnnz}) as a dense or sparse   symmetric matrix of the appropriate dimension or empty matrix \texttt{[]}.   \texttt{mconhess()} will be called only with the indices \texttt{i,j} where the first   matrix derivative was nonempty. Alternatively, \texttt{mconlagrhess()} can   be defined instead.
+   \item the 2nd derivative of the lagrangian of the \texttt{k}-th nonlinear matrix   constraint (\texttt{k=1..NANLN}); Matrix Constraint Lagrangian is defined as
+\end{itemize}
+
+\begin{verbatim}    MCL_k(x,Y,Umlt) = <A_k(x,Y),Umlt> = trace(A_k(x,Y) * Umlt)\end{verbatim}
+    \begin{par}
+where \texttt{Umlt} is provided Lagrangian multiplier for the given constraint.   Thus the 2nd derivative of \texttt{MCL\_k} should be a dense or sparse symmetric   matrix of the dimensions \texttt{(Nx+NYnnz) x (Nx+NYnnz)} whose \texttt{i,j}-th element   should be
+\end{par} \vspace{1em}
+
+\begin{verbatim}    (ddMCL_k)_ij = <d^2/dx_i dx_j A_k(x,Y), Umlt>\end{verbatim}
+    \begin{par}
+This offers an alternative to \texttt{mconhess()} in order to reduce a significant   overhead connected with repeated calls to \texttt{mconhess()}. Examples how to   implemented are \texttt{modules/BMI/bmi\_mconlagrhess.m} or equivalent in \texttt{PMI}.
+\end{par} \vspace{1em}
+\begin{par}
+The meaning of the last (optional) argument \texttt{pointchanged}: if \texttt{pointchanged = 1} then the values of \texttt{x,Y} have changed and this call is the first one supplying the new values; if \texttt{pointchanged = 0} we supply the "old" point.
+\end{par} \vspace{1em}
+\begin{par}
+
+\end{par} \vspace{1em}
+
+
+\subsection*{PENlab and YALMIP}
+
+\begin{par}
+PENlab can be used to solve LMI and BMI problems generated by YALMIP (\texttt{http://users.isy.liu.se/johanl/yalmip/}) using YALMIP's 'export' command. The utility YALMIP2BMI reads this output and converts it into a structure accepted by PENLab via BMI or PMI modules. Note that YALMIP may transform the original matrix variables into vectors by symmetric vectorization. To recover them from the results, you have to 'matricize' these vectors.
+\end{par} \vspace{1em}
+\begin{par}
+Example of using YALMIP2BMI:
+\end{par} \vspace{1em}
+
+\begin{verbatim}%YALMIP commands
+  A = [-1 2;-3 -4]; B=-[1;1];
+  P = sdpvar(2,2); K = sdpvar(1,2);
+  F = [(A+B*K)'*P+P*(A+B*K) < -eye(2); P>eye(2)]
+  yalpen=export(F,trace(P),sdpsettings('solver','penbmi'),[],[],1);
+%PENLAB commands
+  bmi=yalmip2bmi(yalpen);
+  penm = bmi_define(bmi);
+  prob = penlab(penm);
+  solve(prob);
+  K = (prob.x(4:5))';\end{verbatim}
+    \begin{par}
+
+\end{par} \vspace{1em}
+
+
+\subsection*{Pre-programmed interfaces}
+
+\begin{par}
+PENlab distribution contains several pre-programmed interfaces for standard optimization problems with standard inputs. For these problems, the user does not have to create the \texttt{penm} object, nor the call back functions. Pre-programmed interfaces can be found in directory \texttt{interfaces}.
+\end{par} \vspace{1em}
+\begin{par}
+\textbf{Nonlinear optimization with AMPL input}
+\end{par} \vspace{1em}
+\begin{par}
+Go to directory \texttt{interfaces/NLP\_AMPL}. Assume that nonlinear optimization problem is defined in and processed by \begin{verbatim}AMPL\end{verbatim}, so that we have the corresponding \texttt{.nl} file, for instance \texttt{chain.nl} stored in directory \texttt{datafiles}. All the user has to do to solve the problem is to call the following three commands:
+\end{par} \vspace{1em}
+
+\begin{verbatim}penm=nlp_define('datafiles/chain100.nl');
+prob=penlab(penm);
+prob.solve();\end{verbatim}
+    \begin{par}
+\textbf{Linear semidefinite programming with SDPA input}
+\end{par} \vspace{1em}
+\begin{par}
+Go to directory \texttt{interfaces/LMI}. Assume that a linear SDP problem is stored in an SDPA input file, for instance \texttt{arch0.dat-s} stored in directory \texttt{datafiles}. All the user has to do to solve the problem is to call
+\end{par} \vspace{1em}
+
+\begin{verbatim}[x] = solve_sdpa('datafiles/arch0.dat-s');\end{verbatim}
+    \begin{par}
+or, which is the same, the following sequence of commands:
+\end{par} \vspace{1em}
+
+\begin{verbatim}sdpdata=readsdpa('datafiles/arch0.dat-s');
+penm=sdp_define(sdpdata)
+prob=penlab(penm);
+prob.solve();
+x = prob.x;\end{verbatim}
+    \begin{par}
+\textbf{Linear semidefinite programming with SeDuMi input}
+\end{par} \vspace{1em}
+\begin{par}
+Go to directory \texttt{interfaces/LMI}. Assume that a linear SDP problem is stored in an SeDuMi input file, for instance \texttt{arch0.mat} stored in directory \texttt{datafiles}. All the user has to do to solve the problem is to call
+\end{par} \vspace{1em}
+
+\begin{verbatim}[x] = solve_sedumi('datafiles/sedumi-arch0.mat');\end{verbatim}
+    \begin{par}
+or, which is the same, the following sequence of commands:
+\end{par} \vspace{1em}
+
+\begin{verbatim}pen = sed2pen('datafiles/sedumi-arch0.mat');
+bmidata=pen2bmi(pen);
+penm=bmi_define(bmidata);
+prob=penlab(penm);
+prob.solve();
+x = prob.x;\end{verbatim}
+    \begin{par}
+\textbf{Bilinear matrix inequalities}
+\end{par} \vspace{1em}
+\begin{par}
+Go to directory \texttt{interfaces/BMI}. We want to solve an optimization problem with constraints in the form of bilinear matrix inequalities. The problem is stored in a file \texttt{bmidata.mat} in directory \texttt{interfaces/BMI}. The structure of the datafile is explained in Appendix BMI. All the user has to do to solve the problem is to call the following sequence of commands:
+\end{par} \vspace{1em}
+
+\begin{verbatim}load bmidata
+penm=bmi_define(bmidata);
+prob=penlab(penm);
+prob.solve();\end{verbatim}
+    \begin{par}
+\textbf{Polynomial matrix inequalities}
+\end{par} \vspace{1em}
+\begin{par}
+Go to directory \texttt{interfaces/PMI}. We want to solve an optimization problem with constraints in the form of polynomial matrix inequalities. The problem is stored in a structure \texttt{pmidata.mat} in directory \texttt{interfaces/PMI}. The structure of the datafile is explained in Appendix PMI. All the user has to do to solve the problem is to call the following sequence of commands:
+\end{par} \vspace{1em}
+
+\begin{verbatim}load pmidata
+penm=pmi_define(pmidata);
+prob=penlab(penm);
+prob.solve();\end{verbatim}
+    \begin{par}
+
+\end{par} \vspace{1em}
+
+
+\subsection*{Pre-programmed applications}
+
+\begin{par}
+PENlab distribution contains several pre-programmed applications for some standard optimization problems. For these problems, the user does not have to create the \texttt{penm} object, nor the call back functions. Pre-programmed applications can be found in directory \texttt{applications}.
+\end{par} \vspace{1em}
+\begin{par}
+\textbf{Nearest correlation matrix problem}
+\end{par} \vspace{1em}
+\begin{par}
+Go to directory \texttt{applications/CorrMat}. We solve the nearest correlation matrix problem. The problem may include constraints on matrix elements and on the condition number of the resulting matrix; see Example 7.1 from the PENLAB paper (directory \texttt{tex/penlab\_paper}). On input is a given matrix \texttt{H}, not necessarily a correlation matrix and, if applicable, \texttt{kappa}, the required condition number of the computed correlation matrix.
+\end{par} \vspace{1em}
+\begin{par}
+The user can choose (by commenting/uncommenting) the required problem in \texttt{corr\_solve.m}:
+\end{par} \vspace{1em}
+
+\begin{verbatim}penm = corr_define; %nearest correlation matrix
+penm = corr_define_bound; %nearest correlation matrix with element-wise constraints
+penm = corr_define_cond(kappa); %nearest correlation matrix with constrained condition number
+penm = corr_define_cond_bound(kappa); %nearest correlation matrix with constrained condition number and elements\end{verbatim}
+    \begin{par}
+\textbf{Static output feedback with COMPLib input}
+\end{par} \vspace{1em}
+\begin{par}
+Go to directory \texttt{applications/SOF}. We solve feasibility problem for examples from the COMPLib library The user has to install COMPLib from \begin{verbatim}http://www.compleib.de/\end{verbatim} . The problem is formulated as a polynomial matrix inequality and solved using our PMI interface in \texttt{interfaces/PMI}. Example:
+\end{par} \vspace{1em}
+
+\begin{verbatim}sof('AC1');\end{verbatim}
+    \begin{par}
+\textbf{Lyapunov stability of continuous and discrete time linear systems}
+\end{par} \vspace{1em}
+\begin{par}
+Go to directory \texttt{applications/NLP\_AMPL}. We solve the problem of stability of a time invariant linear (discrete) system using Lyapunov theory. The problem is formulated as a LMI system \texttt{A'*P + P*A \ensuremath{<} 0} , \texttt{P \ensuremath{>} I} (continuous time) or \texttt{A'*P*A - P \ensuremath{<} 0} , \texttt{P \ensuremath{>} I} (discrete time) with respect to \texttt{P}. We minimize the trace of \texttt{P}. The user can easily modify the bounds in the LMIs or the LMIs themselves.
+\end{par} \vspace{1em}
+\begin{par}
+Example of solving a continuous time problem
+\end{par} \vspace{1em}
+
+\begin{verbatim}A=[0 1 0;0 0 1;-1 -2 -3];
+penm = lyapu(A);
+prob = penlab(penm);
+solve(prob);
+P=prob.Y{1};\end{verbatim}
+    \begin{par}
+Example of solving a discrete time problem
+\end{par} \vspace{1em}
+
+\begin{verbatim}A = [.7 -.2 -.1; .5 .4 0; 0 -.5 .9];
+penm = dlyapu(A);
+prob = penlab(penm);
+solve(prob);
+P=prob.Y{1};\end{verbatim}
+    \begin{par}
+\textbf{Truss topology optimization}
+\end{par} \vspace{1em}
+\begin{par}
+Go to directory \texttt{applications/TTO}. Solve the basic truss topology optimization problem formulated as an LMI. For more details, see Example 7.2 from the PENLAB paper (directory \texttt{tex/penlab\_paper}). Input data for many examples can be found in sub-directory \texttt{GEO}. Example:
+\end{par} \vspace{1em}
+
+\begin{verbatim}solve_tto('GEO/t3x3.geo');\end{verbatim}
+    \begin{par}
+\textbf{Truss topology optimization with a buckling constraint}
+\end{par} \vspace{1em}
+\begin{par}
+Go to directory \texttt{applications/TTObuckling}. Solve the truss topology optimization problem with a constraint on global stability (buckling). This leads to a nonlinear SDP problem. For more details, see Example 7.2 from the PENLAB paper (directory \texttt{tex/penlab\_paper}). Input data for many examples can be found in sub-directory \texttt{GEO}. Example:
+\end{par} \vspace{1em}
+
+\begin{verbatim}solve_ttob('GEO/t3x3.geo');\end{verbatim}
+    \begin{par}
+
+\end{par} \vspace{1em}
+
+
+\subsection*{Other useful utilities}
+
+\begin{par}
+The following m-files can be found in directory \texttt{utilities}. For more details and examples, use the help command.
+\end{par} \vspace{1em}
+\begin{par}
+\textbf{\texttt{pen2bmi}} converts input structure \texttt{pen} for PENBMI (as described  in PENOPT/PENBMI manual Section 5.2) into a structure accepted by  PENLAB via BMI or PMI modules.
+\end{par} \vspace{1em}
+\begin{par}
+\textbf{\texttt{sed2pen}} converts SeDuMi input into PENBMI input structure \texttt{pen} (as  described in PENOPT/PENBMI manual Section 5.2).
+\end{par} \vspace{1em}
+\begin{par}
+\textbf{\texttt{packmat}} is used for the vectorization of a symmetric matrix. It assumes a symmetric matrix on input and returns its 'L' packed representation i.e., a dense vector of length \texttt{n*(n+1)/2} set up by columns of the lower triangle of the input matrix..
+\end{par} \vspace{1em}
+\begin{par}
+\textbf{\texttt{testmex}} tests whether the behaviour of all the mex files is correct.
+\end{par} \vspace{1em}
+\begin{par}
+
+\end{par} \vspace{1em}
+
+
+\subsection*{Examples}
+
+\begin{par}
+\textbf{Example 1} Consider the following nonlinear optimization problem
+\end{par} \vspace{1em}
+\begin{par}
+$$ \min x_1^2+4x_2^2-x_3^2+x_1x_2-2x_1x_3$$
+\end{par} \vspace{1em}
+\begin{par}
+subject to
+\end{par} \vspace{1em}
+\begin{par}
+$$x_i\geq 0,\ \ i=1,2,3$$
+\end{par} \vspace{1em}
+\begin{par}
+$$4-(x_1^2+x_2^2+x_3^2)\leq 0$$
+\end{par} \vspace{1em}
+\begin{par}
+$$2x_1+6x_2+4x_3-24 = 0$$
+\end{par} \vspace{1em}
+\begin{par}
+The corresponding object \texttt{penm} is defined by function \texttt{ex1\_define} listed below and contained, together with the call back functions, in directory \texttt{examples}
+\end{par} \vspace{1em}
+\begin{verbatim}
+function [penm] = ex1_define()
+  penm = [];
+  penm.probname = 'examples/ex1';
+  penm.comment = 'Source: user external definition of functions';
+
+  penm.Nx = 3;
+  penm.lbx = zeros(3,1);
+
+  penm.NgNLN = 1;
+  penm.NgLIN = 1;
+  penm.lbg = [4, 24];
+  penm.ubg = [Inf, 24];
+
+  penm.objfun = @ex1_objfun;
+  penm.confun = @ex1_confun;
+  penm.objgrad = @ex1_objgrad;
+  penm.congrad = @ex1_congrad;
+  penm.objhess = @ex1_objhess;
+  penm.conhess = @ex1_conhess;
+end
+\end{verbatim}
+\begin{par}
+To solve this example, we execute the following commands:
+\end{par} \vspace{1em}
+
+\begin{verbatim}penm = ex1_define;
+prob = penlab(penm);
+prob.solve();
+x = prob.x;\end{verbatim}
+    \begin{par}
+\textbf{Example 2} Next, consider a toy nonlinear SDP example in two variables
+\end{par} \vspace{1em}
+\begin{par}
+$$ \min \frac{1}{2}(x_1^2 + x_2^2)$$
+\end{par} \vspace{1em}
+\begin{par}
+subject to
+\end{par} \vspace{1em}
+\begin{par}
+$\pmatrix{1& x_1-1& 0\cr x_1& 1& x_2\cr 0&x_2& 1}\succeq 0$
+\end{par} \vspace{1em}
+\begin{par}
+To define this example, we can use Matlab's anonymous functions:
+\end{par} \vspace{1em}
+\begin{verbatim}
+function [penm] = bex1()
+  B = sparse([1 -1 0; -1 1 0; 0 0 1]);
+  A{1} = sparse([0 1 0; 1 0 0; 0 0 0]);
+  A{2} = sparse([0 0 0; 0 0 1; 0 1 0]);
+
+  penm = [];
+  penm.probname = 'berlin_ex1';
+  penm.comment = 'quad objective with LMI';
+
+  penm.Nx=2;
+
+  penm.NALIN=1;
+  penm.lbA=zeros(1,1);
+
+  penm.objfun  = @(x,Y,userdata) deal(-.5*(x(1)^2+x(2)^2), userdata);
+  penm.objgrad = @(x,Y,userdata) deal(-[x(1);x(2)], userdata);
+  penm.objhess = @(x,Y,userdata) deal(-eye(2,2), userdata);
+  penm.mconfun  = @(x,Y,k,userdata) deal(B+A{1}*x(1)+A{2}*x(2), userdata);
+  penm.mcongrad = @(x,Y,k,i,userdata) deal(A{i}, userdata);
+end
+\end{verbatim}
+\begin{par}
+\textbf{Example 3} Again a toy nonlinear SDP example, this time in six variables
+\end{par} \vspace{1em}
+\begin{par}
+$$ \min x_1x_4(x_1 + x_2 +x_3) + x_3$$
+\end{par} \vspace{1em}
+\begin{par}
+subject to
+\end{par} \vspace{1em}
+\begin{par}
+$$x_1x_2x_3x_4 - x_5 - 25 = 0$$
+\end{par} \vspace{1em}
+\begin{par}
+$$x_1^2+x_2^2+x_3^2+x_4^2-x_6-40 = 0$$
+\end{par} \vspace{1em}
+\begin{par}
+$$1\leq x_i\leq 5,\ i=1,2,3,4,\quad x_i\geq 0,\ i=5,6$$
+\end{par} \vspace{1em}
+\begin{par}
+$\pmatrix{x_1& x_2& 0&0\cr x_2&x_4&x_2+x_3& 0\cr 0&x_2+x_3& x_4&x_3\cr 0&0&x_3&x_1}\succeq 0$
+\end{par} \vspace{1em}
+\begin{par}
+To define this example, we can again use Matlab's anonymous functions:
+\end{par} \vspace{1em}
+\begin{verbatim}
+function [penm] = bex3()
+  B = sparse(4,4);
+  A{1} = sparse([1 0 0 0; 0 0 0 0; 0 0 0 0; 0 0 0 1]);
+  A{2} = sparse([0 1 0 0; 1 0 1 0; 0 1 0 0; 0 0 0 0]);
+  A{3} = sparse([0 0 0 0; 0 0 1 0; 0 1 0 1; 0 0 1 0]);
+  A{4} = sparse([0 0 0 0; 0 1 0 0; 0 0 1 0; 0 0 0 0]);
+  A{5} = sparse(4,4);
+  A{6} = sparse(4,4);
+
+  penm = [];
+  penm.probname = 'berlin_ex3';
+  penm.comment = 'quad objective with LMI';
+
+  penm.Nx = 6;
+  penm.lbx = [1;1;1;1;0;0];
+  penm.ubx = [5;5;5;5;Inf;Inf];
+
+  penm.NgNLN = 2;
+  penm.lbg = [0;0];
+  penm.ubg = [0;0];
+
+  penm.NALIN=1;
+  penm.lbA=zeros(1,1);
+
+  penm.objfun  = @(x,Y,userdata) deal(x(1)*x(4)*(x(1)+x(2)+x(3))+x(3), userdata);
+  penm.objgrad = @(x,Y,userdata) deal([2*x(1)*x(4)+x(2)*x(4)+x(3)*x(4);...
+      x(1)*x(4);...
+      x(1)*x(4)+1;...
+      x(1)^2+x(1)*x(2)+x(1)*x(3);...
+      0; 0], userdata);
+  penm.objhess = @(x,Y,userdata) deal([2*x(4) x(4) x(4) 2*x(1)+x(2)+x(3) 0 0;...
+      x(4) 0 0 x(1) 0 0;...
+      x(4) 0 0 x(1) 0 0;...
+      2*x(1)+x(2)+x(3) x(1) x(1) 0 0 0;...
+      0 0 0 0 0 0; 0 0 0 0 0 0], userdata);
+
+  penm.confun = @(x,Y,userdata) deal([x(1)*x(2)*x(3)*x(4)-x(5)-25;...
+      x(1)^2+x(2)^2+x(3)^2+x(4)^2-x(6)-40], userdata);
+  penm.congrad = @(x,Y,userdata) deal(...
+      [x(2)*x(3)*x(4) x(1)*x(3)*x(4) x(1)*x(2)*x(4) x(1)*x(2)*x(3) -1 0;...
+      2*x(1) 2*x(2) 2*x(3) 2*x(4) 0 -1]', userdata);
+  penm.conhess = @bex3_conhess;
+
+  penm.mconfun  = @(x,Y,k,userdata) deal(A{1}*x(1)+A{2}*x(2)+A{3}*x(3)+A{4}*x(4), userdata);
+  penm.mcongrad = @(x,Y,k,i,userdata) deal(A{i}, userdata);
+end
+\end{verbatim}
+\begin{par}
+The Hessian of the standard constraints cannot be defined by the anonymous function and is thus defined by function \texttt{bex3\_conhess} shown below:
+\end{par} \vspace{1em}
+\begin{verbatim}
+function [ddgk, userdata] = bex3_conhess(x,Y,k,userdata)
+  switch(k)
+  case (1)
+    ddgk = [...
+        0 x(3)*x(4) x(2)*x(4) x(2)*x(3) 0 0;
+        x(3)*x(4) 0 x(1)*x(4) x(1)*x(3) 0 0;
+        x(2)*x(4) x(1)*x(4) 0 x(1)*x(2) 0 0;
+        x(2)*x(3) x(1)*x(3) x(1)*x(2) 0 0 0;
+        0 0 0 0 0 0;
+        0 0 0 0 0 0];
+  case (2)
+    ddgk = [...
+        2 0 0 0 0 0;
+        0 2 0 0 0 0;
+        0 0 2 0 0 0;
+        0 0 0 2 0 0;
+        0 0 0 0 0 0;
+        0 0 0 0 0 0];
+  end
+end
+\end{verbatim}
+\begin{par}
+
+\end{par} \vspace{1em}
+
+        \color{lightgray} \begin{verbatim}
+ans = 
+
+  struct with fields:
+
+    probname: 'examples/ex1'
+     comment: 'Source: user external definition of functions'
+          Nx: 3
+         lbx: [3×1 double]
+       NgNLN: 1
+       NgLIN: 1
+         lbg: [4 24]
+         ubg: [Inf 24]
+      objfun: @ex1_objfun
+      confun: @ex1_confun
+     objgrad: @ex1_objgrad
+     congrad: @ex1_congrad
+     objhess: @ex1_objhess
+     conhess: @ex1_conhess
+
+\end{verbatim} \color{black}
+    
+
+\subsection*{Notes}
+
+\begin{par}
+\textbf{How to test that the Augmented Lagrangian is correct?}
+\end{par} \vspace{1em}
+\begin{par}
+Use PENSDP/PENNON (PENNLP) to generate DCF files and use obj.setuptestpoint() to load the file. ... now use alselftest()  [in utilities]
+\end{par} \vspace{1em}
+\begin{par}
+For PENSDP problems:
+\end{par} \vspace{1em}
+\begin{verbatim}sdpdata=readsdpa('datafiles/truss1.dat-s');
+penm=sdp\_define(sdpdata);
+prob=penlab(penm);
+[alx,aldx,alddx] = setuptestpoint(prob,'datafiles/pensdpa_truss1.dcf','pensdp');
+prob.eval\_alx();
+% alx vs. prob.ALx
+alx
+prob.ALx\end{verbatim}
+\begin{par}
+For PENNLP problems:
+\end{par} \vspace{1em}
+\begin{verbatim}penm=nlp\_define('../../problems/ampl-nl/camshape100.nl');
+prob=penlab(penm);
+[alx,aldx,alddx] = setuptestpoint(prob,'datafiles/pennlp_camshape100_a.dcf','pennlp');
+prob.eval\_alx();
+prob.ALx
+alx\end{verbatim}
+\begin{par}
+\textbf{Other problems stored in ./datafiles:}
+\end{par} \vspace{1em}
+\begin{par}
+truss1 - very small matrices, no inequalities
+\end{par} \vspace{1em}
+
+\begin{verbatim}sdpdata=readsdpa('datafiles/truss1.dat-s');
+[alx,aldx,alddx] = setuptestpoint(prob,'datafiles/pensdpa_truss1.dcf','pensdp');\end{verbatim}
+    \begin{par}
+theta1 - one bigger matrix, no inequalitites
+\end{par} \vspace{1em}
+
+\begin{verbatim}sdpdata=readsdpa('datafiles/theta1.dat-s');
+[alx,aldx,alddx] = setuptestpoint(prob,'datafiles/pensdpa_theta1.dcf','pensdp');\end{verbatim}
+    \begin{par}
+control1 - two bigger matrices
+\end{par} \vspace{1em}
+
+\begin{verbatim}sdpdata=readsdpa('datafiles/control1.dat-s');
+[alx,aldx,alddx] = setuptestpoint(prob,'datafiles/pensdpa_control1.dcf','pensdp');\end{verbatim}
+    \begin{par}
+arch0 - one matrix \& set of inequalitites
+\end{par} \vspace{1em}
+
+\begin{verbatim}sdpdata=readsdpa('datafiles/arch0.dat-s');
+[alx,aldx,alddx] = setuptestpoint(prob,'datafiles/pensdpa_arch0.dcf','pensdp');\end{verbatim}
+    \begin{par}
+camshape100 - NLN ineq + LIN eq + BOX
+\end{par} \vspace{1em}
+
+\begin{verbatim}penm=nlp_define('../../problems/ampl-nl/camshape100.nl');
+[alx,aldx,alddx] = setuptestpoint(prob,'datafiles/pennlp_camshape100_a.dcf','pennlp');\end{verbatim}
+    \begin{par}
+chain100 - 100 LIN eq + 1 NLN eq, no box (==\ensuremath{>} no penalties)
+\end{par} \vspace{1em}
+
+\begin{verbatim}penm=nlp_define('../../problems/ampl-nl/chain100.nl');
+[alx,aldx,alddx] = setuptestpoint(prob,'datafiles/pennlp_chain100_a.dcf','pennlp');\end{verbatim}
+    \begin{par}
+israel - box + LIN ineq only (no equal)
+\end{par} \vspace{1em}
+
+\begin{verbatim}penm=nlp_define('../../problems/ampl-nl/israel.nl');
+[alx,aldx,alddx] = setuptestpoint(prob,'datafiles/pennlp_israel_a.dcf','pennlp');\end{verbatim}
+    \begin{par}
+seba - box + LIN ineq \& eq
+\end{par} \vspace{1em}
+
+\begin{verbatim}penm=nlp_define('../../problems/ampl-nl/seba.nl');
+[alx,aldx,alddx] = setuptestpoint(prob,'datafiles/pennlp_seba.dcf','pennlp');\end{verbatim}
+    \begin{par}
+cosine - big \& unconstrained
+\end{par} \vspace{1em}
+
+\begin{verbatim}penm=nlp_define('../../problems/ampl-nl/cosine.nl');
+[alx,aldx,alddx] = setuptestpoint(prob,'datafiles/pennlp_cosine.dcf','pennlp');\end{verbatim}
+    \begin{par}
+
+\end{par} \vspace{1em}
+
+
+\subsection*{Appendix 1, Glossary of penm elements}
+
+\begin{verbatim}penm.probname
+penm.comment\end{verbatim}
+\begin{verbatim}penm.Nx
+penm.lbx
+penm.ubx\end{verbatim}
+\begin{verbatim}penm.NY
+penm.Y\{k\} % k = 1,...,penm.NY
+penm.lbY
+penm.ubY
+penm.lbYx\{k\} % k = 1,...,penm.NY
+penm.ubYx\{k\} % k = 1,...,penm.NY\end{verbatim}
+\begin{verbatim}penm.NgNLN
+penm.NgLIN
+penm.lbg
+penm.ubg\end{verbatim}
+\begin{verbatim}penm.NANLN
+penm.NALIN
+penm.lbA
+penm.ubA\end{verbatim}
+\begin{verbatim}penm.objfun
+penm.objgrad
+penm.objhess\end{verbatim}
+\begin{verbatim}penm.confun
+penm.congrad
+penm.conhess\end{verbatim}
+\begin{verbatim}penm.mconfun
+penm.mcongrad\end{verbatim}
+\begin{verbatim}penm.xinit
+penm.Yinit\{k\} % k = 1,...,penm.NY\end{verbatim}
+\begin{par}
+
+\end{par} \vspace{1em}
+
+
+\subsection*{Appendix 2, List of PENlab options}
+
+\begin{par}
+For explanation of the option meanings, see PENNON manual.
+\end{par} \vspace{1em}
+
+\begin{verbatim}default options
+struct array: name, {default_value, type, restriction}
+where  name is the name of the option used in allopts or opts\end{verbatim}
+    
+\begin{verbatim}      default_value   (==> defopts(1) ~ default allopts structure)
+      restriction ... depending on the type, restriction to the accepted values
+      type: 'O' other, no restriction, no checking (e.g. usr_prn)
+            'S' string, no restriction
+            'I', 'R' integer or real within range restriction(1)~restriction(2)
+            'M' multiple choice - one of the elements in array restriction
+   defopts = struct(...
+     'outlev', {2, 'I', [0, Inf]}, ...
+     'outlev_file', {5, 'I', [0, Inf]}, ...
+     'out_filename', {'penm_log.txt', 'S', []}, ...
+     'user_prn', {[], 'O', []}, ...
+     'maxotiter', {100, 'I', [0, Inf]}, ...
+     'maxiniter', {100, 'I', [0, Inf]}, ...
+     ... % from pennon.m
+     'penalty_update', {0.5, 'R', [0, 1]}, ...       % PENALTY_UPDT
+     'penalty_update_bar', {0.3, 'R', [0, 1]}, ...   % PENALTY_UPDT_BAR
+     'mpenalty_update', {0.5, 'R', [0, 1]}, ...      %
+     'mpenalty_min', {1e-6, 'R', [0, 1]}, ...        %
+     'mpenalty_border', {1e-6, 'R', [0, 1]}, ...     %
+     'max_outer_iter', {100, 'I', [0, Inf]}, ...     % MAX_PBMITER
+     'outer_stop_limit', {1e-6, 'R', [1e-20, 1]}, ...% PBMALPHA
+     'kkt_stop_limit', {1e-4, 'R', [1e-20, 1]}, ...  % KKTALPHA
+     'mlt_update', {0.3, 'R', [0, 1]}, ...           % MU
+     'mmlt_update', {0.1, 'R', [0, 1]}, ...          % MU2
+     'uinit', {1, 'R', [-Inf, Inf]}, ...             % UINIT
+     'uinit_box', {1, 'R', [-Inf, Inf]}, ...         % UINIT_BOX
+     'uinit_eq', {0, 'R', [-Inf, Inf]}, ...          % UINIT_EQ
+     'umin', {1e-10, 'R', [0, 1]}, ...               % UMIN
+     'pinit', {1, 'R', [0, 1]}, ...                  % PINIT
+     'pinit_bar', {1, 'R', [0, 1]}, ...              % PINIT_BAR
+     'usebarrier', {0, 'M', [0, 1]}, ...             % USEBARRIER
+     ... % from unconstr_min.m
+     'max_inner_iter', {100, 'I', [0, Inf]}, ...     % MAX_MITER
+     'inner_stop_limit', {1e-2, 'R', [0, 1]}, ...    % ALPHA
+     'unc_dir_stop_limit', {1e-2, 'R', [0, 1]}, ...  % TOL_DIR
+     'unc_solver', {0, 'M', [0, 1, 2, 3, 4, 5]}, ... % solver
+     'unc_linesearch', {3, 'M', [0, 1, 2, 3]}, ...   % linesearch
+     ... % from eqconstr_min.m
+     'eq_dir_stop_limit', {1e-2, 'R', [0, 1]}, ...   % TOL_DIR
+     'eq_solver', {0, 'M', [0, 1]}, ...              % solver
+     'eq_linesearch', {3, 'M', [0, 1, 2, 3]}, ...    % linesearch
+     'eq_solver_warn_max', {4, 'I', [0, 10]}, ...    % solver_warn_max
+     'ls_short_max', {3, 'I', [0, 10]}, ...          % ls_short_max
+     'min_recover_strategy', {0, 'M', [0, 1]}, ...   % recover_strategy
+     'min_recover_max', {3, 'I', [0, 10]}, ...       % recover_max
+     ... % from phi2.m
+     'phi_R', {-0.5, 'R', [-1, 1]}, ...              % R_default
+     ... % linesearchs - ls_armijo.m
+     'max_ls_iter', {20, 'I', [0, Inf]}, ...   % max tries before LS fails
+     'max_lseq_iter', {20, 'I', [0, Inf]}, ...   % same for LS for equality constrained problems
+     'armijo_eps', {1e-2, 'R', [0, 1]}, ...  % when is armijo step satisfactory? P(alp) - P(0) <= eps*alp*P'(0)
+     ... % solve_simple_chol.m, solkvekkt_ldl.m, solvekkt_lu.m
+     'pert_update', {2., 'R', [0, 100]}, ...  % known aka LMUPDATE, multiplier of the lambda-perturbation factor
+     'pert_min', {1e-6, 'R', [0, 1]}, ...   % LMLOW, minimal (starting) perturbation
+     'pert_try_max', {50, 'I', [0, Inf]}, ... % max number of attempts to successfully perturbate a matrix
+     'pert_faster', {1, 'M', [0, 1]}, ...   % use the last known negative curvature vector to determine perturbation
+     ... % solve_simple_chol.m
+     'chol_ordering', {1, 'M', [0, 1]}, ... % use symamd for sparse matrices before Cholesky factor.?
+     ... % solvers
+     'luk3_diag', {1., 'R', [0, Inf]} ...  % diagonal of the (2,2)-block in Luksan 3 preconditioner
+   );\end{verbatim}
+    \begin{par}
+
+\end{par} \vspace{1em}
+
+
+\subsection*{Appendix 3, Definition of BMI input format}
+
+\begin{par}
+Use PMI input format described below with maximum degree 2.
+\end{par} \vspace{1em}
+\begin{par}
+
+\end{par} \vspace{1em}
+
+
+\subsection*{Appendix 4, Definition of PMI input format}
+
+\begin{par}
+The user needs to prepare a structure \texttt{pmidata} that stores data for the following problem
+\end{par} \vspace{1em}
+
+\begin{verbatim}  min   c'x + 1/2 x'Hx
+  s.t.  lbg <= B*x <= ubg
+        lbx <=  x  <= ubx
+        A_k(x)>=0     for k=1,..,Na\end{verbatim}
+    \begin{par}
+where
+\end{par} \vspace{1em}
+
+\begin{verbatim}        A_k(x) = sum_i  x(multi-index(i))*Q_i\end{verbatim}
+    \begin{par}
+for example
+\end{par} \vspace{1em}
+
+\begin{verbatim}        A_k(x) = Q_1 + x_1*x_3*Q_2 + x_2*x_3*x_4*Q_3\end{verbatim}
+    \begin{par}
+where multi-indices are
+\end{par} \vspace{1em}
+
+\begin{verbatim}           midx_1 = 0       (absolute term, Q_1)
+           midx_2 = [1,3]   (bilinear term, Q_2)
+           midx_3 = [2,3,4] (term for Q_3)\end{verbatim}
+    \begin{par}
+List of elements of the user structure \texttt{pmidata}
+\end{par} \vspace{1em}
+\begin{verbatim}name ... [optional] name of the problem
+Nx ..... number of primal variables
+Na ..... [optional] number of matrix inequalities (or diagonal blocks
+         of the matrix constraint)
+xinit .. [optional] dim (Nx,1), starting point
+c ...... [optional] dim (Nx,1), coefficients of the linear obj. function,
+         considered a zero vector if not present
+H ...... [optional] dim (Nx,Nx), Hessian for the obj. function,
+         considered a zero matrix if not present
+lbx,ubx. [optional] dim (Nx,1) or scalars (1x1), lower and upper bound
+         defining the box constraints
+B ...... [optional] dim(Ng,Nx), matrix defining the linear constraints
+lbg,ubg. [optional] dim (Ng,1) or scalars, upper and lower bounds for B\end{verbatim}
+\begin{verbatim}A ...... if Na>0, cell array of A{k} for k=1,...,Na each defining
+         one matrix constraint; let's assume that A{k} has maximal
+         order maxOrder and has nMat matrices defined, then A{k} should
+         have the following elements:
+           A\{k\}.Q - cell array of nMat (sparse) matrices of the same
+              dimension
+           A\{k\}.midx - (maxOrder x nMat) matrix defining the multi-indices
+              for each matrix Q; use 0 within the multi-index to reduce
+              the order
+         for example, A\{k\}.Q\{i\} defines i-th matrix to which belongs
+         multi-index  A\{k\}.midx(:,i). If midx(:,i) = [1;3;0], it means
+         that Q_i is multiplied by x_1*x_3 within the sum.\end{verbatim}
+\begin{par}
+
+\end{par} \vspace{1em}
+
+
+
+\end{document}
+    

@@ -12,8 +12,8 @@ function [penm] = tto_define(par)
   
   % PARAMETERS TO BE CHANGED MANUALLY
   compl = 1.0; par.cmp=compl;
-  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   
+%%  
   len = zeros(m,1);
   for i=1:m
       x1=xy(ijk(i,2)/2,1); y1=xy(ijk(i,2)/2,2);
@@ -66,5 +66,87 @@ function [penm] = tto_define(par)
   penm.mconfun = @tto_mconfun;
   penm.mcongrad = @tto_mcongrad;
   % hessian not needed as linear
+  
+end
 
+function [g,userdata] = tto_confun(x,Y,userdata)
+% returns all inequalities at once, expect g(x)<=0
+% vector Ng x 1
+
+  if (userdata.Ng>0)
+    g=userdata.B*x;
+  else
+    g=[];
+  end
+  
+end
+
+function [f,userdata] = tto_objfun(x,Y,userdata)
+
+  f = userdata.c'*x;
+  
+end
+
+function [ddf, userdata] = tto_objhess(x,Y,userdata)
+% Hessians of the objective function and constraints
+
+  ddf = [];
+  
+end
+
+function [Akdx, userdata] = tto_mcongrad(x,Y,k,i,userdata)
+% Compute derivatives: d/dx_i A_k(x) based on the data from sdpdata
+% in this context it is in fact -F_i of the specific block
+
+  Akdx=[];
+  if (k<=0 || k>userdata.Na)
+    return;
+  end
+  if (i<=0 || i>userdata.Nx)
+    return;
+  end
+
+  Akdx=-userdata.A{k,i+1};
+  
+end
+
+function [Akx, userdata] = tto_mconfun(x,Y,k,userdata)
+% evaluate A_k(x) based on sdpdata, k denotes a block number
+% sdpdata is a structure as obtained from readsdpa.m
+% note that we aim for A_k(x)<=0 thus A_k(x) is 'reversed' than usual:
+%   A_k(x) = F_0 - sum x_i*F_i
+
+  Akx=[];
+  if (k<=0 || k>userdata.Na)
+    return;
+  end
+
+  Akx=userdata.A{k,1};
+  for i=1:userdata.Nx
+    % won't work if F{} is [] ... <== dims must match
+    Akx = Akx - x(i).*userdata.A{k,i+1};
+    % or - ?
+  end
+  
+end
+
+function [dg, userdata]=tto_congrad(x,Y,userdata)
+% returns all inequalities at once, expect g(x)<=0
+% vector Ng x Nx
+
+  if (userdata.Ng>0)
+    dg=userdata.B;
+  else
+    dg=[];
+  end
+  
+end
+
+function [df, userdata]=tto_objgrad(x,Y,userdata)
+% return function value of the objective
+% return Nx x 1
+
+  df = userdata.c;
+  
+end
 

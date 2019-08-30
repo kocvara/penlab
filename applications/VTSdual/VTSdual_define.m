@@ -9,8 +9,8 @@ ny2 = ny/2; nelem2 = nelem/2; nnod2 = 2*nx*ny2; nnodi = 2*nx;
 n = nnod ; m = nelem;
 volume = nelem/3;
 ubound = 1.2;
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+%%
 lb = 1;
 for ie=1:nelem
     len = IA(ie);

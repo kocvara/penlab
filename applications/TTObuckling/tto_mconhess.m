@@ -1,4 +1,4 @@
-function [Akddx, userdata] = sdp_mconhess(x,Y,k,i,j,userdata)
+function [Akddx, userdata] = tto_mconhess(x,Y,k,i,j,userdata)
 % Compute 2nd derivatives: d/dx_i A_k(x) based on the data from sdpdata
 % in this context it is in fact -F_i of the specific block
 

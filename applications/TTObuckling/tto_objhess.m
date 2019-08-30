@@ -1,4 +1,4 @@
-function [ddf, userdata] = sdp_objhess(x,Y,userdata)
+function [ddf, userdata] = tto_objhess(x,Y,userdata)
 % Hessians of the objective function and constraints
 
 % This file is a part of PENLAB package distributed under GPLv3 license

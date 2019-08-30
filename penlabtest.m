@@ -211,7 +211,7 @@ function [status] = penlabtest(verbose)
     { 'appl', 'applications/TTO', 2.0000000127804962E+00 }, ...
     { 'appl', 'applications/TTObuckling', 8.1776801846349336E+00 }, ...
     { 'appl', 'applications/VTSdual', -2.7344838334179889E+02 }, ...
-    { 'appl', 'applications/VTSml', 4.7999993496427280E+01 }, ...
+    { 'appl', 'applications/VTSprimal', 4.7999993496427280E+01 }, ...
   };
   feeder = @(no) penlabtestfeeder(no,testset);
   ok = runset(feeder,verbose);
@@ -219,6 +219,10 @@ function [status] = penlabtest(verbose)
   disp(' ')
 
   % todo add more tests
+  
+  if status == -1
+      disp('All tests OK')
+  end
 
 end
 
