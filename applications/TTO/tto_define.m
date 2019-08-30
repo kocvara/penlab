@@ -59,27 +59,13 @@ function [penm] = tto_define(par)
   penm.objgrad = @tto_objgrad;
   penm.objhess = @tto_objhess;
 
-  penm.confun = @tto_confun;
-  penm.congrad = @tto_congrad;
-  %penm.conhess = @sdp_conhess;  not needed because all linear
-
   penm.mconfun = @tto_mconfun;
   penm.mcongrad = @tto_mcongrad;
   % hessian not needed as linear
   
 end
 
-function [g,userdata] = tto_confun(x,Y,userdata)
-% returns all inequalities at once, expect g(x)<=0
-% vector Ng x 1
 
-  if (userdata.Ng>0)
-    g=userdata.B*x;
-  else
-    g=[];
-  end
-  
-end
 
 function [f,userdata] = tto_objfun(x,Y,userdata)
 
@@ -87,26 +73,18 @@ function [f,userdata] = tto_objfun(x,Y,userdata)
   
 end
 
+function [df, userdata]=tto_objgrad(x,Y,userdata)
+% return function value of the objective
+% return Nx x 1
+
+  df = userdata.c;
+  
+end
+
 function [ddf, userdata] = tto_objhess(x,Y,userdata)
 % Hessians of the objective function and constraints
 
   ddf = [];
-  
-end
-
-function [Akdx, userdata] = tto_mcongrad(x,Y,k,i,userdata)
-% Compute derivatives: d/dx_i A_k(x) based on the data from sdpdata
-% in this context it is in fact -F_i of the specific block
-
-  Akdx=[];
-  if (k<=0 || k>userdata.Na)
-    return;
-  end
-  if (i<=0 || i>userdata.Nx)
-    return;
-  end
-
-  Akdx=-userdata.A{k,i+1};
   
 end
 
@@ -130,23 +108,22 @@ function [Akx, userdata] = tto_mconfun(x,Y,k,userdata)
   
 end
 
-function [dg, userdata]=tto_congrad(x,Y,userdata)
-% returns all inequalities at once, expect g(x)<=0
-% vector Ng x Nx
+function [Akdx, userdata] = tto_mcongrad(x,Y,k,i,userdata)
+% Compute derivatives: d/dx_i A_k(x) based on the data from sdpdata
+% in this context it is in fact -F_i of the specific block
 
-  if (userdata.Ng>0)
-    dg=userdata.B;
-  else
-    dg=[];
+  Akdx=[];
+  if (k<=0 || k>userdata.Na)
+    return;
   end
+  if (i<=0 || i>userdata.Nx)
+    return;
+  end
+
+  Akdx=-userdata.A{k,i+1};
   
 end
 
-function [df, userdata]=tto_objgrad(x,Y,userdata)
-% return function value of the objective
-% return Nx x 1
 
-  df = userdata.c;
-  
-end
+
 

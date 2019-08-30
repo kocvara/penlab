@@ -1,0 +1,18 @@
+% This file is a part of PENLAB package distributed under GPLv3 license
+% Copyright (c) 2013-2016 by  J. Fiala, M. Kocvara, M. Stingl
+% Last Modified: 30 Aug 2019
+
+% We solve the truss topology optimization problem, primal formulation,
+% written as linear SDP.
+
+% min_x sum(x)
+% subject to
+% [compl ff'; ff sparse(n,n)] + sum_i [0 sparse(1,n); sparse(n1,1) A_i)] \succeq 0;
+
+% Use
+
+solve_tto('GEO/t3x3.geo');
+
+% to solve a sample problem. Here the initial ground structure t3x3.geo 
+% can be replaced by any ground structure from directory GEO
+

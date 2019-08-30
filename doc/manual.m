@@ -573,10 +573,10 @@
 % Go to directory |applications/NLP_AMPL|. 
 % We solve the problem of stability of a time invariant linear (discrete)
 % system using Lyapunov theory. The problem is formulated as a LMI system
-% |A'*P + P*A < 0| , |P > I| (continuous time)
+% $A^T P + PA \prec 0$, $P \succ I$ (continuous time)
 % or
-% |A'*P*A - P < 0| , |P > I| (discrete time)
-% with respect to |P|. We minimize the trace of |P|. The user can easily
+% $A^T P A - P \prec 0$, $P \succ I$ (discrete time)
+% with respect to $P$. We minimize the trace of $P$. The user can easily
 % modify the bounds in the LMIs or the LMIs themselves.
 % 
 % Example of solving a continuous time problem
@@ -599,7 +599,7 @@
 %
 % Go to directory |applications/TTO|.
 % Solve the basic truss topology optimization problem formulated as an LMI.
-% For more details, see Example 7.2 from the PENLAB paper (directory 
+% For more details, see Section 7.2 from the PENlab paper (directory 
 % |tex/penlab_paper|). Input data for many examples can be found in
 % sub-directory |GEO|.
 % Example: 
@@ -611,7 +611,7 @@
 % Go to directory |applications/TTObuckling|.
 % Solve the truss topology optimization problem with a constraint on global
 % stability (buckling). This leads to a nonlinear SDP problem. For more 
-% details, see Example 7.2 from the PENLAB paper (directory 
+% details, see Section 7.2 from the PENlab paper (directory 
 % |tex/penlab_paper|). Input data for many examples can be found in
 % sub-directory |GEO|.
 % Example: 
@@ -620,14 +620,23 @@
 %
 % *Topology optimization, variable thickness sheet problem, primal formulation*
 %
-% Go to directory |applications/VTSml|.
-% Solve the basic VTS problem formulated as an LMI.
-% For more details, see Example 7.2 from the PENLAB paper (directory 
-% |tex/penlab_paper|). Input data for many examples can be found in
-% sub-directory |GEO|.
+% Go to directory |applications/VTSprimal|.
+% Solve the basic VTS problem formulated as an LMI. The formulation is
+% analogous to the TTO problem above, only the data differ.
+%
 % Example: 
 %
-%  solve_tto('GEO/t3x3.geo');
+%  solve_vts;
+%
+% *Topology optimization, VTS problem, dual formulation*
+%
+% Go to directory |applications/VTSdual|.
+% Solve the dual to the basic VTS problem. This is a convex problem
+% with linear objective function and quadratic constraints.
+%
+% Example: 
+%
+%  solve_vts;
 % 
 % <html><a
 %  href="#top_of_page">Back to Top</a>

@@ -1,5 +1,5 @@
-Problem name: Pennon NLP-SDP problem 30-Aug-2019 22:21:34
-Start time:   30-Aug-2019 22:21:34
+Problem name: Pennon NLP-SDP problem 30-Aug-2019 22:46:56
+Start time:   30-Aug-2019 22:46:56
 All option settings (* = set by user):
   outlev                : 2 
   outlev_file           : 5 
@@ -87,7 +87,7 @@ object(x_  0) =   1.8421052631578920E+00
         --- start of inner iter ---
  
 Computing ordering
-Chol fact OK in 0.010000s, total 0.010000s, no pert=0, pert=0.0000e+00, nnz=79 (dim 18x18)
+Chol fact OK in 0.020000s, total 0.020000s, no pert=0, pert=0.0000e+00, nnz=79 (dim 18x18)
 LS (pen): -4.4415e+00, 1 steps, Step width: 1.000000
  
 object(x_  1) =  -1.1351937395524363E+00
@@ -103,7 +103,7 @@ object(x_  2) =  -3.1323996832672067E+00
         --- end of   2 in. iter ---
 
 Reusing ordering
-Chol fact OK in 0.000000s, total 0.010000s, no pert=0, pert=0.0000e+00, nnz=171 (dim 18x18)
+Chol fact OK in 0.000000s, total 0.000000s, no pert=0, pert=0.0000e+00, nnz=171 (dim 18x18)
 LS (pen): -1.5952e+00, 1 steps, Step width: 1.000000
  
 object(x_  3) =  -4.1360810720799854E+00
@@ -159,8 +159,8 @@ Minimal penalty           8.3333333333333337E-01
 Newton steps                                   7
 Inner steps                                    7
 Linesearch steps                               7
-Time of the minimization step             0.08 s
-  - factorizations in the step            0.01 s
+Time of the minimization step              0.1 s
+  - factorizations in the step            0.02 s
 ************************************************
  
 ************* Start of outer step   2 **********
@@ -233,7 +233,7 @@ Minimal penalty           4.1666666666666669E-01
 Newton steps                                   6
 Inner steps                                    6
 Linesearch steps                               8
-Time of the minimization step             0.02 s
+Time of the minimization step             0.03 s
   - factorizations in the step               0 s
 ************************************************
  
@@ -315,7 +315,7 @@ Minimal penalty           2.0833333333333334E-01
 Newton steps                                   7
 Inner steps                                    7
 Linesearch steps                               7
-Time of the minimization step             0.07 s
+Time of the minimization step             0.09 s
   - factorizations in the step               0 s
 ************************************************
  
@@ -333,7 +333,7 @@ object(x_  1) =   1.9923631820714085E+00
         --- end of   1 in. iter ---
 
 Reusing ordering
-Chol fact OK in 0.000000s, total 0.000000s, no pert=0, pert=0.0000e+00, nnz=171 (dim 18x18)
+Chol fact OK in 0.010000s, total 0.010000s, no pert=0, pert=0.0000e+00, nnz=171 (dim 18x18)
 LS (pen): -1.4684e-02, 1 steps, Step width: 1.000000
  
 object(x_  2) =   1.9842665578234608E+00
@@ -365,8 +365,8 @@ Minimal penalty           1.0416666666666667E-01
 Newton steps                                   3
 Inner steps                                    3
 Linesearch steps                               3
-Time of the minimization step             0.02 s
-  - factorizations in the step               0 s
+Time of the minimization step             0.05 s
+  - factorizations in the step            0.01 s
 ************************************************
  
 ************* Start of outer step   5 **********
@@ -383,7 +383,7 @@ object(x_  1) =   1.9974263856765737E+00
         --- end of   1 in. iter ---
 
 Reusing ordering
-Chol fact OK in 0.000000s, total 0.000000s, no pert=0, pert=0.0000e+00, nnz=171 (dim 18x18)
+Chol fact OK in 0.010000s, total 0.010000s, no pert=0, pert=0.0000e+00, nnz=171 (dim 18x18)
 LS (pen): -1.8404e-05, 1 steps, Step width: 1.000000
  
 object(x_  2) =   1.9974171276755679E+00
@@ -407,8 +407,8 @@ Minimal penalty           5.2083333333333336E-02
 Newton steps                                   2
 Inner steps                                    2
 Linesearch steps                               2
-Time of the minimization step             0.01 s
-  - factorizations in the step               0 s
+Time of the minimization step             0.05 s
+  - factorizations in the step            0.01 s
 ************************************************
  
 ************* Start of outer step   6 **********
@@ -441,7 +441,7 @@ Minimal penalty           2.6041666666666668E-02
 Newton steps                                   1
 Inner steps                                    1
 Linesearch steps                               1
-Time of the minimization step             0.04 s
+Time of the minimization step             0.02 s
   - factorizations in the step               0 s
 ************************************************
  
@@ -475,7 +475,7 @@ Minimal penalty           1.3020833333333334E-02
 Newton steps                                   1
 Inner steps                                    1
 Linesearch steps                               1
-Time of the minimization step             0.01 s
+Time of the minimization step             0.02 s
   - factorizations in the step               0 s
 ************************************************
  
@@ -509,7 +509,7 @@ Minimal penalty           6.5104166666666670E-03
 Newton steps                                   1
 Inner steps                                    1
 Linesearch steps                               1
-Time of the minimization step             0.02 s
+Time of the minimization step             0.03 s
   - factorizations in the step               0 s
 ************************************************
  
@@ -543,7 +543,7 @@ Minimal penalty           3.2552083333333335E-03
 Newton steps                                   1
 Inner steps                                    1
 Linesearch steps                               0
-Time of the minimization step             0.05 s
+Time of the minimization step             0.01 s
   - factorizations in the step               0 s
 ************************************************
  
@@ -569,9 +569,9 @@ Number of evaluations of
    - hessian values                           29
 Time statistics
    - total process time                   0.55 s
-   - all minimization steps               0.32 s
-   - all factorizations                   0.01 s
-   - function values evaluation           0.08 s
+   - all minimization steps                0.4 s
+   - all factorizations                   0.04 s
+   - function values evaluation           0.04 s
    - gradient values evaluation           0.12 s
    - hessian values evaluation            0.09 s
 *******************************************************************************

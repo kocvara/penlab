@@ -148,7 +148,7 @@ mconfun, mcongrad, mconhess
   solve(prob);
   K = (prob.x(4:5))';</pre><p>See also example <tt>solve_ex_yalmip</tt> in directory <tt>penlab/examples</tt>.</p><p><a
  href="#top_of_page">Back to Top</a>
-</p><h2 id="8">Pre-programmed interfaces</h2><p>PENlab distribution contains several pre-programmed interfaces for standard optimization problems with standard inputs. For these problems, the user does not have to create the <tt>penm</tt> object, nor the call back functions. Pre-programmed interfaces can be found in directory <tt>penlab/interfaces</tt>.</p><p><b>Nonlinear optimization with AMPL input</b></p><p>Go to directory <tt>penlab/interfaces/NLP_AMPL</tt>. Assume that nonlinear optimization problem is defined in and processed by <a href="http://www.ampl.com">AMPL</a>, so that we have the corresponding <tt>.nl</tt> file, for instance <tt>chain.nl</tt> stored in directory <tt>penlab/datafiles</tt>. All the user has to do to solve the problem is to call the following three commands:</p><pre>penm=nlp_define('datafiles/chain100.nl');
+</p><h2 id="8">Pre-programmed interfaces</h2><p>PENlab distribution contains several pre-programmed interfaces for standard optimization problems with standard inputs. For these problems, the user does not have to create the <tt>penm</tt> object, nor the call back functions. Pre-programmed interfaces can be found in directory <tt>penlab/interfaces</tt>.</p><p><b>Nonlinear optimization with AMPL input</b></p><p>Go to directory <tt>interfaces/NLP_AMPL</tt>. Assume that nonlinear optimization problem is defined in and processed by <a href="http://www.ampl.com">AMPL</a>, so that we have the corresponding <tt>.nl</tt> file, for instance <tt>chain.nl</tt> stored in directory <tt>penlab/datafiles</tt>. All the user has to do to solve the problem is to call the following three commands:</p><pre>penm=nlp_define('datafiles/chain100.nl');
 prob=penlab(penm);
 prob.solve();</pre><p><b>Linear semidefinite programming with SDPA input</b></p><p>Go to directory <tt>interfaces/LMI</tt>. Assume that a linear SDP problem is stored in an SDPA input file, for instance <tt>arch0.dat-s</tt> stored in directory <tt>datafiles</tt>. All the user has to do to solve the problem is to call</p><pre>[x] = solve_sdpa('datafiles/arch0.dat-s');</pre><p>or, which is the same, the following sequence of commands:</p><pre>sdpdata=readsdpa('datafiles/arch0.dat-s');
 penm=sdp_define(sdpdata)
@@ -167,10 +167,10 @@ penm=pmi_define(pmidata);
 prob=penlab(penm);
 prob.solve();</pre><p><a
  href="#top_of_page">Back to Top</a>
-</p><h2 id="9">Pre-programmed applications</h2><p>PENlab distribution contains several pre-programmed applications for some standard optimization problems. For these problems, the user does not have to create the <tt>penm</tt> object, nor the call back functions. Pre-programmed applications can be found in directory <tt>applications</tt>.</p><p><b>Nearest correlation matrix problem</b></p><p>Go to directory <tt>applications/CorrMat</tt>. We solve the nearest correlation matrix problem. The problem may include constraints on matrix elements and on the condition number of the resulting matrix; see Example 7.1 from the PENLAB paper (directory <tt>tex/penlab_paper</tt>). On input is a given matrix <tt>H</tt>, not necessarily a correlation matrix and, if applicable, <tt>kappa</tt>, the required condition number of the computed correlation matrix.</p><p>The user can choose (by commenting/uncommenting) the required problem in <tt>corr_solve.m</tt>:</p><pre>penm = corr_define; %nearest correlation matrix
+</p><h2 id="9">Pre-programmed applications</h2><p>PENlab distribution contains several pre-programmed applications for some standard optimization problems. For these problems, the user does not have to create the <tt>penm</tt> object, nor the call back functions. Pre-programmed applications can be found in directory <tt>penlab/applications</tt>.</p><p><b>Nearest correlation matrix problem</b></p><p>Go to directory <tt>applications/CorrMat</tt>. We solve the nearest correlation matrix problem. The problem may include constraints on matrix elements and on the condition number of the resulting matrix; see Example 7.1 from the PENLAB paper (directory <tt>tex/penlab_paper</tt>). On input is a given matrix <tt>H</tt>, not necessarily a correlation matrix and, if applicable, <tt>kappa</tt>, the required condition number of the computed correlation matrix.</p><p>The user can choose (by commenting/uncommenting) the required problem in <tt>corr_solve.m</tt>:</p><pre>penm = corr_define; %nearest correlation matrix
 penm = corr_define_bound; %nearest correlation matrix with element-wise constraints
 penm = corr_define_cond(kappa); %nearest correlation matrix with constrained condition number
-penm = corr_define_cond_bound(kappa); %nearest correlation matrix with constrained condition number and elements</pre><p><b>Static output feedback with COMPLib input</b></p><p>Go to directory <tt>applications/SOF</tt>. We solve feasibility problem for examples from the COMPLib library The user has to install COMPLib from <a href="http://www.compleib.de/">http://www.compleib.de/</a> . The problem is formulated as a polynomial matrix inequality and solved using our PMI interface in <tt>interfaces/PMI</tt>. Example:</p><pre>sof('AC1');</pre><p><b>Lyapunov stability of continuous and discrete time linear systems</b></p><p>Go to directory <tt>applications/NLP_AMPL</tt>. We solve the problem of stability of a time invariant linear (discrete) system using Lyapunov theory. The problem is formulated as a LMI system <tt>A'*P + P*A &lt; 0</tt> , <tt>P &gt; I</tt> (continuous time) or <tt>A'*P*A - P &lt; 0</tt> , <tt>P &gt; I</tt> (discrete time) with respect to <tt>P</tt>. We minimize the trace of <tt>P</tt>. The user can easily modify the bounds in the LMIs or the LMIs themselves.</p><p>Example of solving a continuous time problem</p><pre>A=[0 1 0;0 0 1;-1 -2 -3];
+penm = corr_define_cond_bound(kappa); %nearest correlation matrix with constrained condition number and elements</pre><p><b>Static output feedback with COMPLib input</b></p><p>Go to directory <tt>applications/SOF</tt>. We solve feasibility problem for examples from the COMPLib library The user has to install COMPLib from <a href="http://www.compleib.de/">http://www.compleib.de/</a> . The problem is formulated as a polynomial matrix inequality and solved using our PMI interface in <tt>interfaces/PMI</tt>. Example:</p><pre>sof('AC1');</pre><p><b>Lyapunov stability of continuous and discrete time linear systems</b></p><p>Go to directory <tt>applications/NLP_AMPL</tt>. We solve the problem of stability of a time invariant linear (discrete) system using Lyapunov theory. The problem is formulated as a LMI system <img src="manual_eq03074953453076997300.png" alt="$A^T P + PA \prec 0$" style="width:73px;height:11px;">, <img src="manual_eq05717623908505275643.png" alt="$P \succ I$" style="width:29px;height:9px;"> (continuous time) or <img src="manual_eq13506248163588226901.png" alt="$A^T P A - P \prec 0$" style="width:73px;height:10px;">, <img src="manual_eq05717623908505275643.png" alt="$P \succ I$" style="width:29px;height:9px;"> (discrete time) with respect to <img src="manual_eq02661806082982697695.png" alt="$P$" style="width:9px;height:8px;">. We minimize the trace of <img src="manual_eq02661806082982697695.png" alt="$P$" style="width:9px;height:8px;">. The user can easily modify the bounds in the LMIs or the LMIs themselves.</p><p>Example of solving a continuous time problem</p><pre>A=[0 1 0;0 0 1;-1 -2 -3];
 penm = lyapu(A);
 prob = penlab(penm);
 solve(prob);
@@ -178,7 +178,7 @@ P=prob.Y{1};</pre><p>Example of solving a discrete time problem</p><pre>A = [.7 
 penm = dlyapu(A);
 prob = penlab(penm);
 solve(prob);
-P=prob.Y{1};</pre><p><b>Truss topology optimization</b></p><p>Go to directory <tt>applications/TTO</tt>. Solve the basic truss topology optimization problem formulated as an LMI. For more details, see Example 7.2 from the PENLAB paper (directory <tt>tex/penlab_paper</tt>). Input data for many examples can be found in sub-directory <tt>GEO</tt>. Example:</p><pre>solve_tto('GEO/t3x3.geo');</pre><p><b>Truss topology optimization with a buckling constraint</b></p><p>Go to directory <tt>applications/TTObuckling</tt>. Solve the truss topology optimization problem with a constraint on global stability (buckling). This leads to a nonlinear SDP problem. For more details, see Example 7.2 from the PENLAB paper (directory <tt>tex/penlab_paper</tt>). Input data for many examples can be found in sub-directory <tt>GEO</tt>. Example:</p><pre>solve_ttob('GEO/t3x3.geo');</pre><p><a
+P=prob.Y{1};</pre><p><b>Truss topology optimization</b></p><p>Go to directory <tt>applications/TTO</tt>. Solve the basic truss topology optimization problem formulated as an LMI. For more details, see Section 7.2 from the PENlab paper (directory <tt>tex/penlab_paper</tt>). Input data for many examples can be found in sub-directory <tt>GEO</tt>. Example:</p><pre>solve_tto('GEO/t3x3.geo');</pre><p><b>Truss topology optimization with a buckling constraint</b></p><p>Go to directory <tt>applications/TTObuckling</tt>. Solve the truss topology optimization problem with a constraint on global stability (buckling). This leads to a nonlinear SDP problem. For more details, see Section 7.2 from the PENlab paper (directory <tt>tex/penlab_paper</tt>). Input data for many examples can be found in sub-directory <tt>GEO</tt>. Example:</p><pre>solve_ttob('GEO/t3x3.geo');</pre><p><b>Topology optimization, variable thickness sheet problem, primal formulation</b></p><p>Go to directory <tt>applications/VTSprimal</tt>. Solve the basic VTS problem formulated as an LMI. The formulation is analogous to the TTO problem above, only the data differ.</p><p>Example:</p><pre>solve_vts;</pre><p><b>Topology optimization, VTS problem, dual formulation</b></p><p>Go to directory <tt>applications/VTSdual</tt>. Solve the dual to the basic VTS problem. This is a convex problem with linear objective function and quadratic constraints.</p><p>Example:</p><pre>solve_vts;</pre><p><a
  href="#top_of_page">Back to Top</a>
 </p><h2 id="10">Other useful utilities</h2><p>The following m-files can be found in directory <tt>utilities</tt>. For more details and examples, use the help command.</p><p><b><tt>pen2bmi</tt></b> converts input structure <tt>pen</tt> for PENBMI (as described  in PENOPT/PENBMI manual Section 5.2) into a structure accepted by  PENLAB via BMI or PMI modules.</p><p><b><tt>sed2pen</tt></b> converts SeDuMi input into PENBMI input structure <tt>pen</tt> (as  described in PENOPT/PENBMI manual Section 5.2).</p><p><b><tt>packmat</tt></b> is used for the vectorization of a symmetric matrix. It assumes a symmetric matrix on input and returns its 'L' packed representation i.e., a dense vector of length <tt>n*(n+1)/2</tt> set up by columns of the lower triangle of the input matrix..</p><p><b><tt>testmex</tt></b> tests whether the behaviour of all the mex files is correct.</p><p><a
  href="#top_of_page">Back to Top</a>
@@ -927,7 +927,7 @@ lbg,ubg. [optional] dim (Ng,1) or <span class="string">scalars</span>, upper <sp
 %
 % *Nonlinear optimization with AMPL input*
 % 
-% Go to directory |penlab/interfaces/NLP_AMPL|. 
+% Go to directory |interfaces/NLP_AMPL|. 
 % Assume that nonlinear optimization problem is defined in and processed by
 % <http://www.ampl.com AMPL>, so that we have the corresponding |.nl|
 % file, for instance |chain.nl| stored in directory |penlab/datafiles|. All the
@@ -1009,7 +1009,7 @@ lbg,ubg. [optional] dim (Ng,1) or <span class="string">scalars</span>, upper <sp
 % PENlab distribution contains several pre-programmed applications for some 
 % standard optimization problems. For these problems, the user does not 
 % have to create the |penm| object, nor the call back functions.
-% Pre-programmed applications can be found in directory |applications|.
+% Pre-programmed applications can be found in directory |penlab/applications|.
 %
 % *Nearest correlation matrix problem*
 %
@@ -1044,10 +1044,10 @@ lbg,ubg. [optional] dim (Ng,1) or <span class="string">scalars</span>, upper <sp
 % Go to directory |applications/NLP_AMPL|. 
 % We solve the problem of stability of a time invariant linear (discrete)
 % system using Lyapunov theory. The problem is formulated as a LMI system
-% |A'*P + P*A < 0| , |P > I| (continuous time)
+% $A^T P + PA \prec 0$, $P \succ I$ (continuous time)
 % or
-% |A'*P*A - P < 0| , |P > I| (discrete time)
-% with respect to |P|. We minimize the trace of |P|. The user can easily
+% $A^T P A - P \prec 0$, $P \succ I$ (discrete time)
+% with respect to $P$. We minimize the trace of $P$. The user can easily
 % modify the bounds in the LMIs or the LMIs themselves.
 % 
 % Example of solving a continuous time problem
@@ -1070,7 +1070,7 @@ lbg,ubg. [optional] dim (Ng,1) or <span class="string">scalars</span>, upper <sp
 %
 % Go to directory |applications/TTO|.
 % Solve the basic truss topology optimization problem formulated as an LMI.
-% For more details, see Example 7.2 from the PENLAB paper (directory 
+% For more details, see Section 7.2 from the PENlab paper (directory 
 % |tex/penlab_paper|). Input data for many examples can be found in
 % sub-directory |GEO|.
 % Example: 
@@ -1082,12 +1082,32 @@ lbg,ubg. [optional] dim (Ng,1) or <span class="string">scalars</span>, upper <sp
 % Go to directory |applications/TTObuckling|.
 % Solve the truss topology optimization problem with a constraint on global
 % stability (buckling). This leads to a nonlinear SDP problem. For more 
-% details, see Example 7.2 from the PENLAB paper (directory 
+% details, see Section 7.2 from the PENlab paper (directory 
 % |tex/penlab_paper|). Input data for many examples can be found in
 % sub-directory |GEO|.
 % Example: 
 %
 %  solve_ttob('GEO/t3x3.geo');
+%
+% *Topology optimization, variable thickness sheet problem, primal formulation*
+%
+% Go to directory |applications/VTSprimal|.
+% Solve the basic VTS problem formulated as an LMI. The formulation is
+% analogous to the TTO problem above, only the data differ.
+%
+% Example: 
+%
+%  solve_vts;
+%
+% *Topology optimization, VTS problem, dual formulation*
+%
+% Go to directory |applications/VTSdual|.
+% Solve the dual to the basic VTS problem. This is a convex problem
+% with linear objective function and quadratic constraints.
+%
+% Example: 
+%
+%  solve_vts;
 % 
 % <html><a
 %  href="#top_of_page">Back to Top</a>
