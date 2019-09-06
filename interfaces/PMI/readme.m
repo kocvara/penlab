@@ -17,7 +17,7 @@ pmi_ex3
 %
 % or by loading  one of the stored SOF examples, e.g.
 %
-load pmi_AC1
+load ../../datafiles/pmi_AC1
 %
 % Once the structure is in the memory, all the user has to
 % do to solve the problem is to call the following sequence of commands:

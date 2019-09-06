@@ -5,17 +5,17 @@
 % directory |datafiles|. All the user has to do to solve the problem is to
 % call
 %
-[x] = solve_sedumi('datafiles/sedumi-arch0.mat');
+[x] = solve_sedumi('../../datafiles/sedumi-buck1.mat');
 %
 % or
 % 
-[x] = solve_sdpa('datafiles/arch0.dat-s');
+[x] = solve_sdpa('../../datafiles/buck1.dat-s');
 
 % These routines, in turn, call the following sequences of commands
 %
 % SeDuMi input:
 %
- pen = sed2pen('datafiles/sedumi-arch0.mat');
+ pen = sed2pen('../../datafiles/sedumi-buck1.mat');
  bmidata=pen2bmi(pen);
  penm=bmi_define(bmidata);
  prob=penlab(penm);
@@ -24,7 +24,7 @@
 %
 % SDPA input:
 %
- sdpdata=readsdpa('../../datafiles/control1.dat-s');
+ sdpdata=readsdpa('../../datafiles/buck1.dat-s');
  penm=sdp_define(sdpdata)
  prob=penlab(penm);
  prob.solve();
