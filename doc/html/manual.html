@@ -6,7 +6,7 @@
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>PENlab Manual, version 1.04 (January 2014)</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-08-30"><meta name="DC.source" content="manual.m"><style type="text/css">
+      --><title>PENLAB Manual, version 1.05 (September 2019)</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-09-06"><meta name="DC.source" content="manual.m"><style type="text/css">
 html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
 
 html { min-height:100%; margin-bottom:1px; }
@@ -66,15 +66,17 @@ table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px soli
 
 
 
-  </style></head><body><div class="content"><h1>PENlab Manual, version 1.04 (January 2014)</h1><!--introduction--><p>
+  </style></head><body><div class="content"><h1>PENLAB Manual, version 1.05 (September 2019)</h1><!--introduction--><p>
 <a name="top_of_page"></a>
-</p><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#1">What is it?</a></li><li><a href="#2">How to cite it?</a></li><li><a href="#3">How to install it?</a></li><li><a href="#4">How to use it?</a></li><li><a href="#5">Elements of the penm structure</a></li><li><a href="#6">Call back functions</a></li><li><a href="#7">PENlab and YALMIP</a></li><li><a href="#8">Pre-programmed interfaces</a></li><li><a href="#9">Pre-programmed applications</a></li><li><a href="#10">Other useful utilities</a></li><li><a href="#11">Examples</a></li><li><a href="#16">Notes</a></li><li><a href="#17">Appendix 1, Glossary of penm elements</a></li><li><a href="#18">Appendix 2, List of PENlab options</a></li><li><a href="#19">Appendix 3, Definition of BMI input format</a></li><li><a href="#20">Appendix 4, Definition of PMI input format</a></li></ul></div><h2 id="1">What is it?</h2><p>PENlab is Matlab&reg; based toolbox for optimization of nonlinear functions with vector and matrix variables subject to vector and matrix constraints. At present, it can solve standard nonlinear optimization problems, linear and nonlinear semidefinite programming problems and any combination of the two. PENlab is based on the code PENNON by <a href="http://www.penopt.com">PENOPT</a>. PENlab was developed by Jan Fiala (The Numerical Algorithms Group Ltd.), Michal Kocvara (University of Birmingham) and Michael Stingl (University of Erlangen) and is distributed under GPLv3 license.</p><p><a
+</p><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#1">What is it?</a></li><li><a href="#2">How to cite it?</a></li><li><a href="#3">How to install it?</a></li><li><a href="#4">How to use it?</a></li><li><a href="#5">Elements of the penm structure</a></li><li><a href="#6">Call back functions</a></li><li><a href="#7">PENLAB and YALMIP</a></li><li><a href="#8">Pre-programmed interfaces</a></li><li><a href="#9">Pre-programmed applications</a></li><li><a href="#10">Other useful utilities</a></li><li><a href="#11">Examples</a></li><li><a href="#16">Notes</a></li><li><a href="#17">Appendix 1, Glossary of penm elements</a></li><li><a href="#18">Appendix 2, List of PENLAB options</a></li><li><a href="#19">Appendix 3, Definition of BMI input format</a></li><li><a href="#20">Appendix 4, Definition of PMI input format</a></li></ul></div><h2 id="1">What is it?</h2><p>PENLAB is Matlab&reg; based toolbox for optimization of nonlinear functions with vector and matrix variables subject to vector and matrix constraints. At present, it can solve standard nonlinear optimization problems, linear and nonlinear semidefinite programming problems and any combination of the two. PENLAB is based on the code PENNON by <a href="http://www.penopt.com">PENOPT</a>. PENLAB was developed by Jan Fiala (The Numerical Algorithms Group Ltd.), Michal Kocvara (University of Birmingham) and Michael Stingl (University of Erlangen) and is distributed under GPLv3 license.</p><p><a
  href="#top_of_page">Back to Top</a>
 </p><h2 id="2">How to cite it?</h2><p>J. Fiala, M. Kocvara and M. Stingl. PENLAB: A MATLAB solver for nonlinear semidefinite optimization. Preprint NI13056-POP, Isaac Newton Institute for Mathematical Sciences, University of Cambridge, November 2013. arXiv:1311.5240</p><p><a
  href="#top_of_page">Back to Top</a>
-</p><h2 id="3">How to install it?</h2><p>Download the PENlab distrubution and copy it in a directory of your choice. Go to the main PENlab directory and open Matlab. Call <tt>install</tt> from the main directory. For MacOS, call <tt>install_mac</tt>. It adds PENlab directories to the Matlab Path.  The current distribution constains mexfiles precompiled for MS Windows 64 bit, MacOS 64 bit and Linux 64 bit. If you use another OS, the mexfiles need to be compiled manually.</p><p>To check whether PENlab works properly, run <tt>penlabtests</tt>.</p><p><a
+</p><h2 id="3">How to install it?</h2><p>Download the PENLAB distrubution and copy it in a directory of your choice. Go to the main PENLAB directory and open Matlab. Call</p><pre class="language-matlab">install
+</pre><p>from the main directory. It adds PENLAB directories to the Matlab Path. To make this path permanent, you can conclude this step by</p><pre class="language-matlab">savepath
+</pre><p>The current distribution constains mexfiles precompiled for MS Windows 64 bit, MacOS 64 bit and Linux 64 bit. If you use another OS, the mexfiles need to be compiled manually.</p><p>To check whether PENLAB works properly, run <tt>PENLABtests</tt>.</p><p><a
  href="#top_of_page">Back to Top</a>
-</p><h2 id="4">How to use it?</h2><p>At the moment the only option is to define a Matlab structure which has all necessary elements defining the problem and pass it to the constructor. Here we will call the structure <tt>penm</tt>. Examples how to generate it are below and in directories <tt>penlab\examples</tt> and <tt>penlab\applications</tt>. Structures for some standard problems are predefined and can be found in <tt>penlab\interfaces</tt>; see section Pre-programmed interfaces below.</p><p>PENlab is based on Matlab objects so next you need to construct the object, i.e. initialize/read in the problem</p><pre class="language-matlab">problem = penlab(penm);
+</p><h2 id="4">How to use it?</h2><p>At the moment the only option is to define a Matlab structure which has all necessary elements defining the problem and pass it to the constructor. Here we will call the structure <tt>penm</tt>. Examples how to generate it are below and in directories <tt>PENLAB\examples</tt> and <tt>PENLAB\applications</tt>. Structures for some standard problems are predefined and can be found in <tt>PENLAB\interfaces</tt>; see section Pre-programmed interfaces below.</p><p>PENLAB is based on Matlab objects so next you need to construct the object, i.e. initialize/read in the problem</p><pre class="language-matlab">problem = PENLAB(penm);
 </pre><p>Then you can optionally edit some parametrers before calling the solver itself; for example, set up the user data to be passed to the callbacks, set starting point, set optional parameters,... Typically you just change the appropriate bits in the structure:</p><pre class="language-matlab">problem.xinit = <span class="keyword">...</span>
 problem.Yinit = <span class="keyword">...</span>
 problem.opts.chosen_option = <span class="keyword">...</span>
@@ -136,7 +138,7 @@ mconfun, mcongrad, mconhess
    function [ddAkij, userdata] = mconhess(x,Y,k,i,j,userdata)
    function [ddMCLk, userdata] = mconlagrhess(x,Y,k,Umlt,userdata)</pre><p>These should return:</p><div><ul><li>a value of the <tt>k</tt>-th matrix constriant (<tt>k=1..NANLN+NALIN</tt>)   as a dense or sparse symmetric matrix <tt>Ak</tt>,</li><li>a derivative of the <tt>k</tt>-th matrix constraint (<tt>k=1..NANLN+NALIN</tt>)   w.r.t. <tt>i</tt>-th variable (<tt>i=1..Nx+NYnnz</tt>) as a <b>sparse</b> symmetric   matrix of the appropriate dimension or empty matrix <tt>[]</tt>. The matrix   must be in the sparse format even if it has all values nonzero. Note   that callback <tt>mcongrad()</tt> is called within the constructor to retrieve   all derivatives (all <tt>i</tt>) of all matrix constraints (all <tt>k</tt>).   It records which derivatives were nonempty and the algorithm later asks   only for these. Therefore it is highly recommended to return empty matrix   <tt>[]</tt> whenever the matrix constraint doesn't depend on the variable   and also to carefully distinquish zero matrix (<tt>sparse(m,m)</tt>) and empty   matrix <tt>[]</tt>.</li><li>a 2nd derivative of the <tt>k</tt>-th nonlinear matrix constraint (<tt>k=1..NANLN</tt>)   w.r.t. <tt>i,j</tt>-th variables (<tt>i,j=1..Nx+NYnnz</tt>) as a dense or sparse   symmetric matrix of the appropriate dimension or empty matrix <tt>[]</tt>.   <tt>mconhess()</tt> will be called only with the indices <tt>i,j</tt> where the first   matrix derivative was nonempty. Alternatively, <tt>mconlagrhess()</tt> can   be defined instead.</li><li>the 2nd derivative of the lagrangian of the <tt>k</tt>-th nonlinear matrix   constraint (<tt>k=1..NANLN</tt>); Matrix Constraint Lagrangian is defined as</li></ul></div><pre>    MCL_k(x,Y,Umlt) = &lt;A_k(x,Y),Umlt&gt; = trace(A_k(x,Y) * Umlt)</pre><p>where <tt>Umlt</tt> is provided Lagrangian multiplier for the given constraint.   Thus the 2nd derivative of <tt>MCL_k</tt> should be a dense or sparse symmetric   matrix of the dimensions <tt>(Nx+NYnnz) x (Nx+NYnnz)</tt> whose <tt>i,j</tt>-th element   should be</p><pre>    (ddMCL_k)_ij = &lt;d^2/dx_i dx_j A_k(x,Y), Umlt&gt;</pre><p>This offers an alternative to <tt>mconhess()</tt> in order to reduce a significant   overhead connected with repeated calls to <tt>mconhess()</tt>. Examples how to   implemented are <tt>modules/BMI/bmi_mconlagrhess.m</tt> or equivalent in <tt>PMI</tt>.</p><p>The meaning of the last (optional) argument <tt>pointchanged</tt>: if <tt>pointchanged = 1</tt> then the values of <tt>x,Y</tt> have changed and this call is the first one supplying the new values; if <tt>pointchanged = 0</tt> we supply the "old" point.</p><p><a
  href="#top_of_page">Back to Top</a>
-</p><h2 id="7">PENlab and YALMIP</h2><p>PENlab can be used to solve LMI and BMI problems generated by YALMIP (<tt>http://users.isy.liu.se/johanl/yalmip/</tt>) using YALMIP's 'export' command. The PENLAB utility <tt>yalmip2bmi</tt> reads this output and converts it into a structure accepted by PENLab via BMI or PMI modules. Note that YALMIP may transform the original matrix variables into vectors by symmetric vectorization. To recover them from the results, you have to 'matricize' these vectors.</p><p>Example of using <tt>yalmip2bmi</tt>:</p><pre>%YALMIP commands
+</p><h2 id="7">PENLAB and YALMIP</h2><p>PENLAB can be used to solve LMI and BMI problems generated by YALMIP (<tt>http://users.isy.liu.se/johanl/yalmip/</tt>) using YALMIP's 'export' command. The PENLAB utility <tt>yalmip2bmi</tt> reads this output and converts it into a structure accepted by PENLAB via BMI or PMI modules. Note that YALMIP may transform the original matrix variables into vectors by symmetric vectorization. To recover them from the results, you have to 'matricize' these vectors.</p><p>Example of using <tt>yalmip2bmi</tt>:</p><pre>%YALMIP commands
   A = [-1 2;-3 -4]; B=-[1;1];
   P = sdpvar(2,2); K = sdpvar(1,2);
   F = [(A+B*K)'*P+P*(A+B*K) &lt; -eye(2); P&gt;eye(2)]
@@ -144,41 +146,41 @@ mconfun, mcongrad, mconhess
 %PENLAB commands
   bmi=yalmip2bmi(yalpen);
   penm = bmi_define(bmi);
-  prob = penlab(penm);
+  prob = PENLAB(penm);
   solve(prob);
-  K = (prob.x(4:5))';</pre><p>See also example <tt>solve_ex_yalmip</tt> in directory <tt>penlab/examples</tt>.</p><p><a
+  K = (prob.x(4:5))';</pre><p>See also example <tt>solve_ex_yalmip</tt> in directory <tt>PENLAB/examples</tt>.</p><p><a
  href="#top_of_page">Back to Top</a>
-</p><h2 id="8">Pre-programmed interfaces</h2><p>PENlab distribution contains several pre-programmed interfaces for standard optimization problems with standard inputs. For these problems, the user does not have to create the <tt>penm</tt> object, nor the call back functions. Pre-programmed interfaces can be found in directory <tt>penlab/interfaces</tt>.</p><p><b>Nonlinear optimization with AMPL input</b></p><p>Go to directory <tt>interfaces/NLP_AMPL</tt>. Assume that nonlinear optimization problem is defined in and processed by <a href="http://www.ampl.com">AMPL</a>, so that we have the corresponding <tt>.nl</tt> file, for instance <tt>chain.nl</tt> stored in directory <tt>penlab/datafiles</tt>. All the user has to do to solve the problem is to call the following three commands:</p><pre>penm=nlp_define('datafiles/chain100.nl');
-prob=penlab(penm);
+</p><h2 id="8">Pre-programmed interfaces</h2><p>PENLAB distribution contains several pre-programmed interfaces for standard optimization problems with standard inputs. For these problems, the user does not have to create the <tt>penm</tt> object, nor the call back functions. Pre-programmed interfaces can be found in directory <tt>PENLAB/interfaces</tt>.</p><p><b>Nonlinear optimization with AMPL input</b></p><p>Go to directory <tt>interfaces/NLP_AMPL</tt>. Assume that nonlinear optimization problem is defined in and processed by <a href="http://www.ampl.com">AMPL</a>, so that we have the corresponding <tt>.nl</tt> file, for instance <tt>chain.nl</tt> stored in directory <tt>PENLAB/datafiles</tt>. All the user has to do to solve the problem is to call the following three commands:</p><pre>penm=nlp_define('datafiles/chain100.nl');
+prob=PENLAB(penm);
 prob.solve();</pre><p><b>Linear semidefinite programming with SDPA input</b></p><p>Go to directory <tt>interfaces/LMI</tt>. Assume that a linear SDP problem is stored in an SDPA input file, for instance <tt>arch0.dat-s</tt> stored in directory <tt>datafiles</tt>. All the user has to do to solve the problem is to call</p><pre>[x] = solve_sdpa('datafiles/arch0.dat-s');</pre><p>or, which is the same, the following sequence of commands:</p><pre>sdpdata=readsdpa('datafiles/arch0.dat-s');
 penm=sdp_define(sdpdata)
-prob=penlab(penm);
+prob=PENLAB(penm);
 prob.solve();
 x = prob.x;</pre><p><b>Linear semidefinite programming with SeDuMi input</b></p><p>Go to directory <tt>interfaces/LMI</tt>. Assume that a linear SDP problem is stored in an SeDuMi input file, for instance <tt>arch0.mat</tt> stored in directory <tt>datafiles</tt>. All the user has to do to solve the problem is to call</p><pre>[x] = solve_sedumi('datafiles/sedumi-arch0.mat');</pre><p>or, which is the same, the following sequence of commands:</p><pre>pen = sed2pen('datafiles/sedumi-arch0.mat');
 bmidata=pen2bmi(pen);
 penm=bmi_define(bmidata);
-prob=penlab(penm);
+prob=PENLAB(penm);
 prob.solve();
 x = prob.x;</pre><p><b>Bilinear matrix inequalities</b></p><p>Go to directory <tt>interfaces/BMI</tt>. We want to solve an optimization problem with constraints in the form of bilinear matrix inequalities. The problem is stored in a file <tt>bmidata.mat</tt> in directory <tt>interfaces/BMI</tt>. The structure of the datafile is explained in Appendix BMI. All the user has to do to solve the problem is to call the following sequence of commands:</p><pre>load bmidata
 penm=bmi_define(bmidata);
-prob=penlab(penm);
+prob=PENLAB(penm);
 prob.solve();</pre><p><b>Polynomial matrix inequalities</b></p><p>Go to directory <tt>interfaces/PMI</tt>. We want to solve an optimization problem with constraints in the form of polynomial matrix inequalities. The problem is stored in a structure <tt>pmidata.mat</tt> in directory <tt>interfaces/PMI</tt>. The structure of the datafile is explained in Appendix PMI. All the user has to do to solve the problem is to call the following sequence of commands:</p><pre>load pmidata
 penm=pmi_define(pmidata);
-prob=penlab(penm);
+prob=PENLAB(penm);
 prob.solve();</pre><p><a
  href="#top_of_page">Back to Top</a>
-</p><h2 id="9">Pre-programmed applications</h2><p>PENlab distribution contains several pre-programmed applications for some standard optimization problems. For these problems, the user does not have to create the <tt>penm</tt> object, nor the call back functions. Pre-programmed applications can be found in directory <tt>penlab/applications</tt>.</p><p><b>Nearest correlation matrix problem</b></p><p>Go to directory <tt>applications/CorrMat</tt>. We solve the nearest correlation matrix problem. The problem may include constraints on matrix elements and on the condition number of the resulting matrix; see Example 7.1 from the PENLAB paper (directory <tt>tex/penlab_paper</tt>). On input is a given matrix <tt>H</tt>, not necessarily a correlation matrix and, if applicable, <tt>kappa</tt>, the required condition number of the computed correlation matrix.</p><p>The user can choose (by commenting/uncommenting) the required problem in <tt>corr_solve.m</tt>:</p><pre>penm = corr_define; %nearest correlation matrix
+</p><h2 id="9">Pre-programmed applications</h2><p>PENLAB distribution contains several pre-programmed applications for some standard optimization problems. For these problems, the user does not have to create the <tt>penm</tt> object, nor the call back functions. Pre-programmed applications can be found in directory <tt>PENLAB/applications</tt>.</p><p><b>Nearest correlation matrix problem</b></p><p>Go to directory <tt>applications/CorrMat</tt>. We solve the nearest correlation matrix problem. The problem may include constraints on matrix elements and on the condition number of the resulting matrix; see Example 7.1 from the PENLAB paper (directory <tt>tex/PENLAB_paper</tt>). On input is a given matrix <tt>H</tt>, not necessarily a correlation matrix and, if applicable, <tt>kappa</tt>, the required condition number of the computed correlation matrix.</p><p>The user can choose (by commenting/uncommenting) the required problem in <tt>corr_solve.m</tt>:</p><pre>penm = corr_define; %nearest correlation matrix
 penm = corr_define_bound; %nearest correlation matrix with element-wise constraints
 penm = corr_define_cond(kappa); %nearest correlation matrix with constrained condition number
 penm = corr_define_cond_bound(kappa); %nearest correlation matrix with constrained condition number and elements</pre><p><b>Static output feedback with COMPLib input</b></p><p>Go to directory <tt>applications/SOF</tt>. We solve feasibility problem for examples from the COMPLib library The user has to install COMPLib from <a href="http://www.compleib.de/">http://www.compleib.de/</a> . The problem is formulated as a polynomial matrix inequality and solved using our PMI interface in <tt>interfaces/PMI</tt>. Example:</p><pre>sof('AC1');</pre><p><b>Lyapunov stability of continuous and discrete time linear systems</b></p><p>Go to directory <tt>applications/NLP_AMPL</tt>. We solve the problem of stability of a time invariant linear (discrete) system using Lyapunov theory. The problem is formulated as a LMI system <img src="manual_eq03074953453076997300.png" alt="$A^T P + PA \prec 0$" style="width:73px;height:11px;">, <img src="manual_eq05717623908505275643.png" alt="$P \succ I$" style="width:29px;height:9px;"> (continuous time) or <img src="manual_eq13506248163588226901.png" alt="$A^T P A - P \prec 0$" style="width:73px;height:10px;">, <img src="manual_eq05717623908505275643.png" alt="$P \succ I$" style="width:29px;height:9px;"> (discrete time) with respect to <img src="manual_eq02661806082982697695.png" alt="$P$" style="width:9px;height:8px;">. We minimize the trace of <img src="manual_eq02661806082982697695.png" alt="$P$" style="width:9px;height:8px;">. The user can easily modify the bounds in the LMIs or the LMIs themselves.</p><p>Example of solving a continuous time problem</p><pre>A=[0 1 0;0 0 1;-1 -2 -3];
 penm = lyapu(A);
-prob = penlab(penm);
+prob = PENLAB(penm);
 solve(prob);
 P=prob.Y{1};</pre><p>Example of solving a discrete time problem</p><pre>A = [.7 -.2 -.1; .5 .4 0; 0 -.5 .9];
 penm = dlyapu(A);
-prob = penlab(penm);
+prob = PENLAB(penm);
 solve(prob);
-P=prob.Y{1};</pre><p><b>Truss topology optimization</b></p><p>Go to directory <tt>applications/TTO</tt>. Solve the basic truss topology optimization problem formulated as an LMI. For more details, see Section 7.2 from the PENlab paper (directory <tt>tex/penlab_paper</tt>). Input data for many examples can be found in sub-directory <tt>GEO</tt>. Example:</p><pre>solve_tto('GEO/t3x3.geo');</pre><p><b>Truss topology optimization with a buckling constraint</b></p><p>Go to directory <tt>applications/TTObuckling</tt>. Solve the truss topology optimization problem with a constraint on global stability (buckling). This leads to a nonlinear SDP problem. For more details, see Section 7.2 from the PENlab paper (directory <tt>tex/penlab_paper</tt>). Input data for many examples can be found in sub-directory <tt>GEO</tt>. Example:</p><pre>solve_ttob('GEO/t3x3.geo');</pre><p><b>Topology optimization, variable thickness sheet problem, primal formulation</b></p><p>Go to directory <tt>applications/VTSprimal</tt>. Solve the basic VTS problem formulated as an LMI. The formulation is analogous to the TTO problem above, only the data differ.</p><p>Example:</p><pre>solve_vts;</pre><p><b>Topology optimization, VTS problem, dual formulation</b></p><p>Go to directory <tt>applications/VTSdual</tt>. Solve the dual to the basic VTS problem. This is a convex problem with linear objective function and quadratic constraints.</p><p>Example:</p><pre>solve_vts;</pre><p><a
+P=prob.Y{1};</pre><p><b>Truss topology optimization</b></p><p>Go to directory <tt>applications/TTO</tt>. Solve the basic truss topology optimization problem formulated as an LMI. For more details, see Section 7.2 from the PENLAB paper (directory <tt>tex/PENLAB_paper</tt>). Input data for many examples can be found in sub-directory <tt>GEO</tt>. Example:</p><pre>solve_tto('GEO/t3x3.geo');</pre><p><b>Truss topology optimization with a buckling constraint</b></p><p>Go to directory <tt>applications/TTObuckling</tt>. Solve the truss topology optimization problem with a constraint on global stability (buckling). This leads to a nonlinear SDP problem. For more details, see Section 7.2 from the PENLAB paper (directory <tt>tex/PENLAB_paper</tt>). Input data for many examples can be found in sub-directory <tt>GEO</tt>. Example:</p><pre>solve_ttob('GEO/t3x3.geo');</pre><p><b>Topology optimization, variable thickness sheet problem, primal formulation</b></p><p>Go to directory <tt>applications/VTSprimal</tt>. Solve the basic VTS problem formulated as an LMI. The formulation is analogous to the TTO problem above, only the data differ.</p><p>Example:</p><pre>solve_vts;</pre><p><b>Topology optimization, VTS problem, dual formulation</b></p><p>Go to directory <tt>applications/VTSdual</tt>. Solve the dual to the basic VTS problem. This is a convex problem with linear objective function and quadratic constraints.</p><p>Example:</p><pre>solve_vts;</pre><p><a
  href="#top_of_page">Back to Top</a>
 </p><h2 id="10">Other useful utilities</h2><p>The following m-files can be found in directory <tt>utilities</tt>. For more details and examples, use the help command.</p><p><b><tt>pen2bmi</tt></b> converts input structure <tt>pen</tt> for PENBMI (as described  in PENOPT/PENBMI manual Section 5.2) into a structure accepted by  PENLAB via BMI or PMI modules.</p><p><b><tt>sed2pen</tt></b> converts SeDuMi input into PENBMI input structure <tt>pen</tt> (as  described in PENOPT/PENBMI manual Section 5.2).</p><p><b><tt>packmat</tt></b> is used for the vectorization of a symmetric matrix. It assumes a symmetric matrix on input and returns its 'L' packed representation i.e., a dense vector of length <tt>n*(n+1)/2</tt> set up by columns of the lower triangle of the input matrix..</p><p><b><tt>testmex</tt></b> tests whether the behaviour of all the mex files is correct.</p><p><a
  href="#top_of_page">Back to Top</a>
@@ -203,7 +205,7 @@ P=prob.Y{1};</pre><p><b>Truss topology optimization</b></p><p>Go to directory <t
   penm.conhess = @ex1_conhess;
 <span class="keyword">end</span>
 </pre><p>To solve this example, we execute the following commands:</p><pre>penm = ex1_define;
-prob = penlab(penm);
+prob = PENLAB(penm);
 prob.solve();
 x = prob.x;</pre><p><b>Example 2</b> Next, consider a toy nonlinear SDP example in two variables</p><p><img src="manual_eq09160951870855124190.png" alt="$$ \min \frac{1}{2}(x_1^2 + x_2^2)$$" style="width:71px;height:23px;"></p><p>subject to</p><p><img src="manual_eq07589176290400090744.png" alt="$\pmatrix{1&amp; x_1-1&amp; 0\cr x_1&amp; 1&amp; x_2\cr 0&amp;x_2&amp; 1}\succeq 0$" style="width:113px;height:40px;"></p><p>To define this example, we can use Matlab's anonymous functions:</p><pre class="codeinput"><span class="keyword">function</span> [penm] = bex1()
   B = sparse([1 -1 0; -1 1 0; 0 0 1]);
@@ -315,14 +317,14 @@ ans =
 
 </pre><h2 id="16">Notes</h2><p><b>How to test that the Augmented Lagrangian is correct?</b></p><p>Use PENSDP/PENNON (PENNLP) to generate DCF files and use obj.setuptestpoint() to load the file. ... now use alselftest()  [in utilities]</p><p>For PENSDP problems:</p><pre class="language-matlab">sdpdata=readsdpa(<span class="string">'datafiles/truss1.dat-s'</span>);
 penm=sdp_define(sdpdata);
-prob=penlab(penm);
+prob=PENLAB(penm);
 [alx,aldx,alddx] = setuptestpoint(prob,<span class="string">'datafiles/pensdpa_truss1.dcf'</span>,<span class="string">'pensdp'</span>);
 prob.eval_alx();
 <span class="comment">% alx vs. prob.ALx</span>
 alx
 prob.ALx
 </pre><p>For PENNLP problems:</p><pre class="language-matlab">penm=nlp_define(<span class="string">'../../problems/ampl-nl/camshape100.nl'</span>);
-prob=penlab(penm);
+prob=PENLAB(penm);
 [alx,aldx,alddx] = setuptestpoint(prob,<span class="string">'datafiles/pennlp_camshape100_a.dcf'</span>,<span class="string">'pennlp'</span>);
 prob.eval_alx();
 prob.ALx
@@ -369,7 +371,7 @@ penm.mcongrad
 penm.Yinit{k} <span class="comment">% k = 1,...,penm.NY</span>
 </pre><p><a
  href="#top_of_page">Back to Top</a>
-</p><h2 id="18">Appendix 2, List of PENlab options</h2><p>For explanation of the option meanings, see PENNON manual.</p><pre>default options
+</p><h2 id="18">Appendix 2, List of PENLAB options</h2><p>For explanation of the option meanings, see PENNON manual.</p><pre>default options
 struct array: name, {default_value, type, restriction}
 where  name is the name of the option used in allopts or opts</pre><pre>      default_value   (==&gt; defopts(1) ~ default allopts structure)
       restriction ... depending on the type, restriction to the accepted values
@@ -469,19 +471,19 @@ lbg,ubg. [optional] dim (Ng,1) or <span class="string">scalars</span>, upper <sp
  href="#top_of_page">Back to Top</a>
 </p><p class="footer"><br><a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2019a</a><br></p></div><!--
 ##### SOURCE BEGIN #####
-%%  PENlab Manual, version 1.04 (January 2014)
+%%  PENLAB Manual, version 1.05 (September 2019)
 % 
 % <html>
 % <a name="top_of_page"></a>
 % </html>
 %  
 %% What is it?
-% PENlab is Matlab(R) based toolbox for optimization of nonlinear functions
+% PENLAB is Matlab(R) based toolbox for optimization of nonlinear functions
 % with vector and matrix variables subject to vector and matrix
 % constraints. At present, it can solve standard nonlinear optimization
 % problems, linear and nonlinear semidefinite programming problems and any
-% combination of the two. PENlab is based on the code PENNON by 
-% <http://www.penopt.com PENOPT>. PENlab was developed by Jan Fiala
+% combination of the two. PENLAB is based on the code PENNON by 
+% <http://www.penopt.com PENOPT>. PENLAB was developed by Jan Fiala
 % (The Numerical Algorithms Group Ltd.), Michal Kocvara (University of
 % Birmingham) and Michael Stingl (University of Erlangen) and is
 % distributed under GPLv3 license.
@@ -501,15 +503,23 @@ lbg,ubg. [optional] dim (Ng,1) or <span class="string">scalars</span>, upper <sp
 % </html>
 %  
 %% How to install it? 
-% Download the PENlab distrubution and copy it in a directory of your
-% choice. Go to the main PENlab directory and open Matlab.
-% Call |install| from the main directory. For MacOS, call |install_mac|. 
-% It adds PENlab directories to the
-% Matlab Path.  The current distribution constains mexfiles
+% Download the PENLAB distrubution and copy it in a directory of your
+% choice. Go to the main PENLAB directory and open Matlab.
+% Call 
+%
+%   install 
+%
+% from the main directory. 
+% It adds PENLAB directories to the
+% Matlab Path. To make this path permanent, you can conclude this step by
+% 
+%   savepath
+%
+% The current distribution constains mexfiles
 % precompiled for MS Windows 64 bit, MacOS 64 bit and Linux 64 bit.
 % If you use another OS, the mexfiles need to be compiled manually.
 %
-% To check whether PENlab works properly, run |penlabtests|.
+% To check whether PENLAB works properly, run |PENLABtests|.
 % 
 % <html><a
 %  href="#top_of_page">Back to Top</a>
@@ -521,15 +531,15 @@ lbg,ubg. [optional] dim (Ng,1) or <span class="string">scalars</span>, upper <sp
 % elements defining the problem and pass it to the constructor. 
 % Here we will call the
 % structure |penm|. Examples how to generate it are below and in
-% directories |penlab\examples| and |penlab\applications|. Structures
+% directories |PENLAB\examples| and |PENLAB\applications|. Structures
 % for some standard problems are predefined and can be found in
-% |penlab\interfaces|; see section 
+% |PENLAB\interfaces|; see section 
 % Pre-programmed interfaces below.
 %
-% PENlab is based on Matlab objects so next you need to construct the object, 
+% PENLAB is based on Matlab objects so next you need to construct the object, 
 % i.e. initialize/read in the problem 
 %
-%   problem = penlab(penm);
+%   problem = PENLAB(penm);
 %
 % Then you can optionally edit some parametrers before calling the solver
 % itself;
@@ -888,12 +898,12 @@ lbg,ubg. [optional] dim (Ng,1) or <span class="string">scalars</span>, upper <sp
 %  href="#top_of_page">Back to Top</a>
 % </html>
 %
-%% PENlab and YALMIP
+%% PENLAB and YALMIP
 %
-% PENlab can be used to solve LMI and BMI problems generated by YALMIP
+% PENLAB can be used to solve LMI and BMI problems generated by YALMIP
 % (|http://users.isy.liu.se/johanl/yalmip/|) using YALMIP's 'export'
 % command. The PENLAB utility |yalmip2bmi| reads this output and converts it into a 
-% structure accepted by PENLab via BMI or PMI modules. Note that YALMIP
+% structure accepted by PENLAB via BMI or PMI modules. Note that YALMIP
 % may transform the original matrix variables into vectors by symmetric
 % vectorization. To recover them from the results, you have to 'matricize'
 % these vectors.
@@ -908,34 +918,34 @@ lbg,ubg. [optional] dim (Ng,1) or <span class="string">scalars</span>, upper <sp
 %  %PENLAB commands
 %    bmi=yalmip2bmi(yalpen);
 %    penm = bmi_define(bmi);
-%    prob = penlab(penm);
+%    prob = PENLAB(penm);
 %    solve(prob);
 %    K = (prob.x(4:5))';
 %
-% See also example |solve_ex_yalmip| in directory |penlab/examples|.
+% See also example |solve_ex_yalmip| in directory |PENLAB/examples|.
 % 
 % <html><a
 %  href="#top_of_page">Back to Top</a>
 % </html>
 %% Pre-programmed interfaces 
 %
-% PENlab distribution contains several pre-programmed interfaces for 
+% PENLAB distribution contains several pre-programmed interfaces for 
 % standard optimization problems with standard inputs. For these problems, 
 % the user does not have to create the |penm| object, nor the call back 
 % functions.
-% Pre-programmed interfaces can be found in directory |penlab/interfaces|.
+% Pre-programmed interfaces can be found in directory |PENLAB/interfaces|.
 %
 % *Nonlinear optimization with AMPL input*
 % 
 % Go to directory |interfaces/NLP_AMPL|. 
 % Assume that nonlinear optimization problem is defined in and processed by
 % <http://www.ampl.com AMPL>, so that we have the corresponding |.nl|
-% file, for instance |chain.nl| stored in directory |penlab/datafiles|. All the
+% file, for instance |chain.nl| stored in directory |PENLAB/datafiles|. All the
 % user has to do to solve the problem is to call the following three
 % commands:
 % 
 %  penm=nlp_define('datafiles/chain100.nl');
-%  prob=penlab(penm);
+%  prob=PENLAB(penm);
 %  prob.solve();
 %
 % *Linear semidefinite programming with SDPA input*
@@ -951,7 +961,7 @@ lbg,ubg. [optional] dim (Ng,1) or <span class="string">scalars</span>, upper <sp
 % 
 %  sdpdata=readsdpa('datafiles/arch0.dat-s');
 %  penm=sdp_define(sdpdata)
-%  prob=penlab(penm);
+%  prob=PENLAB(penm);
 %  prob.solve();
 %  x = prob.x;
 %
@@ -969,7 +979,7 @@ lbg,ubg. [optional] dim (Ng,1) or <span class="string">scalars</span>, upper <sp
 %  pen = sed2pen('datafiles/sedumi-arch0.mat');
 %  bmidata=pen2bmi(pen);
 %  penm=bmi_define(bmidata);
-%  prob=penlab(penm);
+%  prob=PENLAB(penm);
 %  prob.solve();
 %  x = prob.x;
 %
@@ -984,7 +994,7 @@ lbg,ubg. [optional] dim (Ng,1) or <span class="string">scalars</span>, upper <sp
 % 
 %  load bmidata
 %  penm=bmi_define(bmidata);
-%  prob=penlab(penm);
+%  prob=PENLAB(penm);
 %  prob.solve();
 %
 % *Polynomial matrix inequalities*
@@ -998,7 +1008,7 @@ lbg,ubg. [optional] dim (Ng,1) or <span class="string">scalars</span>, upper <sp
 % 
 %  load pmidata
 %  penm=pmi_define(pmidata);
-%  prob=penlab(penm);
+%  prob=PENLAB(penm);
 %  prob.solve();
 % 
 % <html><a
@@ -1006,10 +1016,10 @@ lbg,ubg. [optional] dim (Ng,1) or <span class="string">scalars</span>, upper <sp
 % </html>
 %
 %% Pre-programmed applications 
-% PENlab distribution contains several pre-programmed applications for some 
+% PENLAB distribution contains several pre-programmed applications for some 
 % standard optimization problems. For these problems, the user does not 
 % have to create the |penm| object, nor the call back functions.
-% Pre-programmed applications can be found in directory |penlab/applications|.
+% Pre-programmed applications can be found in directory |PENLAB/applications|.
 %
 % *Nearest correlation matrix problem*
 %
@@ -1017,7 +1027,7 @@ lbg,ubg. [optional] dim (Ng,1) or <span class="string">scalars</span>, upper <sp
 % We solve the nearest correlation matrix problem. The problem may include
 % constraints on matrix elements and on the condition number of the
 % resulting matrix; see Example 7.1 from the PENLAB paper (directory
-% |tex/penlab_paper|). On input is a given matrix |H|, not necessarily a
+% |tex/PENLAB_paper|). On input is a given matrix |H|, not necessarily a
 % correlation matrix and, if applicable, |kappa|, the required condition
 % number of the computed correlation matrix.
 %
@@ -1054,7 +1064,7 @@ lbg,ubg. [optional] dim (Ng,1) or <span class="string">scalars</span>, upper <sp
 %
 %  A=[0 1 0;0 0 1;-1 -2 -3];
 %  penm = lyapu(A);
-%  prob = penlab(penm); 
+%  prob = PENLAB(penm); 
 %  solve(prob);
 %  P=prob.Y{1};
 %
@@ -1062,7 +1072,7 @@ lbg,ubg. [optional] dim (Ng,1) or <span class="string">scalars</span>, upper <sp
 %
 %  A = [.7 -.2 -.1; .5 .4 0; 0 -.5 .9];
 %  penm = dlyapu(A);
-%  prob = penlab(penm); 
+%  prob = PENLAB(penm); 
 %  solve(prob);
 %  P=prob.Y{1};
 %
@@ -1070,8 +1080,8 @@ lbg,ubg. [optional] dim (Ng,1) or <span class="string">scalars</span>, upper <sp
 %
 % Go to directory |applications/TTO|.
 % Solve the basic truss topology optimization problem formulated as an LMI.
-% For more details, see Section 7.2 from the PENlab paper (directory 
-% |tex/penlab_paper|). Input data for many examples can be found in
+% For more details, see Section 7.2 from the PENLAB paper (directory 
+% |tex/PENLAB_paper|). Input data for many examples can be found in
 % sub-directory |GEO|.
 % Example: 
 %
@@ -1082,8 +1092,8 @@ lbg,ubg. [optional] dim (Ng,1) or <span class="string">scalars</span>, upper <sp
 % Go to directory |applications/TTObuckling|.
 % Solve the truss topology optimization problem with a constraint on global
 % stability (buckling). This leads to a nonlinear SDP problem. For more 
-% details, see Section 7.2 from the PENlab paper (directory 
-% |tex/penlab_paper|). Input data for many examples can be found in
+% details, see Section 7.2 from the PENLAB paper (directory 
+% |tex/PENLAB_paper|). Input data for many examples can be found in
 % sub-directory |GEO|.
 % Example: 
 %
@@ -1177,7 +1187,7 @@ end
 % To solve this example, we execute the following commands:
 %
 %  penm = ex1_define;
-%  prob = penlab(penm);
+%  prob = PENLAB(penm);
 %  prob.solve();
 %  x = prob.x;
 %
@@ -1321,7 +1331,7 @@ end
 %
 %   sdpdata=readsdpa('datafiles/truss1.dat-s'); 
 %   penm=sdp_define(sdpdata);
-%   prob=penlab(penm); 
+%   prob=PENLAB(penm); 
 %   [alx,aldx,alddx] = setuptestpoint(prob,'datafiles/pensdpa_truss1.dcf','pensdp');
 %   prob.eval_alx(); 
 %   % alx vs. prob.ALx 
@@ -1331,7 +1341,7 @@ end
 % For PENNLP problems:
 %
 %   penm=nlp_define('../../problems/ampl-nl/camshape100.nl');
-%   prob=penlab(penm); 
+%   prob=PENLAB(penm); 
 %   [alx,aldx,alddx] = setuptestpoint(prob,'datafiles/pennlp_camshape100_a.dcf','pennlp');
 %   prob.eval_alx(); 
 %   prob.ALx 
@@ -1432,7 +1442,7 @@ end
 %  href="#top_of_page">Back to Top</a>
 % </html>
 %
-%% Appendix 2, List of PENlab options
+%% Appendix 2, List of PENLAB options
 % For explanation of the option meanings, see PENNON manual.
 %
 %  default options
