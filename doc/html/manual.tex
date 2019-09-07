@@ -14,7 +14,7 @@
 
     
     
-\section*{PENlab Manual, version 1.04 (January 2014)}
+\section*{PENLAB Manual, version 1.05 (September 2019)}
 
 \begin{par}
 
@@ -25,19 +25,19 @@
 \begin{itemize}
 \setlength{\itemsep}{-1ex}
    \item What is it?
+   \item How to cite it?
    \item How to install it?
    \item How to use it?
-   \item How to initiate/set up the problem?
    \item Elements of the penm structure
    \item Call back functions
-   \item PENlab and YALMIP
+   \item PENLAB and YALMIP
    \item Pre-programmed interfaces
    \item Pre-programmed applications
    \item Other useful utilities
    \item Examples
    \item Notes
    \item Appendix 1, Glossary of penm elements
-   \item Appendix 2, List of PENlab options
+   \item Appendix 2, List of PENLAB options
    \item Appendix 3, Definition of BMI input format
    \item Appendix 4, Definition of PMI input format
 \end{itemize}
@@ -46,7 +46,17 @@
 \subsection*{What is it?}
 
 \begin{par}
-PENlab is Matlab® based toolbox for optimization of nonlinear functions with vector and matrix variables subject to vector and matrix constraints. At present, it can solve standard nonlinear optimization problems, linear and nonlinear semidefinite programming problems and any combination of the two. PENlab is based on the code PENNON by \begin{verbatim}PENOPT\end{verbatim}. PENlab was developed by Jan Fiala (The Numerical Algorithms Group Ltd.), Michal Kocvara (University of Birmingham) and Michael Stingl (University of Erlangen) and is distributed under GPLv3 license.
+PENLAB is Matlab® based toolbox for optimization of nonlinear functions with vector and matrix variables subject to vector and matrix constraints. At present, it can solve standard nonlinear optimization problems, linear and nonlinear semidefinite programming problems and any combination of the two. PENLAB is based on the code PENNON by \begin{verbatim}PENOPT\end{verbatim}. PENLAB was developed by Jan Fiala (The Numerical Algorithms Group Ltd.), Michal Kocvara (University of Birmingham) and Michael Stingl (University of Erlangen) and is distributed under GPLv3 license.
+\end{par} \vspace{1em}
+\begin{par}
+
+\end{par} \vspace{1em}
+
+
+\subsection*{How to cite it?}
+
+\begin{par}
+J. Fiala, M. Kocvara and M. Stingl. PENLAB: A MATLAB solver for nonlinear semidefinite optimization. Preprint NI13056-POP, Isaac Newton Institute for Mathematical Sciences, University of Cambridge, November 2013. arXiv:1311.5240
 \end{par} \vspace{1em}
 \begin{par}
 
@@ -56,9 +66,22 @@ PENlab is Matlab® based toolbox for optimization of nonlinear functions with vec
 \subsection*{How to install it?}
 
 \begin{par}
-Call \texttt{install} from the main directory. It adds PENlab directories to the Matlab Path. If any mexfiles are used, they need to be compiled separately at the moment. The current distribution constains mexfiles precompiled for MS Windows 32bit and Linux 64bit.
+Download the PENLAB distrubution and copy it in a directory of your choice. Go to the main PENLAB directory and open Matlab. Call
+\end{par} \vspace{1em}
+\begin{verbatim}\ensuremath{>}\ensuremath{>} install\end{verbatim}
+\begin{par}
+from the main directory. It adds PENLAB directories to the Matlab Path. To make this path permanent, you can conclude this step by
+\end{par} \vspace{1em}
+\begin{verbatim}\ensuremath{>}\ensuremath{>} savepath\end{verbatim}
+\begin{par}
+The current distribution constains mexfiles precompiled for MS Windows 64 bit, MacOS 64 bit and Linux 64 bit. If you use another OS, the mexfiles need to be compiled manually.
 \end{par} \vspace{1em}
 \begin{par}
+To check whether PENLAB works properly, run
+\end{par} \vspace{1em}
+
+\begin{verbatim}>> penlabtests\end{verbatim}
+    \begin{par}
 
 \end{par} \vspace{1em}
 
@@ -66,28 +89,31 @@ Call \texttt{install} from the main directory. It adds PENlab directories to the
 \subsection*{How to use it?}
 
 \begin{par}
-It's based on Matlab objects so you need to construct the object first, i.e. initialize/read in the problem
+At the moment the only option is to define a Matlab structure which has all necessary elements defining the problem and pass it to the constructor. Here we will call the structure \texttt{penm}. Examples how to generate it are below and in directories \texttt{PENLAB\ensuremath{\backslash}examples} and \texttt{PENLAB\ensuremath{\backslash}applications}. Structures for some standard problems are predefined and can be found in \texttt{PENLAB\ensuremath{\backslash}interfaces}; see section Pre-programmed interfaces below.
 \end{par} \vspace{1em}
-\begin{verbatim}problem = penlab(problem\_data);\end{verbatim}
 \begin{par}
-Then you can optionally edit some stuff before calling the solver itself, for example, set up the user data to be passed to the callbacks, set starting point, set optional parameters,... Typically you just change the appropriate bits in the structure:
+PENLAB is based on Matlab objects so next you need to construct the object, i.e. initialize/read in the problem
 \end{par} \vspace{1em}
-\begin{verbatim}problem.xinit = ...
-problem.Yinit = ...
-problem.opts.chosen\_option = ...\end{verbatim}
+\begin{verbatim}\ensuremath{>}\ensuremath{>} problem = PENLAB(penm);\end{verbatim}
+\begin{par}
+Then you can optionally edit some parametrers before calling the solver itself; for example, set up the user data to be passed to the callbacks, set starting point, set optional parameters,... Typically you just change the appropriate bits in the structure:
+\end{par} \vspace{1em}
+\begin{verbatim}\ensuremath{>}\ensuremath{>} problem.xinit = ...
+\ensuremath{>}\ensuremath{>} problem.Yinit = ...
+\ensuremath{>}\ensuremath{>} problem.opts.chosen\_option = ...\end{verbatim}
 \begin{par}
 or
 \end{par} \vspace{1em}
-\begin{verbatim}new\_opts = structure\_something
-problem.opts = new\_opts;\end{verbatim}
+\begin{verbatim}\ensuremath{>}\ensuremath{>} new\_opts = structure\_something
+\ensuremath{>}\ensuremath{>} problem.opts = new\_opts;\end{verbatim}
 \begin{par}
 Typically, all these changes inside the object are "monitored" by the object and it might not allow you to change the value (e.g. invalid option settings, wrong dimension of \texttt{xinit}, ...). In such a case you will get an error message and the structure is not changed. Or you might get a warning that something has been changed but it looks suspicious so it just points you that it might be wrong.
 \end{par} \vspace{1em}
 \begin{par}
 You can also always check how the problem is set or what are the default values used. Just read the appropriate part of the object, such as
 \end{par} \vspace{1em}
-\begin{verbatim}problem.opts     %option settings set by the user
-problem.allopts  %all options set, default values & user's ones
+\begin{verbatim}\ensuremath{>}\ensuremath{>} problem.opts     %option settings set by the user
+\ensuremath{>}\ensuremath{>} problem.allopts  %all options set, default values & user's ones
 ...\end{verbatim}
 \begin{par}
 Some of these might be read-only and changes are not allowed.
@@ -95,30 +121,18 @@ Some of these might be read-only and changes are not allowed.
 \begin{par}
 When everything is ready, you invoke the solver
 \end{par} \vspace{1em}
-\begin{verbatim}problem.solve();\end{verbatim}
+\begin{verbatim}\ensuremath{>}\ensuremath{>} problem.solve();\end{verbatim}
 \begin{par}
 Depending on option settings, you will see the progress or final message.
 \end{par} \vspace{1em}
 \begin{par}
 You can retrieve the results by
 \end{par} \vspace{1em}
-\begin{verbatim}problem.x, problem.Y, problem.ueq, problem.uineq, ...\end{verbatim}
+\begin{verbatim}\ensuremath{>}\ensuremath{>} problem.x, problem.Y, problem.ueq, problem.uineq, ...\end{verbatim}
 \begin{par}
 or you can change options or initialization and invoke \texttt{solve()} again to use the new settings.
 \end{par} \vspace{1em}
 \begin{par}
-
-\end{par} \vspace{1em}
-
-
-\subsection*{How to initiate/set up the problem?}
-
-\begin{par}
-At the moment the only option is to use structure which has all necessary elements set and pass it to the constructor. Here we will call the structure \texttt{penm}. Examples how to generate it are below or in directory \texttt{penlab\ensuremath{\backslash}examples}.
-\end{par} \vspace{1em}
-
-\begin{verbatim}problem = penlab(penm);\end{verbatim}
-    \begin{par}
 
 \end{par} \vspace{1em}
 
@@ -359,13 +373,13 @@ The meaning of the last (optional) argument \texttt{pointchanged}: if \texttt{po
 \end{par} \vspace{1em}
 
 
-\subsection*{PENlab and YALMIP}
+\subsection*{PENLAB and YALMIP}
 
 \begin{par}
-PENlab can be used to solve LMI and BMI problems generated by YALMIP (\texttt{http://users.isy.liu.se/johanl/yalmip/}) using YALMIP's 'export' command. The utility YALMIP2BMI reads this output and converts it into a structure accepted by PENLab via BMI or PMI modules. Note that YALMIP may transform the original matrix variables into vectors by symmetric vectorization. To recover them from the results, you have to 'matricize' these vectors.
+PENLAB can be used to solve LMI and BMI problems generated by YALMIP (\begin{verbatim}http://users.isy.liu.se/johanl/yalmip/\end{verbatim}) using YALMIP's 'export' command. The PENLAB utility \texttt{yalmip2bmi} reads this output and converts it into a structure accepted by PENLAB via BMI or PMI modules. Note that YALMIP may transform the original matrix variables into vectors by symmetric vectorization. To recover them from the results, you have to 'matricize' these vectors.
 \end{par} \vspace{1em}
 \begin{par}
-Example of using YALMIP2BMI:
+Example of using \texttt{yalmip2bmi}:
 \end{par} \vspace{1em}
 
 \begin{verbatim}%YALMIP commands
@@ -376,10 +390,13 @@ Example of using YALMIP2BMI:
 %PENLAB commands
   bmi=yalmip2bmi(yalpen);
   penm = bmi_define(bmi);
-  prob = penlab(penm);
+  prob = PENLAB(penm);
   solve(prob);
   K = (prob.x(4:5))';\end{verbatim}
     \begin{par}
+See also example \texttt{solve\_ex\_yalmip.m} in directory \texttt{PENLAB/examples}.
+\end{par} \vspace{1em}
+\begin{par}
 
 \end{par} \vspace{1em}
 
@@ -387,18 +404,18 @@ Example of using YALMIP2BMI:
 \subsection*{Pre-programmed interfaces}
 
 \begin{par}
-PENlab distribution contains several pre-programmed interfaces for standard optimization problems with standard inputs. For these problems, the user does not have to create the \texttt{penm} object, nor the call back functions. Pre-programmed interfaces can be found in directory \texttt{interfaces}.
+PENLAB distribution contains several pre-programmed interfaces for standard optimization problems with standard inputs. For these problems, the user does not have to create the \texttt{penm} object, nor the call back functions. Pre-programmed interfaces can be found in directory \texttt{PENLAB/interfaces}.
 \end{par} \vspace{1em}
 \begin{par}
 \textbf{Nonlinear optimization with AMPL input}
 \end{par} \vspace{1em}
 \begin{par}
-Go to directory \texttt{interfaces/NLP\_AMPL}. Assume that nonlinear optimization problem is defined in and processed by \begin{verbatim}AMPL\end{verbatim}, so that we have the corresponding \texttt{.nl} file, for instance \texttt{chain.nl} stored in directory \texttt{datafiles}. All the user has to do to solve the problem is to call the following three commands:
+Go to directory \texttt{interfaces/NLP\_AMPL}. Assume that nonlinear optimization problem is defined in and processed by \begin{verbatim}AMPL\end{verbatim}, so that we have the corresponding \texttt{.nl} file, for instance \texttt{chain.nl} stored in directory \texttt{PENLAB/datafiles}. All the user has to do to solve the problem is to call the following three commands:
 \end{par} \vspace{1em}
 
-\begin{verbatim}penm=nlp_define('datafiles/chain100.nl');
-prob=penlab(penm);
-prob.solve();\end{verbatim}
+\begin{verbatim}>> penm=nlp_define('datafiles/chain100.nl');
+>> prob=PENLAB(penm);
+>> prob.solve();\end{verbatim}
     \begin{par}
 \textbf{Linear semidefinite programming with SDPA input}
 \end{par} \vspace{1em}
@@ -406,14 +423,14 @@ prob.solve();\end{verbatim}
 Go to directory \texttt{interfaces/LMI}. Assume that a linear SDP problem is stored in an SDPA input file, for instance \texttt{arch0.dat-s} stored in directory \texttt{datafiles}. All the user has to do to solve the problem is to call
 \end{par} \vspace{1em}
 
-\begin{verbatim}[x] = solve_sdpa('datafiles/arch0.dat-s');\end{verbatim}
+\begin{verbatim}>> [x] = solve_sdpa('datafiles/arch0.dat-s');\end{verbatim}
     \begin{par}
 or, which is the same, the following sequence of commands:
 \end{par} \vspace{1em}
 
 \begin{verbatim}sdpdata=readsdpa('datafiles/arch0.dat-s');
 penm=sdp_define(sdpdata)
-prob=penlab(penm);
+prob=PENLAB(penm);
 prob.solve();
 x = prob.x;\end{verbatim}
     \begin{par}
@@ -423,7 +440,7 @@ x = prob.x;\end{verbatim}
 Go to directory \texttt{interfaces/LMI}. Assume that a linear SDP problem is stored in an SeDuMi input file, for instance \texttt{arch0.mat} stored in directory \texttt{datafiles}. All the user has to do to solve the problem is to call
 \end{par} \vspace{1em}
 
-\begin{verbatim}[x] = solve_sedumi('datafiles/sedumi-arch0.mat');\end{verbatim}
+\begin{verbatim}>> [x] = solve_sedumi('datafiles/sedumi-arch0.mat');\end{verbatim}
     \begin{par}
 or, which is the same, the following sequence of commands:
 \end{par} \vspace{1em}
@@ -431,7 +448,7 @@ or, which is the same, the following sequence of commands:
 \begin{verbatim}pen = sed2pen('datafiles/sedumi-arch0.mat');
 bmidata=pen2bmi(pen);
 penm=bmi_define(bmidata);
-prob=penlab(penm);
+prob=PENLAB(penm);
 prob.solve();
 x = prob.x;\end{verbatim}
     \begin{par}
@@ -443,7 +460,7 @@ Go to directory \texttt{interfaces/BMI}. We want to solve an optimization proble
 
 \begin{verbatim}load bmidata
 penm=bmi_define(bmidata);
-prob=penlab(penm);
+prob=PENLAB(penm);
 prob.solve();\end{verbatim}
     \begin{par}
 \textbf{Polynomial matrix inequalities}
@@ -454,7 +471,7 @@ Go to directory \texttt{interfaces/PMI}. We want to solve an optimization proble
 
 \begin{verbatim}load pmidata
 penm=pmi_define(pmidata);
-prob=penlab(penm);
+prob=PENLAB(penm);
 prob.solve();\end{verbatim}
     \begin{par}
 
@@ -464,13 +481,13 @@ prob.solve();\end{verbatim}
 \subsection*{Pre-programmed applications}
 
 \begin{par}
-PENlab distribution contains several pre-programmed applications for some standard optimization problems. For these problems, the user does not have to create the \texttt{penm} object, nor the call back functions. Pre-programmed applications can be found in directory \texttt{applications}.
+PENLAB distribution contains several pre-programmed applications for some standard optimization problems. For these problems, the user does not have to create the \texttt{penm} object, nor the call back functions. Pre-programmed applications can be found in directory \texttt{PENLAB/applications}.
 \end{par} \vspace{1em}
 \begin{par}
 \textbf{Nearest correlation matrix problem}
 \end{par} \vspace{1em}
 \begin{par}
-Go to directory \texttt{applications/CorrMat}. We solve the nearest correlation matrix problem. The problem may include constraints on matrix elements and on the condition number of the resulting matrix; see Example 7.1 from the PENLAB paper (directory \texttt{tex/penlab\_paper}). On input is a given matrix \texttt{H}, not necessarily a correlation matrix and, if applicable, \texttt{kappa}, the required condition number of the computed correlation matrix.
+Go to directory \texttt{applications/CorrMat}. We solve the nearest correlation matrix problem. The problem may include constraints on matrix elements and on the condition number of the resulting matrix; see Example 7.1 from the PENLAB paper (directory \texttt{tex/PENLAB\_paper}). On input is a given matrix \texttt{H}, not necessarily a correlation matrix and, if applicable, \texttt{kappa}, the required condition number of the computed correlation matrix.
 \end{par} \vspace{1em}
 \begin{par}
 The user can choose (by commenting/uncommenting) the required problem in \texttt{corr\_solve.m}:
@@ -487,12 +504,12 @@ penm = corr_define_cond_bound(kappa); %nearest correlation matrix with constrain
 Go to directory \texttt{applications/SOF}. We solve feasibility problem for examples from the COMPLib library The user has to install COMPLib from \begin{verbatim}http://www.compleib.de/\end{verbatim} . The problem is formulated as a polynomial matrix inequality and solved using our PMI interface in \texttt{interfaces/PMI}. Example:
 \end{par} \vspace{1em}
 
-\begin{verbatim}sof('AC1');\end{verbatim}
+\begin{verbatim}>> sof('AC1');\end{verbatim}
     \begin{par}
 \textbf{Lyapunov stability of continuous and discrete time linear systems}
 \end{par} \vspace{1em}
 \begin{par}
-Go to directory \texttt{applications/NLP\_AMPL}. We solve the problem of stability of a time invariant linear (discrete) system using Lyapunov theory. The problem is formulated as a LMI system \texttt{A'*P + P*A \ensuremath{<} 0} , \texttt{P \ensuremath{>} I} (continuous time) or \texttt{A'*P*A - P \ensuremath{<} 0} , \texttt{P \ensuremath{>} I} (discrete time) with respect to \texttt{P}. We minimize the trace of \texttt{P}. The user can easily modify the bounds in the LMIs or the LMIs themselves.
+Go to directory \texttt{applications/NLP\_AMPL}. We solve the problem of stability of a time invariant linear (discrete) system using Lyapunov theory. The problem is formulated as a LMI system $A^T P + PA \prec 0$, $P \succ I$ (continuous time) or $A^T P A - P \prec 0$, $P \succ I$ (discrete time) with respect to $P$. We minimize the trace of $P$. The user can easily modify the bounds in the LMIs or the LMIs themselves.
 \end{par} \vspace{1em}
 \begin{par}
 Example of solving a continuous time problem
@@ -500,7 +517,7 @@ Example of solving a continuous time problem
 
 \begin{verbatim}A=[0 1 0;0 0 1;-1 -2 -3];
 penm = lyapu(A);
-prob = penlab(penm);
+prob = PENLAB(penm);
 solve(prob);
 P=prob.Y{1};\end{verbatim}
     \begin{par}
@@ -509,25 +526,47 @@ Example of solving a discrete time problem
 
 \begin{verbatim}A = [.7 -.2 -.1; .5 .4 0; 0 -.5 .9];
 penm = dlyapu(A);
-prob = penlab(penm);
+prob = PENLAB(penm);
 solve(prob);
 P=prob.Y{1};\end{verbatim}
     \begin{par}
 \textbf{Truss topology optimization}
 \end{par} \vspace{1em}
 \begin{par}
-Go to directory \texttt{applications/TTO}. Solve the basic truss topology optimization problem formulated as an LMI. For more details, see Example 7.2 from the PENLAB paper (directory \texttt{tex/penlab\_paper}). Input data for many examples can be found in sub-directory \texttt{GEO}. Example:
+Go to directory \texttt{applications/TTO}. Solve the basic truss topology optimization problem formulated as an LMI. For more details, see Section 7.2 from the PENLAB paper (directory \texttt{tex/PENLAB\_paper}). Input data for many examples can be found in sub-directory \texttt{GEO}. Example:
 \end{par} \vspace{1em}
 
-\begin{verbatim}solve_tto('GEO/t3x3.geo');\end{verbatim}
+\begin{verbatim}>> solve_tto('GEO/t3x3.geo');\end{verbatim}
     \begin{par}
 \textbf{Truss topology optimization with a buckling constraint}
 \end{par} \vspace{1em}
 \begin{par}
-Go to directory \texttt{applications/TTObuckling}. Solve the truss topology optimization problem with a constraint on global stability (buckling). This leads to a nonlinear SDP problem. For more details, see Example 7.2 from the PENLAB paper (directory \texttt{tex/penlab\_paper}). Input data for many examples can be found in sub-directory \texttt{GEO}. Example:
+Go to directory \texttt{applications/TTObuckling}. Solve the truss topology optimization problem with a constraint on global stability (buckling). This leads to a nonlinear SDP problem. For more details, see Section 7.2 from the PENLAB paper (directory \texttt{tex/PENLAB\_paper}). Input data for many examples can be found in sub-directory \texttt{GEO}. Example:
 \end{par} \vspace{1em}
 
-\begin{verbatim}solve_ttob('GEO/t3x3.geo');\end{verbatim}
+\begin{verbatim}>> solve_ttob('GEO/t3x3.geo');\end{verbatim}
+    \begin{par}
+\textbf{Topology optimization, variable thickness sheet problem, primal formulation}
+\end{par} \vspace{1em}
+\begin{par}
+Go to directory \texttt{applications/VTSprimal}. Solve the basic VTS problem formulated as an LMI. The formulation is analogous to the TTO problem above, only the data differ.
+\end{par} \vspace{1em}
+\begin{par}
+Example:
+\end{par} \vspace{1em}
+
+\begin{verbatim}>> solve_vts;\end{verbatim}
+    \begin{par}
+\textbf{Topology optimization, VTS problem, dual formulation}
+\end{par} \vspace{1em}
+\begin{par}
+Go to directory \texttt{applications/VTSdual}. Solve the dual to the basic VTS problem. This is a convex problem with linear objective function and quadratic constraints.
+\end{par} \vspace{1em}
+\begin{par}
+Example:
+\end{par} \vspace{1em}
+
+\begin{verbatim}>> solve_vts;\end{verbatim}
     \begin{par}
 
 \end{par} \vspace{1em}
@@ -605,7 +644,7 @@ To solve this example, we execute the following commands:
 \end{par} \vspace{1em}
 
 \begin{verbatim}penm = ex1_define;
-prob = penlab(penm);
+prob = PENLAB(penm);
 prob.solve();
 x = prob.x;\end{verbatim}
     \begin{par}
@@ -782,7 +821,7 @@ For PENSDP problems:
 \end{par} \vspace{1em}
 \begin{verbatim}sdpdata=readsdpa('datafiles/truss1.dat-s');
 penm=sdp\_define(sdpdata);
-prob=penlab(penm);
+prob=PENLAB(penm);
 [alx,aldx,alddx] = setuptestpoint(prob,'datafiles/pensdpa_truss1.dcf','pensdp');
 prob.eval\_alx();
 % alx vs. prob.ALx
@@ -792,7 +831,7 @@ prob.ALx\end{verbatim}
 For PENNLP problems:
 \end{par} \vspace{1em}
 \begin{verbatim}penm=nlp\_define('../../problems/ampl-nl/camshape100.nl');
-prob=penlab(penm);
+prob=PENLAB(penm);
 [alx,aldx,alddx] = setuptestpoint(prob,'datafiles/pennlp_camshape100_a.dcf','pennlp');
 prob.eval\_alx();
 prob.ALx
@@ -895,7 +934,7 @@ penm.Yinit\{k\} % k = 1,...,penm.NY\end{verbatim}
 \end{par} \vspace{1em}
 
 
-\subsection*{Appendix 2, List of PENlab options}
+\subsection*{Appendix 2, List of PENLAB options}
 
 \begin{par}
 For explanation of the option meanings, see PENNON manual.
