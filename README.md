@@ -6,5 +6,4 @@ PENLAB is distributed under GNU General Public License 3.0 and should be support
 
 Authors: Jan Fiala, Michal Kocvara, Michael Stingl
 
-We will be more than happy if you sent your feedback to: 
-   jan@nag.co.uk or m.kocvara@bham.ac.uk.
+We will be more than happy if you sent your feedback to m.kocvara@bham.ac.uk.
