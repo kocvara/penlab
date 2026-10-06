@@ -57,13 +57,6 @@ function [nFlag,rResults]=eqconstr_min(obj)
   obj.lsiter_last=0;
   obj.stats_time_fact_last=0;
 
-  % init LS
-  if (linesearch==9)
-    error('not adjusted for PenLab yet');
-    %lseq_inoc(fnc);
-    obj.lseq_inoc();
-  end
-
     while (miter < MAX_MITER)
 
       %hessx=fnc.obj_hess(x,ueq);
@@ -74,28 +67,6 @@ function [nFlag,rResults]=eqconstr_min(obj)
       switch solver
       case 0  % LDL factorization
         [x_dir,ueq_dir,nFlagSol] = obj.solvekkt_ldl(obj.ALddx,obj.eqdx,-obj.ALdx,-obj.eqx);
-      case 1  % LU factorization
-        [x_dir,ueq_dir,nFlagSol] = obj.solvekkt_lu(obj.ALddx,obj.eqdx,-obj.ALdx,-obj.eqx);
-      case 2  % MA57 factorization
-        [x_dir,ueq_dir,nFlagSol] = obj.solvekkt_ma57(obj.ALddx,obj.eqdx,-obj.ALdx,-obj.eqx);
-      case 3  % Luksan 3
-        [x_dir,ueq_dir,nFlagSol] = obj.solvekkt_luksan3(obj.ALddx,obj.eqdx,-obj.ALdx,-obj.eqx,TOL_DIR,20+obj.Nx+obj.NYnnz+obj.Neq);
-      case 4  % Luksan 4
-        [x_dir,ueq_dir,nFlagSol] = obj.solvekkt_luksan4(obj.ALddx,obj.eqdx,-obj.ALdx,-obj.eqx,TOL_DIR,20+2*(obj.Nx+obj.NYnnz-obj.Neq));
-      case 5  % Schur complement + CGM
-        [x_dir,ueq_dir,nFlagSol] = obj.solvekkt_schurcgm(obj.ALddx,obj.eqdx,-obj.ALdx,-obj.eqx,TOL_DIR,20+2*obj.Neq);
-      case 6  % Projected CGM onto nullspace (implicit)
-        [x_dir,ueq_dir,nFlagSol] = obj.solvekkt_projcgm(obj.ALddx,obj.eqdx,-obj.ALdx,-obj.eqx,TOL_DIR,20+2*(obj.Nx+obj.NYnnz-obj.Neq));
-      case 7  % Projected CGM onto nullspace (implicit, LDL)
-        [x_dir,ueq_dir,nFlagSol] = obj.solvekkt_projcgm2(obj.ALddx,obj.eqdx,-obj.ALdx,-obj.eqx,TOL_DIR,20+2*(obj.Nx+obj.NYnnz-obj.Neq));
-      case 8  % CGM on the nullspace (implicit Z based on the structure of FMO)
-        [x_dir,ueq_dir,nFlagSol] = obj.solvekkt_nscgm(obj.ALddx,obj.eqdx,-obj.ALdx,-obj.eqx,TOL_DIR,20+2*(obj.Nx+obj.NYnnz-obj.Neq));
-      case 103  % Luksan 3 with a special stop crit
-        stop_test=@obj.lseq_inoc;
-        [x_dir,ueq_dir,nFlagSol] = obj.solvekkt_luksan3e(obj.ALddx,obj.eqdx,-obj.ALdx,-obj.eqx,stop_test,20+obj.Nx+obj.NYnnz+obj.Neq);
-      case 104  % Luksan 4 & LS stop crit
-        stop_test=@obj.lseq_inoc;
-        [x_dir,ueq_dir,nFlagSol] = obj.solvekkt_luksan4e(obj.ALddx,obj.eqdx,-obj.ALdx,-obj.eqx,stop_test,20+2*(obj.Nx+obj.NYnnz-obj.Neq));
       %case   %
       otherwise
         obj.print(1,Inf,'ERR @ eqconstr_min(): Sorry, no such solver, terminating...');
@@ -128,26 +99,8 @@ function [nFlag,rResults]=eqconstr_min(obj)
       obj.print(5,Inf,'LSEQ: max step %.1e, %i steps',rMaxStep,nMaxSteps);
 
       switch linesearch
-      case 0  % Do nothing, leave original data
-	 % such as x, grad_x (useful for TR, ...)
-      case 1  % Do full steps, no linesearch at all
-        [rRelStep, nFlagLS] = obj.lseq_fullstep(x_dir,ueq_dir);
-      %case 2  % Armijo linesearch
-      %  [rRelStep, nFlagLS] = ls_armijo(dir);
       case 3  % Pennlp/Pennon equality linesearch
         [rRelStep, nFlagLS] = obj.lseq_pen(x_dir,ueq_dir,miter);
-      case 4  % Filter linesearch, first version, Biegler/Wachter
-        [rRelStep, nFlagLS] = obj.lseq_filter(x_dir,ueq_dir,miter);
-      case 5  % Nocedal Knitro LS, simple, first version
-        [rRelStep, nFlagLS] = obj.lseq_noc(x_dir,ueq_dir,obj.ALddx*x_dir,miter);
-      case 6  % Nocedal Flexible Merit LS
-        [rRelStep, nFlagLS] = obj.lseq_flex(x_dir,ueq_dir,obj.ALddx*x_dir,miter);
-      case 7  % Nocedal Knitro LS, simple, 2nd version
-        [rRelStep, nFlagLS] = obj.lseq_noc2(x_dir,ueq_dir,obj.ALddx*x_dir,miter);
-      case 8  % Nocedal Knitro LS, simple, 3nd version
-        [rRelStep, nFlagLS] = obj.lseq_noc3(x_dir,ueq_dir,obj.ALddx*x_dir,miter);
-      case 9  % Nocedal Knitro inexact SQP LS
-        [nFlagLS, rRelStep] = obj.lseq_inoc(x_dir,ueq_dir,obj.ALddx*x_dir);
       %case   df%
       otherwise
         obj.print(1,Inf,'ERR @ eqconstr_min(): Sorry, no such LS, terminating...');
