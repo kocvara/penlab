@@ -85,34 +85,27 @@ end
 function [e_pos, e_neg, e_zero] = inertia(D)
 % returns the inertia triplet of matrix D, expects D to be a diagonal/block
 % diagonal symmetric matrix with at most 2-times-2 blocks on the diagonal
+% (as returned by ldl()); works directly on the blocks, i.e., in O(dim)
 
-  % simple but perhaps ?slow? way how to do it
-  [dim dim2] = size(D);
-  e=eig(D);
-  e_pos=sum(e>0);
-  e_neg=sum(e<0);
-  e_zero=dim-e_pos-e_neg;
+  dim = size(D,1);
+  d = full(diag(D));
+  off = full(diag(D,1));
 
-  return;
+  % 2-by-2 blocks start where the superdiagonal is nonzero
+  k = find(off);
+  in1 = true(dim,1);
+  in1([k; k+1]) = false;
 
-  % faster?? but more complicated way - split it to 1-by-1 / 2-by-2 blocks
-  e_pos=0;
-  e_neg=0; 
+  % 1-by-1 blocks
+  e_pos = sum(d(in1)>0);
+  e_neg = sum(d(in1)<0);
 
-  i=1;
-  while (i<=dim)
-    if (i<dim && D(i,i+1))  % 2-by-2 block
-      e=eig(D(i:i+1,i:i+1));
-      e_pos = e_pos + sum(e>0);
-      e_neg = e_neg + sum(e<0);
-      i=i+2;
-    else           % 1-by-1 block
-      e_pos = e_pos + D(i,i)>0;
-      e_neg = e_neg + D(i,i)<0;
-      i=i+1;
-    end
-  end
-  e_zero=dim-e_pos-e_neg;
+  % 2-by-2 blocks [a b; b c]: sign of det and trace decide
+  a = d(k); c = d(k+1); b = off(k);
+  dt = a.*c - b.^2;
+  tr = a + c;
+  e_pos = e_pos + sum(dt<0) + 2*sum(dt>0 & tr>0) + sum(dt==0 & tr>0);
+  e_neg = e_neg + sum(dt<0) + 2*sum(dt>0 & tr<0) + sum(dt==0 & tr<0);
+  e_zero = dim - e_pos - e_neg;
 
 end
-
