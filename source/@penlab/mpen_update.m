@@ -91,6 +91,8 @@ function [p, nfactor] = p_check(M, p, pold)
 
   rFactor=0.75;   % if need to refactorize, prefer new penalty parameter
   nfactor=0;
+  maxfactor=50;   % p -> pold geometrically, if pold is not valid either,
+                  % this would never finish
 
   [n m] = size(M);
   Missparse = n>10 && issparse(M) && nnz(M)<0.15*n*n;  
@@ -113,6 +115,11 @@ function [p, nfactor] = p_check(M, p, pold)
   end
 
   while (k~=0)
+    if (nfactor>=maxfactor)
+      % even pold doesn't seem to be valid (infeasible point), keep it
+      p=pold;
+      return;
+    end
     p=rFactor*p + (1-rFactor)*pold;
     [R,k] = chol(M+p*I);
     %disp(sprintf('up   pert=%e (%i)',p,k));
