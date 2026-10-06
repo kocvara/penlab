@@ -61,12 +61,12 @@ void mexFunction(int nlhs, mxArray *plhs[], int nrhs, const mxArray *prhs[]) {
   /* input: is it dense, sparse, dense, sparse */
   for (i=0;i<2;i++)
     if (!mxIsSparse(prhs[2*i+1])) {
-      sprintf(msg,"Error: Input %u is expected to be a sparse matrix\n", (unsigned) 2*i+2);
+      sprintf(msg,"Error: Input %u is expected to be a sparse matrix\n", (unsigned) (2*i+2));
       mexErrMsgTxt(msg);
     }
   for (i=0;i<2;i++)
     if (mxIsSparse(prhs[2*i])) {
-      sprintf(msg,"Error: Input %u is expected to be a dense matrix\n", (unsigned) 2*i+1);
+      sprintf(msg,"Error: Input %u is expected to be a dense matrix\n", (unsigned) (2*i+1));
       mexErrMsgTxt(msg);
     }
 
