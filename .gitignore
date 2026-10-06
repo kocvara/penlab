@@ -49,3 +49,10 @@ Temporary Items
 # My stuff
 # .svn
 *log.txt
+
+# PenLab / MATLAB run & build output
+*.log
+*.asv
+*.o
+*.obj
+matlab_crash_dump.*
