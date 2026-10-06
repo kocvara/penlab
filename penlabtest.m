@@ -57,7 +57,7 @@ function [status] = penlabtest(verbose)
     status = 0;
   end
   % examples
-  if (exist('ex1_define','file')~=2)
+  if (exist('ex1a_define','file')~=2)
     disp('Error: penlab/examples is not on the path.')
     status = 0;
   end
