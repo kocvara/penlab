@@ -87,26 +87,13 @@ function [status] = eval_aldx(obj)
 
       % compute partial derivatives of the penalty term:
       %    d/dxi... = -p*trace( (A^-1) * (d/dxi A) )
-
-      % there should be just one dependant with obvious value (+-1) in each
-      % triangle of every Y{k} derivative
+      % where d/dxi A = mlt*(e_r*e_c' + e_c*e_r') for the variable mapped to
+      % the element (r,c), so trace(W * d/dxi A) = mlt*(W(r,c)+W(c,r)) or
+      % mlt*W(r,r) on the diagonal
       mlt=-obj.Yboxmlt(k);  % +/-1
       mapper=obj.vec2Ymap{obj.Yboxmap(k)};
-      dim=mapper.dim;
-      offset=obj.Nx + mapper.xmap(1) - 1;
-      irow=mapper.irow;
-      icol=mapper.icol;
-      for idx=1:mapper.nelem
-        if (irow(idx)==icol(idx))
-          % diagonal element
-          Akdx = sparse(irow(idx),icol(idx),mlt,dim,dim);
-        else
-          % nondiag element --> add two
-          Akdx = sparse([irow(idx),icol(idx)],[icol(idx),irow(idx)],[mlt,mlt],dim,dim);
-        end
-        % but this can be done directly...!
-        ALdx(offset+idx) = ALdx(offset+idx) - pkx*trace(invAkx*Akdx);
-      end
+      idx=obj.Nx + mapper.xmap(1) - 1 + (1:mapper.nelem)';
+      ALdx(idx) = ALdx(idx) - pkx*mlt*ybox_trace(invAkx, mapper);
 
     end
     end
@@ -125,25 +112,11 @@ function [status] = eval_aldx(obj)
       invZ=full(inv(Z));
       pZUZ=pkx^2*invZ*umatk*invZ;
 
-      % there should be just one dependant with obvious value (+-1) in each
-      % triangle of every Y{k} derivative
+      % derivatives with respect to the elements of Y, see above
       mlt=obj.Yboxmlt(k);  % +/-1
       mapper=obj.vec2Ymap{obj.Yboxmap(k)};
-      dim=mapper.dim;
-      offset=obj.Nx + mapper.xmap(1) - 1;
-      irow=mapper.irow;
-      icol=mapper.icol;
-      for idx=1:mapper.nelem
-        if (irow(idx)==icol(idx))
-          % diagonal element
-          Akdx = sparse(irow(idx),icol(idx),mlt,dim,dim);
-        else
-          % nondiag element --> add two
-          Akdx = sparse([irow(idx),icol(idx)],[icol(idx),irow(idx)],[mlt,mlt],dim,dim);
-        end
-        % but this can be done directly...!
-        ALdx(offset+idx) = ALdx(offset+idx) + trace(pZUZ*Akdx);
-      end
+      idx=obj.Nx + mapper.xmap(1) - 1 + (1:mapper.nelem)';
+      ALdx(idx) = ALdx(idx) + mlt*ybox_trace(pZUZ, mapper);
     end
     end
 
@@ -186,4 +159,16 @@ function [status] = eval_aldx(obj)
 
   end
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% trace(W*E_i) for all element-variables i of one matrix variable, where
+% E_i = e_r*e_c' + e_c*e_r' (or e_r*e_r' on the diagonal), (r,c) given by
+% mapper.irow/icol (the first nelem entries are the lower triangle)
+function [tr] = ybox_trace(W, mapper)
 
+  r = mapper.irow(1:mapper.nelem);
+  c = mapper.icol(1:mapper.nelem);
+  dim = mapper.dim;
+  tr = full(W(r + (c-1)*dim) + W(c + (r-1)*dim));
+  diagonal = r==c;
+  tr(diagonal) = tr(diagonal)/2;
+  tr = tr(:);
