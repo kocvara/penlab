@@ -55,6 +55,11 @@ function [ifail] = solve(obj)
   % Initialize penalty parameters and Lagrangian multipliers based on
   % option settings if there are not valid values yet.
   obj.init(false);
+  % multipliers/penalties might have changed (e.g., by init or by the end of
+  % the previous solve()) while the point did not, cached AL values are invalid
+  obj.ALxtck=0;
+  obj.ALdxtck=0;
+  obj.ALddxtck=0;
 
   % automatic modification of the starting point
   % reconstruct from Nxbox constraints lbx and ubx. This is a bit silly
@@ -397,22 +402,27 @@ function [ifail] = solve(obj)
   %if (nFlag~=4 && ps.N_CONSTR-ps.N_EQUAL~=0)
   %  u = u.*u_updt;
   %end
-  % (full) multipliers update
-  % TODO update it always? even if error occured
-  obj.uxbox(obj.xboxindphi) = obj.uxbox(obj.xboxindphi).*uxbox_updt(obj.xboxindphi);
-  obj.uineq(obj.ineqindphi) = obj.uineq(obj.ineqindphi).*uineq_updt(obj.ineqindphi);
+  % (full) multipliers update; not if the outer iteration limit was reached
+  % because then the (restricted) update was already done in the last iteration
+  if (nFlag~=7)
+    obj.uxbox(obj.xboxindphi) = obj.uxbox(obj.xboxindphi).*uxbox_updt(obj.xboxindphi);
+    obj.uineq(obj.ineqindphi) = obj.uineq(obj.ineqindphi).*uineq_updt(obj.ineqindphi);
+    obj.ALxtck=0;
+    obj.ALdxtck=0;
+    obj.ALddxtck=0;
+  end
 
   % print results
   obj.rNormG=norm(obj.ALdx);
-  obj.rFeas=max([abs(obj.eqx);max(0,obj.xboxx);max(0,obj.ineqx);0]);
+  rFeasM=obj.feas_ay();
+  obj.rFeas=max([abs(obj.eqx);max(0,obj.xboxx);max(0,obj.ineqx);rFeasM;0]);
   rGap=abs(obj.objx-obj.ALx);
-  if (obj.Nxbox + obj.Nineq>0)
-    % TODO this hasn't been change, has it?
-    rPmin=min([obj.pxbox;obj.pineq]);
+  if (bConstrIneq)
+    rPmin=min([obj.pxbox;obj.pineq;obj.PYbox;obj.PA]);
   end
   if (obj.Nxbox + obj.Nineq + obj.Neq>0)
     % TODO ... what if is somewhere barrier?? (and using uxbox??)
-    obj.rCompl=max([abs(obj.uxbox.*obj.xboxx);abs(obj.uineq.*obj.ineqx);abs(obj.eqx.*obj.ueq)]);
+    obj.rCompl=max([0;abs(obj.uxbox.*obj.xboxx);abs(obj.uineq.*obj.ineqx);abs(obj.eqx.*obj.ueq)]);
   end
   %  ??? not necessary to recompute?
   % Note: if finished with maxit -> lagrangian multipliers weren't fully updated --> printed slackness may be absolutely wrong; better to leave the earlier computed one
@@ -436,13 +446,14 @@ function [ifail] = solve(obj)
   obj.print(2,Inf,'*******************************************************************************');
   obj.print(2,Inf,'Objective            %27.16E',obj.objx);
   obj.print(3,Inf,'Augmented Lagrangian %27.16E',obj.ALx);
-  obj.print(2,Inf,'Relative precision   %27.16E',abs(obj.ALx-obj.objx)/max(1,obj.objx));
+  obj.print(2,Inf,'Relative precision   %27.16E',abs(obj.ALx-obj.objx)/max(1,abs(obj.objx)));
   obj.print(2,Inf,'Compl. Slackness     %27.16E',obj.rCompl);
   obj.print(2,Inf,'Grad augm. lagr.     %27.16E',obj.rNormG);
   obj.print(2,Inf,'Feasibility (max)    %27.16E',obj.rFeas);
   obj.print(3,Inf,'Feasibility eqx      %27.16E',max(abs(obj.eqx)));
   obj.print(3,Inf,'Feasibility ineq     %27.16E',max(max(0,obj.ineqx)));
   obj.print(3,Inf,'Feasibility box      %27.16E',max(max(0,obj.xboxx)));
+  obj.print(3,Inf,'Feasibility m.ineq   %27.16E',rFeasM);
   obj.print(3,Inf,'Minimal penalty      %27.16E',rPmin);
   obj.print(2,Inf,'Newton steps                               %5d',obj.miter);
   obj.print(2,Inf,'Inner steps                                %5d',obj.initer);

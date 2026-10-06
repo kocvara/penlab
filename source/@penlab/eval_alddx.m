@@ -6,8 +6,7 @@ function [status] = eval_alddx(obj)
   % status TODO
   status = 0;
 
-  % TODO remove!
-  if (true || obj.ALddxtck < obj.ticker)
+  if (obj.ALddxtck < obj.ticker)
     starttime = cputime;
 
     % create local copies of obj.x,obj.Y to avoid checking repetitively if they
@@ -148,49 +147,11 @@ function [status] = eval_alddx(obj)
 
       % compute elements of 2nd derivative of the penalty term:
       %   d2/dxi dxj ... = p*trace( (A^-1) * (d/dxi A) * (A^-1) * (d/dxj A) )
-
-      mlt=-obj.Yboxmlt(k);  % +/-1
+      % (mlt^2==1 so the sign of the derivatives doesn't matter)
       mapper=obj.vec2Ymap{obj.Yboxmap(k)};
-      dim=mapper.dim;
-      lAdep=mapper.nelem;
-      offset=obj.Nx + mapper.xmap(1) - 1;
-      irow=mapper.irow;
-      icol=mapper.icol;
-
-      Akdixall=cell(lAdep,1);
-      % store everything in a dense matrix (kernel) and copy it to the Hessian
-      % once when finished
-      Akddx=zeros(lAdep,lAdep);
-      for ii=1:lAdep
-        if (irow(ii)==icol(ii))
-          % diagonal element
-          Akdix = sparse(irow(ii),icol(ii),mlt,dim,dim);
-        else
-          % nondiag element --> add two
-          Akdix = sparse([irow(ii),icol(ii)],[icol(ii),irow(ii)],[mlt,mlt],dim,dim);
-        end
-
-        Akdixall{ii}=Akdix;
-
-        % compute all elements under the diagonal
-        for jj=1:ii-1
-          hij=0.5*pkx*mextrdsdsmat(invAkx, Akdix, invAkx, Akdixall{jj});
-          Akddx(ii,jj)=hij;
-          Akddx(jj,ii)=hij;
-        end
-
-        % compute diagonal element jj=ii
-        hij=0.5*pkx*mextrdsdsmat(invAkx, Akdix, invAkx, Akdix);
-        Akddx(ii,ii)=hij;
-        
-      end
-      Adep=offset+[1:lAdep];
-      % copy the dense kernel back to ALddx
-      % ALddx=ALddx + Akddx(obj.Adep{kuser},obj.Adep{kuser}); ... need other way
-      Akddx_expand=sparse(obj.Nx+obj.NYnnz,obj.Nx+obj.NYnnz);
-      %Akddx_expand(obj.Adep{kuser},obj.Adep{kuser})=Akddx;
-      Akddx_expand(Adep,Adep)=Akddx;
-      ALddx=ALddx + Akddx_expand;
+      Akddx = 0.5*pkx*ybox_kernel(invAkx, invAkx, mapper);
+      Adep = obj.Nx + mapper.xmap(1) - 1 + (1:mapper.nelem);
+      ALddx = ALddx + expand_kernel(Akddx, Adep, obj.Nx+obj.NYnnz);
 
     end
     end
@@ -209,48 +170,10 @@ function [status] = eval_alddx(obj)
       invZ=full(inv(Z));
       pZUZ=pkx^2*invZ*umatk*invZ;
 
-      mlt=obj.Yboxmlt(k);  % +/-1
       mapper=obj.vec2Ymap{obj.Yboxmap(k)};
-      dim=mapper.dim;
-      lAdep=mapper.nelem;
-      offset=obj.Nx + mapper.xmap(1) - 1;
-      irow=mapper.irow;
-      icol=mapper.icol;
-
-      Akdixall=cell(lAdep,1);
-      % store everything in a dense matrix (kernel) and copy it to the Hessian
-      % once when finished
-      Akddx=zeros(lAdep,lAdep);
-      for ii=1:lAdep
-        if (irow(ii)==icol(ii))
-          % diagonal element
-          Akdix = sparse(irow(ii),icol(ii),mlt,dim,dim);
-        else
-          % nondiag element --> add two
-          Akdix = sparse([irow(ii),icol(ii)],[icol(ii),irow(ii)],[mlt,mlt],dim,dim);
-        end
-
-        Akdixall{ii}=Akdix;
-
-        % compute all elements under the diagonal
-        for jj=1:ii-1
-          hij=mextrdsdsmat(pZUZ, Akdix, invZ, Akdixall{jj});
-          Akddx(ii,jj)=hij;
-          Akddx(jj,ii)=hij;
-        end
-
-        % compute diagonal element jj=ii
-        hij=mextrdsdsmat(pZUZ, Akdix, invZ, Akdix);
-        Akddx(ii,ii)=hij;
-        
-      end
-      Adep=offset+[1:lAdep];
-      % copy the dense kernel back to ALddx
-      % ALddx=ALddx + Akddx(obj.Adep{kuser},obj.Adep{kuser}); ... need other way
-      Akddx_expand=sparse(obj.Nx+obj.NYnnz,obj.Nx+obj.NYnnz);
-      %Akddx_expand(obj.Adep{kuser},obj.Adep{kuser})=Akddx;
-      Akddx_expand(Adep,Adep)=Akddx;
-      ALddx=ALddx + Akddx_expand;
+      Akddx = ybox_kernel(pZUZ, invZ, mapper);
+      Adep = obj.Nx + mapper.xmap(1) - 1 + (1:mapper.nelem);
+      ALddx = ALddx + expand_kernel(Akddx, Adep, obj.Nx+obj.NYnnz);
 
     end
     end
@@ -397,3 +320,38 @@ function [status] = eval_alddx(obj)
 
   end
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Dense kernel H(i,j) = trace(A*E_i*B*E_j) + trace(A*E_j*B*E_i) for all
+% element-variables i,j of one matrix variable (the same as
+% mextrdsdsmat(A,E_i,B,E_j)), where E_i = e_a*e_b' + e_b*e_a' for the
+% variable mapped to the element (a,b), or e_a*e_a' on the diagonal.
+% Writing E_i as a sum of terms e_p*e_q' (two slots, the second one is
+% missing on the diagonal), trace(A*e_p*e_q'*B*e_s*e_t') = A(t,p)*B(q,s).
+function [H] = ybox_kernel(A, B, mapper)
+
+  n = mapper.nelem;
+  a = mapper.irow(1:n);  a = a(:);
+  b = mapper.icol(1:n);  b = b(:);
+  offdiag = double(a~=b);
+  A = full(A);
+  B = full(B);
+  At = A.';
+
+  % slot 1: (p,q)=(a,b), slot 2: (p,q)=(b,a) with weight offdiag
+  P = [a, b];  Q = [b, a];  W = [ones(n,1), offdiag];
+  T = zeros(n,n);
+  for u=1:2
+    for v=1:2
+      % variable j uses (s,t)=(P(j,v),Q(j,v)), i.e., A(t_j,p_i)*B(q_i,s_j)
+      T = T + (W(:,u)*W(:,v)') .* At(P(:,u),Q(:,v)) .* B(Q(:,u),P(:,v));
+    end
+  end
+  H = T + T.';
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% put the dense kernel K into a sparse matrix N x N at rows/columns idx
+function [S] = expand_kernel(K, idx, N)
+
+  [I, J] = ndgrid(idx, idx);
+  S = sparse(I(:), J(:), K(:), N, N);

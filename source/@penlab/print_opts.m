@@ -32,7 +32,7 @@ function [errmsg] = print_opts(obj, minlev, maxlev)
     elseif (ischar(fld))
       str=fld;
     else
-      str='[other type, in use]'
+      str='[other type, in use]';
     end
     errmsg=obj.print(minlev,maxlev,'  %-20s %s: %s',optnames{i},flag,str);
   end

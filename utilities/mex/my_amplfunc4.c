@@ -550,13 +550,23 @@ real *d2r_copy(real *to, const double *from, int no_items) {
   return to;
 }
 
-/* Copy array fint to int, fint is probably defined as long */
-int *fi2i_copy(int *to, const fint *from, int no_items) {
-  int *dest;
+/* Copy index arrays into Matlab sparse index arrays (mwIndex, which is
+ * 64-bit with -largeArrayDims, so a memcpy() of int arrays is not possible) */
+static mwIndex *i2mw_copy(mwIndex *to, const int *from, size_t no_items) {
+  mwIndex *dest;
 
-  if (to && from && (void *)from!=(void *)to)
+  if (to && from)
     for (dest=to; no_items>0; no_items--)
-      *dest++=*from++;
+      *dest++=(mwIndex) *from++;
+  return to;
+}
+
+static mwIndex *fi2mw_copy(mwIndex *to, const fint *from, size_t no_items) {
+  mwIndex *dest;
+
+  if (to && from)
+    for (dest=to; no_items>0; no_items--)
+      *dest++=(mwIndex) *from++;
   return to;
 }
 
@@ -1141,8 +1151,8 @@ void mexFunction(int nlhs, mxArray *plhs[], int nrhs, const mxArray *prhs[])
             plhs[1] = mxCreateSparse(N, N_INEQUAL, nnz_inequal_Jac, mxREAL);
             jac_values(Jc_inequal_Jac,mxGetPr(plhs[1]),1,0,N_INEQUAL,X,gi_grd,gi_gind);
           }
-          memcpy(mxGetJc(plhs[1]),Jc_inequal_Jac,(N_INEQUAL+1)*sizeof(int));
-          memcpy(mxGetIr(plhs[1]),Ir_inequal_Jac,nnz_inequal_Jac*sizeof(int));
+          i2mw_copy(mxGetJc(plhs[1]),Jc_inequal_Jac,N_INEQUAL+1);
+          i2mw_copy(mxGetIr(plhs[1]),Ir_inequal_Jac,nnz_inequal_Jac);
         } else {  // no inequalities
           plhs[1] = mxCreateSparse(N, 0, 0, mxREAL);
           *mxGetJc(plhs[1])=0;
@@ -1158,8 +1168,8 @@ void mexFunction(int nlhs, mxArray *plhs[], int nrhs, const mxArray *prhs[])
             plhs[2] = mxCreateSparse(N, N_EQUAL, nnz_equal_Jac, mxREAL);
             jac_values(Jc_equal_Jac,mxGetPr(plhs[2]),1,N_INEQUAL,N_CONSTR,X,gi_grd,gi_gind);
           }
-          memcpy(mxGetJc(plhs[2]),Jc_equal_Jac,(N_EQUAL+1)*sizeof(int));
-          memcpy(mxGetIr(plhs[2]),Ir_equal_Jac,nnz_equal_Jac*sizeof(int));
+          i2mw_copy(mxGetJc(plhs[2]),Jc_equal_Jac,N_EQUAL+1);
+          i2mw_copy(mxGetIr(plhs[2]),Ir_equal_Jac,nnz_equal_Jac);
         } else {  // no equalities
           plhs[2] = mxCreateSparse(N, 0, 0, mxREAL);
           *mxGetJc(plhs[2])=0;
@@ -1237,8 +1247,8 @@ void mexFunction(int nlhs, mxArray *plhs[], int nrhs, const mxArray *prhs[])
         //sphes(mxGetPr(plhs[0]), my_obj_no, ow, L_mlt); // sometimes doesn't work - BUG?
         sphes(mxGetPr(plhs[0]), -1, ow, L_mlt);   // should be OK
 
-	fi2i_copy(mxGetJc(plhs[0]),sputinfo->hcolstarts,N+1);
-	fi2i_copy(mxGetIr(plhs[0]),sputinfo->hrownos, nnz_Hes_Lagr);
+	fi2mw_copy(mxGetJc(plhs[0]),sputinfo->hcolstarts,N+1);
+	fi2mw_copy(mxGetIr(plhs[0]),sputinfo->hrownos, nnz_Hes_Lagr);
       }
     return;
   } else {  // not Hessian??

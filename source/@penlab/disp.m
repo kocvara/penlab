@@ -40,11 +40,11 @@ function disp(obj)
       fprintf('\n  Optimality meassures in the final iteration:\n');
     end
     fprintf('  Objective                %27.16E\n',obj.objx);
-    fprintf('  Relative precision       %27.16E\n',abs(obj.ALx-obj.objx)/max(1,obj.objx));
+    fprintf('  Relative precision       %27.16E\n',abs(obj.ALx-obj.objx)/max(1,abs(obj.objx)));
     fprintf('  Compl. Slackness         %27.16E\n',obj.rCompl);
     fprintf('  Grad augm. lagr.         %27.16E\n',obj.rNormG);
     fprintf('  Feasibility              %27.16E\n',obj.rFeas);
-    fprintf('  Minimal penalty          %27.16E\n',min([obj.pxbox;obj.pineq]));
+    fprintf('  Minimal penalty          %27.16E\n',min([obj.pxbox;obj.pineq;obj.PYbox;obj.PA]));
 
     fprintf('  Newton steps                                   %5d\n',obj.miter);
     fprintf('  Inner steps                                    %5d\n',obj.initer);

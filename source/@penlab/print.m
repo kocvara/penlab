@@ -26,6 +26,6 @@ function [errmsg] = print(obj, minlev, maxlev, msg, varargin)
   end
   
   if (~isempty(obj.allopts.user_prn))
-    user_prn(minlev, maxlev, text);
+    obj.allopts.user_prn(minlev, maxlev, text);
   end
 

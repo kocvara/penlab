@@ -69,7 +69,14 @@ function [] = init(obj, forceupdate)
         [pnew, nfactor] = p_check2(-Ykx, pnew);
       end
 
-      % use the minima for all  TODO shoudln't it be maxima????
+      % pnew is the last one from the sequence and might not be big enough
+      % for the earlier constraints, increase it if necessary
+      for k=1:obj.NYbox
+        kuser=obj.Yboxmap(k);
+        Ykuserx=obj.Y{kuser};
+        Ykx = obj.Yboxshift(k)*speye(size(Ykuserx)) + obj.Yboxmlt(k) .* Ykuserx;
+        pnew = p_ensure(-Ykx, pnew);
+      end
       obj.PYbox=pnew*ones(obj.NYbox,1);
 
     else
@@ -93,7 +100,14 @@ function [] = init(obj, forceupdate)
         [pnew, nfactor] = p_check2(-Akx, pnew);
       end
 
-      % use the minima for all  TODO shoudln't it be maxima????
+      % pnew is the last one from the sequence and might not be big enough
+      % for the earlier constraints, increase it if necessary
+      for k=obj.Aindphi
+        kuser=obj.Amap(k);
+        [Akuserx, obj.userdata] = obj.mconfun(obj.x, obj.Y, kuser, obj.userdata);
+        Akx = obj.Ashift(k)*speye(size(Akuserx)) + obj.Amlt(k) .* Akuserx;
+        pnew = p_ensure(-Akx, pnew);
+      end
       obj.PA=pnew*ones(obj.NA,1);
     else
       obj.PA=[];
@@ -181,6 +195,14 @@ function [p, nfactor] = p_check2(M, p)
 
 end
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% return p if M+p*I is positive definite, otherwise a bigger one which is
+% (as p_check2), i.e., the penalty parameter never decreases here
+function [p] = p_ensure(M, p)
 
+  [R,k] = chol(full(M)+p*eye(size(M)));
+  if (k~=0)
+    p = p_check2(M, p);
+  end
 
-
+end

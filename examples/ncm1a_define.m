@@ -72,7 +72,7 @@ function [penm] = ncm1a_define()
   
 end
   
-  function [Akx, userdata] = mcm1a_mconfun(x,Y,k,userdata)
+  function [Akx, userdata] = ncm1a_mconfun(x,Y,k,userdata)
 % There is only one matrix variable A(x) = sum x(i)*userdata.A{i}
 
   A=userdata.A;
@@ -80,4 +80,33 @@ end
 
   end
 
+  function [fx, userdata] = ncm1a_objfun(x,Y,userdata)
+% f(x) = sum_ij (X_ij - H_ij)^2 where X = sum x(i)*A{i}
 
+  [Akx, userdata] = ncm1a_mconfun(x,Y,1,userdata);
+  D = Akx - userdata.H;
+  fx = sum(D(:).^2);
+
+  end
+
+  function [fdx, userdata] = ncm1a_objgrad(x,Y,userdata)
+
+  [Akx, userdata] = ncm1a_mconfun(x,Y,1,userdata);
+  D = Akx - userdata.H;
+  fdx = zeros(5,1);
+  for i=1:5
+    fdx(i) = 2*sum(sum(D.*userdata.A{i}));
+  end
+
+  end
+
+  function [fddx, userdata] = ncm1a_objhess(x,Y,userdata)
+
+  fddx = zeros(5,5);
+  for i=1:5
+    for j=1:5
+      fddx(i,j) = 2*sum(sum(userdata.A{i}.*userdata.A{j}));
+    end
+  end
+
+  end

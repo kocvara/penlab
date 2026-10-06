@@ -67,13 +67,8 @@ while (miter < MAX_MITER)
     
     %%%%%%%% linesearch %%%%%%%%%
     switch linesearch
-        case 0  % Do nothing, leave original data
-            % such as x, grad_x (useful for TR, ...)
-            nFlagLS = 0;
         case 1  % Do full steps, no linesearch at all
             [rRelStep, nFlagLS] = obj.ls_fullstep(dir);
-        case 2  % Armijo linesearch
-            [rRelStep, nFlagLS] = obj.ls_armijo(dir);
         case 3  % Pennlp/Pennon ("els) linesearch
             [rRelStep, nFlagLS] = obj.ls_pennon(dir);
             %case   %

@@ -280,12 +280,12 @@ classdef penlab < handle
       'max_inner_iter', {100, 'I', [0, Inf]}, ...     % MAX_MITER
       'inner_stop_limit', {1e-2, 'R', [0, 1]}, ...    % ALPHA
       'unc_dir_stop_limit', {1e-2, 'R', [0, 1]}, ...  % TOL_DIR
-      'unc_solver', {0, 'M', [0, 1, 2, 3, 4, 5]}, ... % solver
-      'unc_linesearch', {3, 'M', [0, 1, 2, 3]}, ...   % linesearch
+      'unc_solver', {0, 'M', [0]}, ... % solver
+      'unc_linesearch', {3, 'M', [1, 3]}, ...   % linesearch
       ... % from eqconstr_min.m
       'eq_dir_stop_limit', {1e-2, 'R', [0, 1]}, ...   % TOL_DIR
-      'eq_solver', {0, 'M', [0, 1]}, ...              % solver
-      'eq_linesearch', {3, 'M', [0, 1, 2, 3]}, ...    % linesearch
+      'eq_solver', {0, 'M', [0]}, ...              % solver
+      'eq_linesearch', {3, 'M', [3]}, ...    % linesearch
       'eq_solver_warn_max', {4, 'I', [0, 10]}, ...    % solver_warn_max
       'ls_short_max', {3, 'I', [0, 10]}, ...          % ls_short_max
       'min_recover_strategy', {0, 'M', [0, 1]}, ...   % recover_strategy
@@ -348,11 +348,13 @@ classdef penlab < handle
           % fill in nonexistent (optional) fields
           penm=defaultsfiller(penm);
 
+          % user's option settings first (they may affect printing)
+          if (isstruct(penm.opts) && ~isempty(fieldnames(penm.opts)))
+            obj.opts=penm.opts;
+          end
+
           % open the filestream if needed
           obj.logfile(1);
-
-          % first options to set up printing
-          %obj.opts=penm.opts;
 
           obj.probname=penm.probname;
           obj.comment=penm.comment;
@@ -364,9 +366,9 @@ classdef penlab < handle
             error('ERR: wrong Nx');
           else
             obj.Nx=penm.Nx;
-            % equalities not allowed, unconstrained are OK
+            % lbx==ubx (fixed variable) as two inequalities, unconstrained OK
             [obj.xboxmap, obj.xboxmlt, obj.xboxshift]= ...
-               boundschecker(penm.Nx,penm.lbx,penm.ubx,false,true,[]);
+               boundschecker(penm.Nx,penm.lbx,penm.ubx,-1,true,[]);
             obj.Nxbox = length(obj.xboxmap);
           end
 
@@ -499,27 +501,32 @@ classdef penlab < handle
             end
           end
 
-          % generate Adep - is the current point good for it?
-           if (isfield(penm,'Adep'))
-               obj.Adep=penm.Adep;
-           else
-              obj.Adep=cell(obj.NANLN+obj.NALIN,1);
-              for kuser=[1:obj.NANLN+obj.NALIN]
-                  xh=rand(size(obj.x)); 
-                  if length(obj.Y)>0
-                  for iY=1:length(obj.Y), Yh{iY}=rand(size(obj.Y{iY}));end
-                  else Yh{1}=[];end 
-                  [Akx,obj.userdata] = obj.mconfun(xh, Yh, kuser, obj.userdata);
-                  list=[];
-                  for i=[1:obj.Nx+obj.NYnnz]                   
-                      [Akdx, obj.userdata] = obj.mcongrad(xh,Yh,kuser,i,obj.userdata);
-                      if (~isempty(Akdx)&& nnz(Akdx)>0)
-                          list=[list,i];
-                      end
-                  end
-                  obj.Adep{kuser}=list;
+          % generate Adep - list of variables each matrix constraint depends on;
+          % detected from nonzero derivatives at a random point (with the
+          % pattern of Y) without disturbing the user's random number stream
+          if (isfield(penm,'Adep'))
+            obj.Adep=penm.Adep;
+          else
+            obj.Adep=cell(obj.NANLN+obj.NALIN,1);
+            rngstate=rng;
+            xh=rand(obj.Nx,1);
+            Yh=obj.vec2Y(rand(obj.NYnnz,1));
+            rng(rngstate);
+            for kuser=1:obj.NANLN+obj.NALIN
+              list=[];
+              for i=1:obj.Nx+obj.NYnnz
+                [Akdx, obj.userdata] = obj.mcongrad(xh,Yh,kuser,i,obj.userdata);
+                if (~isempty(Akdx) && nnz(Akdx)>0)
+                  list=[list,i];
+                end
               end
-           end
+              obj.Adep{kuser}=list;
+            end
+          end
+          % eval_alddx() assembles the lower triangle assuming sorted lists
+          for kuser=1:numel(obj.Adep)
+            obj.Adep{kuser}=unique(obj.Adep{kuser}(:))';
+          end
 
           % generate: *type
 
@@ -593,9 +600,13 @@ classdef penlab < handle
             newvalue=defvalue;
             disp(sprintf('option %s set back to defautls',names{i}));
 
-          elseif (isempty(origvalue) || origvalue~=value)
-            % add or change
-            % check validity of the new value
+          elseif (isempty(origvalue) || ~isequal(origvalue,value))
+            % add or change, but only valid values
+            errmsg=penlab.checkopt(names{i}, value);
+            if (~isempty(errmsg))
+              fprintf('Warning: option %s ignored: %s\n',names{i},errmsg);
+              continue;
+            end
             obj.opts=setfield(obj.opts, names{i}, value);
             obj.allopts=setfield(obj.allopts, names{i}, value);
             newvalue=value;
@@ -605,7 +616,7 @@ classdef penlab < handle
 
           % need to reopen the log file?
           if (strcmp(names{i},'out_filename') || ...
-            strcmp(names{i},'outlev_file') && oldvalue*newvalue==0)
+            strcmp(names{i},'outlev_file') && (oldvalue==0)~=(newvalue==0))
             reopenlog=1;
           end
         end
@@ -689,74 +700,30 @@ classdef penlab < handle
       dname = ['Pennon NLP-SDP problem ', datestr(now) ];
     end
 
-    % default option settings (only values can be changed, new options
-    % need to have a default value first)
-    function dopts = default_opts()
-      dopts = [];
-      dopts.outlev = 2;
-      dopts.outlev_file = 5;
-      dopts.out_filename = 'penm_log.txt';
-      dopts.user_prn = [];
-      dopts.maxotiter = 100;
-      dopts.maxiniter = 100;
-      % ...
-      % from pennon.m
-      dopts.penalty_update = 0.5;       % PENALTY_UPDT
-      dopts.penalty_update_bar = 0.3;   % PENALTY_UPDT_BAR
-      dopts.max_outer_iter = 100;       % MAX_PBMITER
-      dopts.outer_stop_limit = 1e-6;    % PBMALPHA
-      dopts.kkt_stop_limit = 1e-4;      % KKTALPHA
-      dopts.mlt_update =0.3;            % MU
-      dopts.uinit = 1;                  % UINIT
-      dopts.uinit_box = 1;              % UINIT_BOX
-      dopts.uinit_eq = 0;               % UINIT_EQ
-      dopts.umin = 1e-10;               % UMIN
-      dopts.pinit = 1;                  % PINIT
-      dopts.pinit_bar = 1;              % PINIT_BAR
-      dopts.usebarrier = 0;             % USEBARRIER
-      % from unconstr_min.m
-      dopts.max_inner_iter = 100;       % MAX_MITER
-      dopts.inner_stop_limit = 1e-2;    % ALPHA
-      dopts.unc_dir_stop_limit = 1e-2;  % TOL_DIR
-      dopts.unc_solver = 0;             % solver
-      dopts.unc_linesearch = 3;         % linesearch
-      % from eqconstr_min.m
-      dopts.eq_dir_stop_limit = 1e-2;   % TOL_DIR
-      dopts.eq_solver = 0;              % solver
-      dopts.eq_linesearch = 3;          % linesearch
-      dopts.eq_solver_warn_max = 4;     % solver_warn_max
-      dopts.ls_short_max = 3;           % ls_short_max
-      dopts.min_recover_strategy = 0;   % recover_strategy
-      dopts.min_recover_max = 3;        % recover_max
-      % from phi2.m
-      dopts.phi_R = -0.5;               % R_default
-
-      % linesearchs - ls_armijo.m
-      dopts.max_ls_iter = 20;   % max tries before LS fails
-      dopts.max_lseq_iter = 20;   % same for LS for equality constrained problems
-      dopts.armijo_eps = 1e-2;  % when is armijo step satisfactory? P(alp) - P(0) <= eps*alp*P'(0)
-
-      % solve_simple_chol.m, solkvekkt_ldl.m, solvekkt_lu.m
-      dopts.pert_update = 2.;  % known aka LMUPDATE, multiplier of the lambda-perturbation factor
-      dopts.pert_min = 1e-6;   % LMLOW, minimal (starting) perturbation
-      dopts.pert_try_max = 50; % max number of attempts to successfully perturbate a matrix
-      dopts.pert_faster = 1;   % use the last known negative curvature vector to determine perturbation
-
-      % solve_simple_chol.m
-      dopts.chol_ordering = 1; % use symamd for sparse matrices before Cholesky factor.?
-
-      % solvers
-      dopts.luk3_diag = 1;  % diagonal of the (2,2)-block in Luksan 3 preconditioner
-      %%% different stuff from previous 'popt' structure %%%
-      % equality constrained/unconstrained minimization
-      % - eqconstr_min.m, unconstr_min.m
-      %dopts.eq_dir_max_prec = 1e-6; % upper limit to the precision of a solution, do not demand a better (absolute) precision than this one; set 0 to turn it off
-
-      % tracing of one inner loop
-      %dopts.trace = 0;   % turn on tracing?
-      %dopts.trace_outer_iter = 1; % which outer iteration to trace? (1~the whole first iter ~ from the very beginning)
-      %dopts.trace_filename='trace_point.dcf'; % name of the dcf file if used
-
+    % check one option value against its type and restriction in defopts,
+    % returns an empty string if OK, otherwise the reason
+    function errmsg = checkopt(name, value)
+      errmsg = '';
+      type = penlab.defopts(2).(name);
+      restr = penlab.defopts(3).(name);
+      switch type
+        case 'S'
+          if (~ischar(value))
+            errmsg = 'expected a string';
+          end
+        case {'I', 'R'}
+          if (~isnumeric(value) || ~isscalar(value) || ~isreal(value) || isnan(value))
+            errmsg = 'expected a real number';
+          elseif (type=='I' && value~=round(value))
+            errmsg = 'expected an integer';
+          elseif (value<restr(1) || value>restr(2))
+            errmsg = sprintf('out of range [%g, %g]', restr(1), restr(2));
+          end
+        case 'M'
+          if (~isnumeric(value) || ~isscalar(value) || ~any(value==restr))
+            errmsg = ['allowed values are:', sprintf(' %g', restr)];
+          end
+      end
     end
 
   end
