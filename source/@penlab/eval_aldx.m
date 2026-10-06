@@ -18,8 +18,6 @@ function [status] = eval_aldx(obj)
     % the object
     userdata=obj.userdata;
 
-    % TODO reuse it + 'pointchanged' flag
-    [fx, userdata] = obj.objfun(x, Y, userdata);
     [fdx, userdata] = obj.objgrad(x, Y, userdata);
 
     % function inequal & equal
