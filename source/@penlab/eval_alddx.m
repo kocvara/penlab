@@ -6,8 +6,7 @@ function [status] = eval_alddx(obj)
   % status TODO
   status = 0;
 
-  % TODO remove!
-  if (true || obj.ALddxtck < obj.ticker)
+  if (obj.ALddxtck < obj.ticker)
     starttime = cputime;
 
     % create local copies of obj.x,obj.Y to avoid checking repetitively if they

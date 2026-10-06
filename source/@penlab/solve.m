@@ -55,6 +55,11 @@ function [ifail] = solve(obj)
   % Initialize penalty parameters and Lagrangian multipliers based on
   % option settings if there are not valid values yet.
   obj.init(false);
+  % multipliers/penalties might have changed (e.g., by init or by the end of
+  % the previous solve()) while the point did not, cached AL values are invalid
+  obj.ALxtck=0;
+  obj.ALdxtck=0;
+  obj.ALddxtck=0;
 
   % automatic modification of the starting point
   % reconstruct from Nxbox constraints lbx and ubx. This is a bit silly
@@ -402,6 +407,9 @@ function [ifail] = solve(obj)
   if (nFlag~=7)
     obj.uxbox(obj.xboxindphi) = obj.uxbox(obj.xboxindphi).*uxbox_updt(obj.xboxindphi);
     obj.uineq(obj.ineqindphi) = obj.uineq(obj.ineqindphi).*uineq_updt(obj.ineqindphi);
+    obj.ALxtck=0;
+    obj.ALdxtck=0;
+    obj.ALddxtck=0;
   end
 
   % print results
