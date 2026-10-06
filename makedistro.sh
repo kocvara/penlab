@@ -58,17 +58,12 @@ echo Deleting all bigger GEO files
 find "$distrodir/applications" \( -name '*.geo' -size +8k -a ! -name 'tb1.geo' -o -name 'tenbar.geo' -o -name 'wheel.geo' \) -exec rm -v {} \;
 echo " "
 
-echo Deleting all tex files except the PDF
-find "$distrodir/tex" -type f ! -name '*.pdf' -exec rm -v {} \;
-find "$distrodir/tex" -mindepth 2 -type d -exec rm -v -rf {} \;
-echo " "
-
 echo Deleting files explicitly listed
 rm -v "$distrodir/makedistro.sh"
 rm -v "$distrodir/doc/internal"
 rm -v "$distrodir/doc/manual.txt"
 rm -v "$distrodir/doc/todo.txt"     # perhaps leave it?
-rm -v "$distrodir/penlab_flyer_arial.docx"
+rm -v "$distrodir/doc/publicity/penlab_flyer_arial.docx"
 echo " "
 
 # anything to remove from source?
